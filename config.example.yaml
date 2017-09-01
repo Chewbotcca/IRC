@@ -1,0 +1,15 @@
+---
+
+### BOT CONFIGURATION
+
+# Put the nickname you want for the bot. (Ex. Chewbotcca)
+nickname: ''
+# Put the server you want. (Ex. irc.chew.pro)
+server: ''
+# Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
+channels: ""
+
+### OWNER CONFIGURATION
+
+# Your hostname, this is what comes after the @ in a whois. (ex. sid35940@is.a.pretty.kitty, host is is.a.pretty.kitty)
+ownerhost: ''
