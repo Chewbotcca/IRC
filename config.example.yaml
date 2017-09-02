@@ -1,15 +1,23 @@
 ---
 
-### BOT CONFIGURATION
+#################### WARNING ####################
+# Do NOT modify quotation marks.                #
+# Only modify whats INSIDE the quotation marks. #
+#################################################
+
+### BOT CONFIGURATION ###
 
 # Put the nickname you want for the bot. (Ex. Chewbotcca)
-nickname: ''
+nickname:  ''
 # Put the server you want. (Ex. irc.chew.pro)
-server: ''
+server:    ''
 # Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
-channels: ""
+channels:  ""
 
-### OWNER CONFIGURATION
+### OWNER CONFIGURATION ###
 
 # Your hostname, this is what comes after the @ in a whois. (ex. sid35940@is.a.pretty.kitty, host is is.a.pretty.kitty)
 ownerhost: ''
+
+# Your Operating System (Used for restart) Possible Choices: Mac, Windows, Linux
+os:        ''
