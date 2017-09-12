@@ -27,7 +27,7 @@ bot = Cinch::Bot.new do
     c.channels = [CONFIG['channels']]
 
     # Plugins to Load, usually you don't need to modify
-    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB]
+    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig]
 
     # Check to see if the user really modified the config.
     if c.nick == '' || c.server == '' || c.channels == ['']
