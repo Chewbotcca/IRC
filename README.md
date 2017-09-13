@@ -22,7 +22,12 @@ Category | Command | Usage
 Useful | `!ping` | Pings the bot to see if it's alive. u ok?
 Useful | `!uptime` | Check bot uptime.
 Fun | `!cat` | Shows a random cat. aww
+Fun | `!memedb` | Find a Meme in the MemeDB
+Fun | `!trbmb` | Generates a random [TRBMB](http://trbmb.chew.pw) phrase
 Minecraft | `!uuid` | Shows UUID for a user.
 Minecraft | `!server` | Looks up a server for stats. Provide an IP please.
+Owner | `!configure` | Configure certain aspects of the bot.
+Owner | `!setownerhost` | Set the Owner Host.
 Owner | `!join` | Have the bot join a Channel
 Owner | `!part` | Have the bot leave a Channel
+Owner | `!restart` | Restarts the Bot.
