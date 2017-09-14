@@ -3,6 +3,7 @@ class ModifyConfig
 
   match /changeownerhost (.+) (.+)/, method: :changeit
   match /configure (.+) (.+)/, method: :config
+  match /addowner (.+)/, method: :addowner
 
   def changeit(m, pass, hostto)
     if pass == CONFIG['modifypass']
@@ -25,6 +26,17 @@ class ModifyConfig
       end
     else
       m.reply 'Incorrect Password!'
+    end
+
+    def addowner(m, pass, owner)
+      if pass == CONFIG['modifypass']
+          d = YAML.load_file('config.yaml')
+          d['ownerhost'] = "#{d['ownerhost']} || m.user.host.to_s"
+          File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
+          m.reply "Added `#{owner}` to the list of owners!"
+      else
+        m.reply 'Incorrect Password!'
+      end
     end
   end
 end
