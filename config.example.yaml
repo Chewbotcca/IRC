@@ -8,24 +8,36 @@
 ### BOT CONFIGURATION ###
 
 # Put the nickname you want for the bot. (Ex. Chewbotcca)
-nickname:   ''
+nickname:     ''
 # Put the server you want. (Ex. irc.chew.pro)
-server:     ''
+server:       ''
 # Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
-channels:   ""
+channels:     ""
+
+# This option sets the Realname and User name (not nickname) based on the Nickname. If you don't know what this is or just don't care, leave this as true.
+# Can only be on or off.
+lazyconfig:   'on'
+
+# lazyconfig MUST BE OFF For the below to work.
+realname:     ''
+username:     ''
+
+# NickServ Password (Don't have nickserv account? Don't worry! Run !nsregister pass email and it will set up the rest.)]
+# Only tested with Atheme IRC services. Report a bug if it does not work on other services.
+nickservpass: ''
 
 ### OWNER CONFIGURATION ###
 
 # Your hostname, this is what comes after the @ in a whois. (ex. sid35940@is.a.pretty.kitty, host is is.a.pretty.kitty)
 # If unsure, set a modifypass below and run !configure ownerhost
-ownerhost:  ''
+ownerhost:    ''
 
 # This is the password used to modify the ownerhost in order to do restart commands, etc.
 # In case you have no access to the config file or you're on the go.
 # This can is recommended to only be used in PM, because if leaked will allow the user to kill or restart the bot, and make it join any channel.
 # Change this often and be careful how you use it.
-modifypass: ''
+modifypass:   ''
 
 # Your Operating System (Used for restart) Possible Choices: Mac, Windows, Linux.
 # Setting this to the wrong OS may break the bot, be careful.
-os:         ''
+os:           ''
