@@ -10,32 +10,18 @@ class Restart
         m.reply 'Restarting not supported on Windows!'
       end
       if CONFIG['os'] == 'Mac' || 'Linux'
-        if task == 'update'
+        case task
+        when 'update'
           begin
             m.reply 'Restarting and Updating!'
             sleep 1
             exec('bash scripts/update.sh')
           end
-        end
-        if task == 'pushlocal'
-          begin
-            m.reply 'Restarting and uploading all that fancy local code'
-            sleep 1
-            exec('bash scripts/push.sh')
-          end
-        end
-        if task == 'restartonly'
+        when 'restartonly'
           begin
             m.reply 'Restarting the bot without updating...'
             sleep 1
             exec('bash scripts/restartonly.sh')
-          end
-        end
-        if task == 'pushonly'
-          begin
-            m.reply 'Restarting the bot using saved commits...'
-            sleep 1
-            exec('bash scripts/pushonly.sh')
           end
         end
       end
