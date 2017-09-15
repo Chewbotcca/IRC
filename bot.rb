@@ -16,7 +16,7 @@ CONFIG = YAML.load_file('config.yaml')
 Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each { |file| require file }
 
 # Set up uptime.
-starttime = Time.now
+STARTTIME = Time.now
 
 # Configure the Bot
 bot = Cinch::Bot.new do

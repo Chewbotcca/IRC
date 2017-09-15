@@ -4,7 +4,7 @@ class Uptime
   match /uptime/, method: :uptime
 
   def uptime(m)
-    t = Time.now - starttime
+    t = Time.now - STARTTIME
     mm, ss = t.divmod(60)
     hh, mm = mm.divmod(60)
     dd, hh = hh.divmod(24)
