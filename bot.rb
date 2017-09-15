@@ -31,7 +31,7 @@ bot = Cinch::Bot.new do
       c.realname = "Chewbotcca IRC Bot - http://github.com/Chewsterchew/ChewbotccaIRC"
     else
       if CONFIG['username'] == nil
-        puts 'You did not set a username! Set one or set lazyconfig to true.'
+        puts 'You did not set a username! Set one or set lazyconfig to on.'
         exit
       end
       c.user = CONFIG['username']
