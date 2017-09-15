@@ -31,7 +31,7 @@ class ModifyConfig
     def addowner(m, pass, owner)
       if pass == CONFIG['modifypass']
           d = YAML.load_file('config.yaml')
-          d['ownerhost'] = "#{d['ownerhost']} || m.user.host.to_s"
+          d['ownerhost'] = "#{d['ownerhost']} || #{m.user.host.to_s}"
           File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
           m.reply "Added `#{owner}` to the list of owners! Run `!restart restartonly` to put changes into action!"
       else
