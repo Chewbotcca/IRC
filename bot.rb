@@ -22,7 +22,7 @@ STARTTIME = Time.now
 bot = Cinch::Bot.new do
   configure do |c|
     # Bot Settings, Taken from Config.yaml
-    c.nick = CONFIG['nickname']
+    c.nick = CONFIG['nickname'].to_s
     c.server = CONFIG['server']
     c.channels = [CONFIG['channels']]
 
@@ -38,7 +38,7 @@ bot = Cinch::Bot.new do
                  end
 
     # Load this if Modules isn't configured.
-    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ]
+    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin]
 
     # Check to see if the user really modified the config.
     if c.nick.nil? || c.server.nil? || c.nick == '' || c.server == ''
