@@ -7,8 +7,7 @@ class ModifyConfig
 
   def changeit(m, pass, hostto)
     if pass == CONFIG['modifypass']
-      d = YAML.load_file('config.yaml')
-      d['ownerhost'] = hostto.to_s
+      CONFIG['ownerhost'] = hostto.to_s
       File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
       m.reply 'Modified Hostname successfully! Run `!restart restartonly` to put changes into action!'
     else
@@ -19,8 +18,7 @@ class ModifyConfig
   def config(m, pass, option)
     if pass == CONFIG['modifypass']
       if option == 'ownerhost'
-        d = YAML.load_file('config.yaml')
-        d['ownerhost'] = m.user.host.to_s
+        CONFIG['ownerhost'] = m.user.host.to_s
         File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
         m.reply 'Your Ownerhost has been set to your current host! Run `!restart restartonly` to put changes into action!'
       end
@@ -30,8 +28,7 @@ class ModifyConfig
 
     def addowner(m, pass, owner)
       if pass == CONFIG['modifypass']
-          d = YAML.load_file('config.yaml')
-          d['ownerhost'] = "#{d['ownerhost']} || #{m.user.host.to_s}"
+          CONFIG['ownerhost'] = "#{CONFIG['ownerhost']} || #{m.user.host.to_s}"
           File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
           m.reply "Added `#{owner}` to the list of owners! Run `!restart restartonly` to put changes into action!"
       else
