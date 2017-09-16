@@ -5,13 +5,12 @@ class PartChannel
 
   def part(m, part)
     if m.user.host == CONFIG['ownerhost']
-      d = YAML.load_file('config.yaml')
-      d['channels'] = "#{d['channels']},#r28trgh9247tg24h9"
-      d['channels'] = (d['channels']).to_s.sub("#{part},", '')
-      d['channels'] = (d['channels']).to_s.sub(',,', ',')
-      d['channels'] = (d['channels']).to_s.sub('#r28trgh9247tg24h9', '')
-      d['channels'] = (d['channels']).to_s.chomp(',')
-      File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
+      CONFIG['channels'] = "#{CONFIG['channels']},#r28trgh9247tg24h9"
+      CONFIG['channels'] = (CONFIG['channels']).to_s.sub("#{part},", '')
+      CONFIG['channels'] = (CONFIG['channels']).to_s.sub(',,', ',')
+      CONFIG['channels'] = (CONFIG['channels']).to_s.sub('#r28trgh9247tg24h9', '')
+      CONFIG['channels'] = (CONFIG['channels']).to_s.chomp(',')
+      File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
       Channel(part).part
       m.reply 'Left the channel successfully!'
     else

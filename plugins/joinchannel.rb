@@ -5,9 +5,8 @@ class JoinChannel
 
   def join(m, join)
     if m.user.host == CONFIG['ownerhost']
-      d = YAML.load_file('config.yaml')
-      d['channels'] = "#{d['channels']},#{join}"
-      File.open('config.yaml', 'w') { |f| f.write d.to_yaml }
+      CONFIG['channels'] = "#{CONFIG['channels']},#{join}"
+      File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
       Channel(join).join
       m.reply 'Joined the channel successfully!'
     else
