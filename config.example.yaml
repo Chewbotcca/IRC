@@ -14,11 +14,7 @@ server:       ''
 # Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
 channels:     ""
 
-# This option sets the Realname and User name (not nickname) based on the Nickname. If you don't know what this is or just don't care, leave this as true.
-# Can only be on or off.
-lazyconfig:   'on'
-
-# lazyconfig MUST BE OFF For the below to work.
+# Set the bot username and realname. This is optional.
 realname:     ''
 username:     ''
 
