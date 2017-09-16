@@ -26,12 +26,12 @@ bot = Cinch::Bot.new do
     c.server = CONFIG['server']
     c.channels = [CONFIG['channels']]
 
-    c.user = if CONFIG['username'].nil?
+    c.user = if CONFIG['username'].nil? || CONFIG['username'] == ''
                CONFIG['nickname']
              else
                CONFIG['username']
              end
-    c.realname = if CONFIG['realname'].nil?
+    c.realname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
                    'Chewbotcca IRC Bot - http://chew.pro/ChewbotccaIRC'
                  else
                    "#{CONFIG['realname']} - https://chew.pro/ChewbotccaIRC"
