@@ -26,7 +26,7 @@ class Restart
         end
       end
     else
-      event.respond "You can't restart! (If you are the owner of the bot, you did not configure properly! Otherwise, stop trying to restart the bot!)"
+      m.reply "You can't restart! (If you are the owner of the bot, you did not configure properly! Otherwise, stop trying to restart the bot!)"
     end
   end
 end
