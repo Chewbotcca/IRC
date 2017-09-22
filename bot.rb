@@ -37,11 +37,11 @@ bot = Cinch::Bot.new do
                    "#{CONFIG['realname']} - https://chew.pro/ChewbotccaIRC"
                  end
 
-    # Load this if Modules isn't configured.
-    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin]
+    # Load modules.
+    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote]
 
     # Check to see if the user really modified the config.
-    if c.nick.nil? || c.server.nil? || c.nick == '' || c.server == ''
+    if c.nick.nil? || c.server.nil?
       puts 'You did not configure your bot! Please configure the bot.'
       exit
     end
