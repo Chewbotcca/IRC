@@ -9,7 +9,7 @@ class Restart
       if CONFIG['os'] == 'Windows'
         m.reply 'Restarting not supported on Windows!'
       end
-      if CONFIG['os'] == 'Mac' || 'Linux'
+      if CONFIG['os'] == 'Mac' || CONFIG['os'] == 'Linux'
         case task
         when 'update'
           begin
