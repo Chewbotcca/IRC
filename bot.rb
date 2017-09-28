@@ -1,16 +1,23 @@
 # Chewbotcca IRC Bot
 
 # Require Gems needed to run programs and plugins
-require 'cinch'
-require 'RestClient'
-require 'json'
-require 'net/http'
-require 'yaml'
-require 'Nokogiri'
-require 'open-uri'
+require './requiregems.rb'
 
 # Load config from file
-CONFIG = YAML.load_file('config.yaml')
+begin
+  CONFIG = YAML.load_file('config.yaml')
+rescue
+  puts 'Config file not found, this is fatal, please configure the bot.'
+  exit
+end
+
+# Read Versions from file
+begin
+  versionsfile = File.read('data/versions.json')
+  VERSIONS = JSON.parse(versionsfile)
+rescue
+  puts 'There was an error loading versions from file. Make sure you have not modified it and report this on GitHub! Don\'t be alarmed, but !updates and !update is disabled.'
+end
 
 # Require each plugin
 Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each { |file| require file }
