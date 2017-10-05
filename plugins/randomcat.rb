@@ -3,7 +3,6 @@ class RandomCat
 
   match /cat/, method: :showmethecatto
   match /multicat (.+)/, method: :multikitty
-  match /cats (.+)/, method: :multikitty
   match /mcat (.+)/, method: :multikitty
   match /kittens (.+)/, method: :multikitty
 
