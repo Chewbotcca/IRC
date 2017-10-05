@@ -11,14 +11,6 @@ rescue
   exit
 end
 
-# Read Versions from file
-begin
-  versionsfile = File.read('data/versions.json')
-  VERSIONS = JSON.parse(versionsfile)
-rescue
-  puts 'There was an error loading versions from file. Make sure you have not modified it and report this on GitHub! Don\'t be alarmed, but !updates and !update is disabled.'
-end
-
 # Require each plugin
 Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each { |file| require file }
 
@@ -45,7 +37,7 @@ bot = Cinch::Bot.new do
                  end
 
     # Load modules.
-    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote, EBall, Bitcoin, Length, Reverse, QRCode, About] 
+    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote, EBall, Bitcoin, Length, Reverse, QRCode, About, Update]
 
     # Check to see if the user really modified the config.
     if c.nick.nil? || c.server.nil?

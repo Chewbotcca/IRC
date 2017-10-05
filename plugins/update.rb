@@ -1,9 +1,9 @@
-class Restart
+class Update
   include Cinch::Plugin
 
-  match /restart/, method: :restart
+  match /update/, method: :update
 
-  def restart(m)
+  def update(m, task)
     task.downcase!
     if m.user.host == CONFIG['ownerhost']
       if CONFIG['os'] == 'Windows'
@@ -11,13 +11,13 @@ class Restart
       end
       if CONFIG['os'] == 'Mac' || CONFIG['os'] == 'Linux'
         begin
-          m.reply 'Restarting the bot without updating...'
+          m.reply 'Restarting and Updating!'
           sleep 1
-          exec('bash scripts/restartonly.sh')
+          exec('bash scripts/update.sh')
         end
       end
     else
-      m.reply "You can't restart! (If you are the owner of the bot, you did not configure properly! Otherwise, stop trying to restart the bot!)"
+      m.reply "You can't update! (If you are the owner of the bot, you did not configure properly! Otherwise, stop trying to restart the bot!)"
     end
   end
 end
