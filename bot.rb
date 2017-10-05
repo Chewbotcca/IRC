@@ -37,7 +37,7 @@ bot = Cinch::Bot.new do
                  end
 
     # Load modules.
-    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote, EBall, Bitcoin, Length, Reverse, QRCode, About, Update]
+    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote, EBall, Bitcoin, Length, Reverse, QRCode, About, Update, Define, Synonym, Antonym]
 
     # Check to see if the user really modified the config.
     if c.nick.nil? || c.server.nil?
