@@ -3,8 +3,7 @@ class Update
 
   match /update/, method: :update
 
-  def update(m, task)
-    task.downcase!
+  def update(m)
     if m.user.host == CONFIG['ownerhost']
       if CONFIG['os'] == 'Windows'
         m.reply 'Restarting not supported on Windows!'

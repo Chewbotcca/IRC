@@ -4,7 +4,6 @@ class Restart
   match /restart/, method: :restart
 
   def restart(m)
-    task.downcase!
     if m.user.host == CONFIG['ownerhost']
       if CONFIG['os'] == 'Windows'
         m.reply 'Restarting not supported on Windows!'
