@@ -44,7 +44,7 @@ bot = Cinch::Bot.new do
                  end
 
     # Load modules.
-    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote, EBall, Bitcoin, Length, Reverse, QRCode, About, Update, Define, Synonym, Antonym, Die, WordRandom]
+    c.plugins.plugins = [UuidLookup, JoinChannel, PartChannel, ServerStatus, Ping, Uptime, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, Capitalize, Upper, Eval, RonQuote, EBall, Bitcoin, Length, Reverse, QRCode, About, Update, Define, Synonym, Antonym, Die, WordRandom, B]
   end
 end
 
