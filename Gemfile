@@ -1,4 +1,2 @@
 source 'https://rubygems.org'
-gem 'cinch'
-gem 'nokogiri'
-gem 'rest-client'
+gem 'github-pages', group: :jekyll_plugins
