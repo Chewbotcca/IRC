@@ -2,40 +2,9 @@
 
 I made this bot for my IRC Network. It's ok, I guess.
 
-## How to install and run
+## How to install
 
-## Downloading
-
-1) Download using `git clone https://github.com/Chewsterchew/ChewbotccaIRC`
-
-2) Install ruby. don't ask me how just google it
-
-3) Modify the config to your liking.
-
-### Install extremely lazily
-
-If you simply run `ruby bot.rb`, a GUI will help you install all the gems needed.
-
-### Install via `gem install`
-
-1) If on Mac or Linux, run `./scripts/installgems.sh` then `ruby bot.rb` otherwise:
-
-```bash
-gem install cinch nokogiri rest-client
-ruby bot.rb
-```
-
-### Install using bundler
-
-1) Download bundler gem with `gem install bundler`
-
-2) `bundle install`
-
-3) `bundle exec ruby bot.rb`
-
-IF YOU'RE CONFUSED (which i already am), just send an issue.
-
-Or... join Chewbotcca IRC Channel! [Click here to join! (with KiwiIRC)](http://chew.pro/ChewbotccaIRC/irc)
+Check it out on the [website](http://chew.pro/ChewbotccaIRC)
 
 ## Commands
 
