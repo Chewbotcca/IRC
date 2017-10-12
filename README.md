@@ -4,12 +4,12 @@ I made this bot for my IRC Network. It's ok, I guess.
 
 ## How to install
 
-Check it out on the [website](http://chew.pro/ChewbotccaIRC)
+Check it out on the [website](http://chewbotcca.github.io/IRC)
 
 ## Commands
 
-There were so many commands, we moved to [commands](http://chew.pro/ChewbotccaIRC/commands)
+There were so many commands, we moved to [commands](http://chewbotcca.github.io/IRC/commands)
 
 ### Credits and API usage
 
-Please go here to see [credit where credit is due](http://chew.pro/ChewbotccaIRC/credits).
+Please go here to see [credit where credit is due](http://chewbotcca.github.io/IRC/credits).
