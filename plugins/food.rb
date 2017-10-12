@@ -1,4 +1,4 @@
-class Taco
+class Food
   include Cinch::Plugin
 
   match /taco (.+)/, method: :destination
