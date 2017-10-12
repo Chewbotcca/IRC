@@ -6,7 +6,7 @@ I made this bot for my IRC Network. It's ok, I guess.
 
 ## Downloading
 
-1) Download using `git clone https://github.com/Chewsterchew/ChewbotccaIRC`
+1) Download using `git clone https://github.com/Chewbotcca/IRC`
 
 2) Install ruby. don't ask me how just google it
 
@@ -35,12 +35,12 @@ ruby bot.rb
 
 IF YOU'RE CONFUSED (which i already am), just send an issue.
 
-Or... join Chewbotcca IRC Channel! [Click here to join! (with KiwiIRC)](http://chew.pro/ChewbotccaIRC/irc)
+Or... join Chewbotcca IRC Channel! [Click here to join! (with KiwiIRC)](irc)
 
 ## Commands
 
-There were so many commands, we moved to [commands](http://chew.pro/ChewbotccaIRC/commands)
+There were so many commands, we moved to [commands](commands)
 
 ### Credits and API usage
 
-Please go here to see [credit where credit is due](http://chew.pro/ChewbotccaIRC/credits).
+Please go here to see [credit where credit is due](credits).
