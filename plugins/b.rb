@@ -6,6 +6,6 @@ class B
   match /🅱️ (.+)/, method: :b
 
   def b(m, args)
-    m.reply args.gsub('b','🅱️').gsub('B','🅱️')
+    m.reply args.gsub('b', '🅱️').gsub('B', '🅱️')
   end
 end
