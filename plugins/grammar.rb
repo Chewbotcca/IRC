@@ -13,9 +13,9 @@ class Grammar
 
   def derp(m, args)
     args.upcase!
-    args = args.gsub('BECAUSE',%w(BECUZ BECAS CUZ BECZ).sample.to_s)
-    args = args.gsub('THAT',%w(DAT TAT DHAT DATA THAT).sample.to_s)
-    args = args.gsub('SCHOOL',%w(SKEWL SCHEWL SCOOL SKMOOP SKOWL).sample.to_s)
+    args = args.gsub('BECAUSE', %w(BECUZ BECAS CUZ BECZ).sample.to_s)
+    args = args.gsub('THAT', %w(DAT TAT DHAT DATA THAT).sample.to_s)
+    args = args.gsub('SCHOOL', %w(SKEWL SCHEWL SCOOL SKMOOP SKOWL).sample.to_s)
     args = args.gsub('LIKE', %w(LIAK LIEK LOKE LICK LIKE).sample.to_s)
     args = args.gsub('HELP', %w(HALP HEEPL HAAPLE HELP).sample.to_s)
     args = args.gsub('THE', %w(TEH DA DAH THE).sample.to_s)
