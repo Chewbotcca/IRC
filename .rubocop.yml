@@ -1,0 +1,23 @@
+Metrics/LineLength:
+  Max: 356
+
+Security/Eval:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
