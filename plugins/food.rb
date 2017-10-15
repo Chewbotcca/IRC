@@ -6,6 +6,7 @@ class Food
   match /potato (.+)/, method: :potato
   match /cake (.+)/, method: :cake
   match /biscuit (.+)/, method: :biscuit
+  match /sandwich (.+)/, method: :sandwich
 
   def taco(m, user)
     toppings = ['guacamole', 'salsa', 'sour cream', 'cheese', 'lettuce', 'tomatoes', 'avocado', 'onion', 'scallions', 'jalepeños', 'capsicum', 'ghost chili', 'olives', 'pineapple', 'raspberries']
@@ -28,7 +29,7 @@ class Food
     size = ['small', 'little', 'mid-sized', 'medium-sized', 'large', 'gigantic']
     flavour = %w(tasty delectable delicious yummy toothsome scrumptious luscious)
     method = %w(bakes fries boils roasts)
-    side_dish = ['side salad', 'dollop of sour cream', 'piece of chicken', 'bowl of shredded bacon']
+    side_dish = ['side joey', 'dollop of sour cream', 'piece of chicken', 'bowl of shredded bacon']
     m.reply "#{m.user.nick} #{method.sample} a #{flavour.sample} #{size.sample} #{potatoes.sample} potato for #{user} and serves it with a small #{side_dish.sample}"
   end
 
@@ -46,5 +47,17 @@ class Food
     flavour = ['tasty', 'delectable', 'delicious', 'yummy', 'gorgeous', 'scrumptious', 'luscious', 'irresistible', 'mouth watering']
     method = ['makes', 'gives', 'gets', 'buys', 'unwantingly passes', 'grants', 'force feeds']
     m.reply "#{m.user.nick} #{method.sample} #{user} a #{flavour.sample} #{biscuits.sample} biscuit."
+  end
+
+  def sandwich(m, user)
+    meat = ['ham', 'salami', 'steak', 'meatball', 'tuna', 'pork', 'chicken', 'roast beef', 'corned beef', 'pastrami', 'turkey']
+    flavour = ['a tasty', 'a delicious', 'an awesome', 'an excellent', 'a beautifully-made']
+    type = %w(roll wrap pita sandwich bun)
+    method = %w(hands gives makes passes)
+    joey = ['tomatoes', 'lettuce', 'pickles', 'cucumbers', 'red onions', 'jalapenos']
+    sauce = ['sweet onion sauce', 'honey mustard sauce', 'mayo', 'sweet chili sauce', 'italian sauce', 'ranch dressing', 'barbecue sauce']
+    andmeat = ["and #{meat.sample}", '']
+    templates = [" and #{sauce.sample}!", ", #{joey.sample}, and #{sauce.sample}!", ", #{joey.sample}, #{joey.sample}, and #{sauce.sample}!"]
+    m.reply "#{method.sample} #{user} #{flavour.sample} #{meat.sample} #{andmeat.sample} #{type.sample} with #{joey.sample}#{templates.sample}"
   end
 end
