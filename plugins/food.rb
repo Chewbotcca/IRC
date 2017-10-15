@@ -4,6 +4,7 @@ class Food
   match /taco (.+)/, method: :taco
   match /cookie (.+)/, method: :cookie
   match /potato (.+)/, method: :potato
+  match /cake (.+)/, method: :cake
 
   def taco(m, user)
     toppings = ['guacamole', 'salsa', 'sour cream', 'cheese', 'lettuce', 'tomatoes', 'avocado', 'onion', 'scallions', 'jalepeños', 'capsicum', 'ghost chili', 'olives', 'pineapple', 'raspberries']
@@ -28,5 +29,14 @@ class Food
     method = %w(bakes fries boils roasts)
     side_dish = ['side salad', 'dollop of sour cream', 'piece of chicken', 'bowl of shredded bacon']
     m.reply "#{m.user.nick} #{method.sample} a #{flavour.sample} #{size.sample} #{potatoes.sample} potato for #{user} and serves it with a small #{side_dish.sample}"
+  end
+
+  def cake(m, user)
+    cakes = ['Chocolate', 'Ice Cream', 'Angel', 'Boston Cream', 'Birthday', 'Bundt', 'Carrot', 'Coffee', 'Devils', 'Fruit', 'Gingerbread', 'Pound', 'Red Velvet', 'Stack', 'Welsh', 'Yokan']
+    size = ['small', 'little', 'mid-sized', 'medium-sized', 'large', 'gigantic']
+    flavour = %w(tasty delectable delicious yummy toothsome scrumptious luscious)
+    method = %w(makes gives gets buys)
+    side_dish = ['glass of chocolate milk', 'bowl of ice cream', 'jar of cookies', 'some chocolate sauce']
+    m.reply "#{m.user.nick} #{method.sample} #{user} a #{flavour.sample} #{size.sample} #{cakes.sample} cake and serves it with a small #{side_dish.sample}"
   end
 end
