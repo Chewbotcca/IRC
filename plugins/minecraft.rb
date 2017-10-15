@@ -3,6 +3,12 @@ class Minecraft
 
   match /uuid (.+)/, method: :uuid
   match /server (.+)/, method: :checkserver
+  match /namemc (.+)/, method: :namemcsearch
+
+  def namemcsearch(m, name)
+    name = name.delete(' ')
+    m.reply "NameMC Search: http://namemc.com/s/#{name}"
+  end
 
   def uuid(m, name)
     name = name.delete(' ')
