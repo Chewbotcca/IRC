@@ -5,6 +5,7 @@ class Food
   match /cookie (.+)/, method: :cookie
   match /potato (.+)/, method: :potato
   match /cake (.+)/, method: :cake
+  match /biscuit (.+)/, method: :biscuit
 
   def taco(m, user)
     toppings = ['guacamole', 'salsa', 'sour cream', 'cheese', 'lettuce', 'tomatoes', 'avocado', 'onion', 'scallions', 'jalepeños', 'capsicum', 'ghost chili', 'olives', 'pineapple', 'raspberries']
@@ -38,5 +39,12 @@ class Food
     method = %w(makes gives gets buys)
     side_dish = ['glass of chocolate milk', 'bowl of ice cream', 'jar of cookies', 'some chocolate sauce']
     m.reply "#{m.user.nick} #{method.sample} #{user} a #{flavour.sample} #{size.sample} #{cakes.sample} cake and serves it with a small #{side_dish.sample}"
+  end
+
+  def biscuit(m, user)
+    biscuits = ['Digestive', 'Caramel', 'Hobnob', 'Rich Tea', 'Custard Cream', 'Chocolate Finger', 'Ginger Nut', 'Penguin Bar', 'Fruit Shortcake', 'Caramel Wafer', 'Shortbread Round', 'Lemon Puff', 'Elite Chocolate Tea Cake', 'Club Bar', 'Viennese', 'Bourbon Cream', 'Malted Milk', 'Lotus Biscoff', 'Fig Roll', 'Jammie Dodger', 'Oatie', 'Jaffa Cake']
+    flavour = ['tasty', 'delectable', 'delicious', 'yummy', 'gorgeous', 'scrumptious', 'luscious', 'irresistible', 'mouth watering']
+    method = ['makes', 'gives', 'gets', 'buys', 'unwantingly passes', 'grants', 'force feeds']
+    m.reply "#{m.user.nick} #{method.sample} #{user} a #{flavour.sample} #{biscuits.sample} biscuit."
   end
 end
