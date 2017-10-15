@@ -2,6 +2,12 @@ class Bitcoin
   include Cinch::Plugin
 
   match /bitcoin/, method: :bitcoin
+  match /litecoin/, method: :litecoin
+
+  def litecoin(m)
+    grabthatsweetapi = JSON.parse(RestClient.get('https://api.coinmarketcap.com/v1/ticker/litecoin/'))[0]
+    m.reply "LiteCoin Conversions: USD: $#{grabthatsweetapi}['price_usd']"
+  end
 
   def bitcoin(m)
     grabthatsweetapi = JSON.parse(RestClient.get('https://api.coindesk.com/v1/bpi/currentprice.json'))
