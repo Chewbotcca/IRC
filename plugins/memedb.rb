@@ -37,7 +37,7 @@ class MemeDB
     when 'submit'
       m.reply 'You can submit a meme here: http://goo.gl/forms/BRMomYVizsY7SqOg2'
     else
-      m.reply "This meme doesn't exist! Make sure you spell the meme name right (CASE SENSITIVE). Here is a list of the current memes: `deanmeme, rickroll, vegans, spotad, petpet, nicememe, paycheck, pokesteak, losthope, timetostop, trap, triggered, noot, iplayedmyself`"
+      m.reply "This meme doesn't exist! Make sure you spell the meme name right. Here is a list of the current memes: `deanmeme, rickroll, vegans, spotad, petpet, nicememe, paycheck, pokesteak, losthope, timetostop, trap, triggered, noot, iplayedmyself`"
     end
   end
 end
