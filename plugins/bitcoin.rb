@@ -3,9 +3,15 @@ class Bitcoin
 
   match /bitcoin/, method: :bitcoin
   match /litecoin/, method: :litecoin
+  match /zetacoin/, method: :zetacoin
 
   def litecoin(m)
     grabthatsweetapi = JSON.parse(RestClient.get('https://api.coinmarketcap.com/v1/ticker/litecoin/'))[0]
+    m.reply "LiteCoin Conversions: USD: $#{grabthatsweetapi}['price_usd']"
+  end
+
+  def zetacoin(m)
+    grabthatsweetapi = JSON.parse(RestClient.get('https://api.coinmarketcap.com/v1/ticker/zetacoin/'))[0]
     m.reply "LiteCoin Conversions: USD: $#{grabthatsweetapi}['price_usd']"
   end
 
