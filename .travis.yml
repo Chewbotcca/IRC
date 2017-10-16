@@ -4,4 +4,9 @@ rvm:
 script:
  - bundle exec rubocop
 notifications:
-  irc: "irc.chew.pro#Chewbotcca"
+  irc:
+    channels:
+      - "irc.chew.pro#Chewbotcca"
+    template:
+      - "[2%{repository_name}] 7%{author} 3%{commit} (3%{branch}) - %{commit_message}"
+      - "Build #%{build_number}: %{message} in %{time_elapsed}. %{build_url}"
