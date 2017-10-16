@@ -9,6 +9,8 @@ class Grammar
   match /upcase (.+)/, method: :up
   match /up (.+)/, method: :up
   match /uppercase (.+)/, method: :up
+  match /downcase (.+)/, method: :down
+  match /down (.+)/, method: :down
   match /derpify (.+)/, method: :derp
 
   def derp(m, args)
@@ -31,6 +33,10 @@ class Grammar
 
   def up(m, message)
     m.reply message.upcase
+  end
+
+  def down(m, message)
+    m.reply message.downcase
   end
 
   def cap(m, message)
