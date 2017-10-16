@@ -21,3 +21,9 @@ Metrics/CyclomaticComplexity:
 
 Style/GuardClause:
   Enabled: false
+
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
+Lint/UriEscapeUnescape:
+  Enabled: false
