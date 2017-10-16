@@ -8,5 +8,5 @@ notifications:
     channels:
       - "irc.chew.pro#Chewbotcca"
     template:
-      - "[\u00032%{repository_name}] \u00037%{author}\u0003 \u00033%{commit} \u0003(\u00033%{branch}\u0003) - \u0002%{commit_message}"
-      - "Build #%{build_number}: %{message} in %{elapsed_time}. %{build_url}"
+      - "Build #%{build_number}: %{message} Time Elapsed: %{elapsed_time}. %{build_url}"
+      - "[\u00032%{repository_name}\u0003] \u00037%{author}\u0003 \u00033%{commit} \u0003(\u00033%{branch}\u0003) - \u0002%{commit_message}"
