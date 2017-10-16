@@ -14,7 +14,7 @@ class Owner
       m.reply "You can't kill the bot! (If you are the owner of the bot, you did not configure properly! Otherwise, stop trying to KILL the bot!)"
     end
   end
-  
+
   def eval(m, code)
     if m.user.host == CONFIG['ownerhost']
       begin
