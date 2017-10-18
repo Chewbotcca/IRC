@@ -27,3 +27,9 @@ Lint/RescueWithoutErrorClass:
 
 Lint/UriEscapeUnescape:
   Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4.1
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
