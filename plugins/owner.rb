@@ -3,7 +3,7 @@ class Owner
 
   match /join (.+)/, method: :join
   match /part (.+)/, method: :part
-  match /eval (.+)/, method: :eval
+  match /eval (.+)/, method: :execute
   match /die/, method: :die
 
   def die(m)
@@ -15,7 +15,7 @@ class Owner
     end
   end
 
-  def eval(m, code)
+  def execute(m, code)
     if m.user.host == CONFIG['ownerhost']
       begin
         m.reply eval code
