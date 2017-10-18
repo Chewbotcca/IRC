@@ -6,9 +6,9 @@ class Formatting
 
   def rainbow(m, args)
     case m.params[1].split(' ')[0]
-    when "!rainbow"
+    when '!rainbow'
       args = args.split('')
-    when "!wrainbow"
+    when '!wrainbow'
       args = args.split(' ')
     end
     amount = args.length
@@ -41,9 +41,9 @@ class Formatting
       end
     end
     case m.params[1].split(' ')[0]
-    when "!rainbow"
+    when '!rainbow'
       m.reply message.join('')
-    when "!wrainbow"
+    when '!wrainbow'
       m.reply message.join(' ')
     end
   end
