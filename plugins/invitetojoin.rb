@@ -29,7 +29,7 @@ class InviteToJoin
       CONFIG['channels'] = (CONFIG['channels']).to_s.chomp(',')
       File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
       m.reply 'Bye!'
-      Channel(m.channel, 'Quit: Requested to leave.').part
+      Channel(m.channel).part
     else
       m.reply 'Only half-ops and above may force me to leave!'
     end
