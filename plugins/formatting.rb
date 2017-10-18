@@ -16,11 +16,19 @@ class Formatting
         current += 1
         message[current] = Format(:yellow, args[current])
         current += 1
+        message[current] = Format(:lime, args[current])
+        current += 1
         message[current] = Format(:green, args[current])
+        current += 1
+        message[current] = Format(:teal, args[current])
+        current += 1
+        message[current] = Format(:aqua, args[current])
         current += 1
         message[current] = Format(:blue, args[current])
         current += 1
         message[current] = Format(:purple, args[current])
+        current += 1
+        message[current] = Format(:pink, args[current])
         current += 1
       rescue
         current = amount
