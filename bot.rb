@@ -43,7 +43,7 @@ bot = Cinch::Bot.new do
                  end
 
     # Load modules.
-    c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, Update, Define, Synonym, Antonym, WordRandom, B, Food, TableFlip, Grammar]
+    c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, Update, Define, Synonym, Antonym, WordRandom, B, Food, TableFlip, Grammar, Formatting]
   end
 end
 # START THE BOT
