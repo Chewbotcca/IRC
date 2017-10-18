@@ -2,9 +2,15 @@ class Formatting
   include Cinch::Plugin
 
   match /rainbow (.+)/, method: :rainbow
+  match /wrainbow (.+)/, method: :rainbow
 
   def rainbow(m, args)
-    args = args.split('')
+    case m.params[1].split(' ')[0]
+    when "!rainbow"
+      args = args.split('')
+    when "!wrainbow"
+      args = args.split(' ')
+    end
     amount = args.length
     current = 0
     message = Array.new(amount, '')
@@ -34,6 +40,11 @@ class Formatting
         current = amount
       end
     end
-    m.reply message.join('')
+    case m.params[1].split(' ')[0]
+    when "!rainbow"
+      m.reply message.join('')
+    when "!wrainbow"
+      m.reply message.join(' ')
+    end
   end
 end
