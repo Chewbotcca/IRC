@@ -20,7 +20,13 @@ class Owner
       begin
         m.reply eval code
       rescue => e
-        evalerrors = ['Well, excuse me, mr nobrain, cant even eval correctly smh.', "You can't eval? Why are you running a bot!", 'Evaluation error! Please consult your handbook (as in how to properly ruby)', 'The real error here is your lack of ruby knowledge', 'Has halloween come early this year? because your lack of ability to eval is pretty spooky.']
+        evalerrors = [
+          'Well, excuse me, mr nobrain, cant even eval correctly smh.',
+          "You can't eval? Why are you running a bot!",
+          'Evaluation error! Please consult your handbook (as in how to properly ruby)',
+          'The real error here is your lack of ruby knowledge.',
+          'Has halloween come early this year? because your lack of ability to eval is pretty spooky.'
+        ]
         m.reply "#{evalerrors.sample} THE ERROR: ```#{e}```"
       end
     else
