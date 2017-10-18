@@ -56,8 +56,8 @@ class Food
     method = %w[hands gives makes passes]
     joey = ['tomatoes', 'lettuce', 'pickles', 'cucumbers', 'red onions', 'jalapenos']
     sauce = ['sweet onion sauce', 'honey mustard sauce', 'mayo', 'sweet chili sauce', 'italian sauce', 'ranch dressing', 'barbecue sauce']
-    andmeat = ["and #{meat.sample}", '']
+    andmeat = [" and #{meat.sample}", '']
     templates = [" and #{sauce.sample}!", ", #{joey.sample}, and #{sauce.sample}!", ", #{joey.sample}, #{joey.sample}, and #{sauce.sample}!"]
-    m.reply "#{method.sample} #{user} #{flavour.sample} #{meat.sample} #{andmeat.sample} #{type.sample} with #{joey.sample}#{templates.sample}"
+    m.reply "#{m.user.nick} #{method.sample} #{user} #{flavour.sample} #{meat.sample}#{andmeat.sample} #{type.sample} with #{joey.sample}#{templates.sample}"
   end
 end

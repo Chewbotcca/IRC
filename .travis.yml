@@ -1,12 +1,20 @@
 language: ruby
 rvm:
-- 2.4.2
+- 2.4.1
 script:
- - bundle exec rubocop
+ - rubocop
+install: gem install rubocop -v 0.50.0
 notifications:
   irc:
     channels:
       - "irc.chew.pro#Chewbotcca"
     template:
       - "Build #%{build_number}: %{message} Time Elapsed: %{elapsed_time}. %{build_url}"
-      - "[\u00032%{repository_name}\u0003] \u00037%{author}\u0003 \u00033%{commit} \u0003(\u00033%{branch}\u0003) - \u0002%{commit_message}"
+  webhooks:
+    urls:
+      - http://n.tkte.ch/h/5572/gzZnD80loltP7nsckuoVlGD7
+    on_success: always # default: always
+    on_failure: always # default: always
+    on_start: always   # default: never
+    on_cancel: always # default: always
+    on_error: always # default: always
