@@ -4,6 +4,23 @@ class Minecraft
   match /uuid (.+)/, method: :uuid
   match /server (.+)/, method: :checkserver
   match /namemc (.+)/, method: :namemcsearch
+  match /mcstatus/, method: :mcstatus
+
+  def mcstatus(m)
+    statusurl = JSON.parse(RestClient.get('https://status.mojang.com/check'))
+    url1 = Format(:"#{statusurl[0]['minecraft.net']}", 'minecraft.net')
+    url2 = Format(:"#{statusurl[1]['session.minecraft.net']}", 'session.minecraft.net')
+    url3 = Format(:"#{statusurl[2]['account.mojang.com']}", 'account.mojang.com')
+    url4 = Format(:"#{statusurl[3]['auth.mojang.com']}", 'auth.mojang.com')
+    url5 = Format(:"#{statusurl[4]['skins.minecraft.net']}", 'skins.minecraft.net')
+    url6 = Format(:"#{statusurl[5]['authserver.mojang.com']}", 'authserver.mojang.com')
+    url7 = Format(:"#{statusurl[6]['sessionserver.mojang.com']}", 'sessionserver.mojang.com')
+    url8 = Format(:"#{statusurl[7]['api.mojang.com']}", 'api.mojang.com')
+    url9 = Format(:"#{statusurl[8]['textures.minecraft.net']}", 'textures.minecraft.net')
+    url0 = Format(:"#{statusurl[9]['mojang.com']}", 'mojang.com')
+    message = "#{Format(:green, 'Up')} - #{Format(:yellow, 'Shakey')} - #{Format(:red, 'Down')} : #{url1} - #{url2} - #{url3} - #{url4} - #{url5} - #{url6} - #{url7} - #{url8} - #{url9} - #{url0}"
+    m.reply message
+  end
 
   def namemcsearch(m, name)
     name = name.delete(' ')
