@@ -32,7 +32,7 @@ bot = Cinch::Bot.new do
     c.channels = [CONFIG['channels']]
 
     c.port = if CONFIG['port'].nil?
-               "6667"
+               '6667'
              else
                CONFIG['port']
              end
