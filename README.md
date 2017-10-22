@@ -18,4 +18,4 @@ Please go here to see [credit where credit is due](http://chewbotcca.github.io/I
 
 ## Official Public Chewbotccas
 
-I run some of my chewbotccas on some servers. Check them out [here](http://chewbotcca.github.io/#official-public-chewbotccas)
+I run Chewbotcca on some IRC networks. Check them out [here](http://chewbotcca.github.io/IRC/#official-public-chewbotccas)
