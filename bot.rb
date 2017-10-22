@@ -7,7 +7,8 @@ require './requiregems.rb'
 begin
   CONFIG = YAML.load_file('config.yaml')
 rescue
-  puts 'Config file not found, this is fatal, please configure the bot.'
+  puts 'Config file not found, this is fatal, running setup.'
+  `ruby setup.rb`
   exit
 end
 
@@ -49,7 +50,7 @@ bot = Cinch::Bot.new do
                  end
 
     # Load modules.
-    c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, Update, Define, Synonym, Antonym, WordRandom, B, Food, TableFlip, Grammar, Formatting]
+    c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, Define, Synonym, Antonym, WordRandom, B, Food, TableFlip, Grammar, Formatting]
   end
 end
 # START THE BOT
