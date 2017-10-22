@@ -2,4 +2,3 @@ config.yaml
 CafeBabeMigration.txt
 Gemfile.lock
 data/versions.json
-setup.rb
