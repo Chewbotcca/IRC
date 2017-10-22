@@ -1,6 +1,7 @@
 puts 'Welcome to Chewbotcca IRC bot setup'
 puts 'This really simple GUI will guide you in setting up the bot by yourself!'
 puts 'Press enter to get started'
+puts 'WARNING: Your config will get WIPED if you continue. Only use this to setup.'
 gets
 puts 'First, we are going to make sure you have all of your gems. Press enter to install neccessary gems.'
 require './requiregems.rb'
@@ -48,7 +49,7 @@ rescue => e
 end
 puts 'Now, a confirmation bot will join with the config you created and verify your identify. Hop on your irc client!'
 `ruby scripts/confirm.rb`
-puts "You are ready to run your bot! Would you like to start this bot up now? (y/n)"
+puts 'You are ready to run your bot! Would you like to start this bot up now? (y/n)'
 input = gets.chomp
 if input == 'y'
   `ruby bot.rb`
