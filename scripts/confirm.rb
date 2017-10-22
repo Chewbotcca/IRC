@@ -21,7 +21,7 @@ class Confirm
   match /exit/, method: :that
 
   def identify(_m)
-    User(CONFIG['ownernick']).send("Hello! It is me, Chewbotcca! Please respond with my nickname to confirm your identity, othwerwise, type `!exit`")
+    User(CONFIG['ownernick']).send("Hello! It is me, Chewbotcca! Please respond with my nickname to confirm your identity, othwerwise, type `exit`")
   end
 
   def whodidthis(m)
