@@ -28,10 +28,11 @@ class About
     if CONFIG['ownerhost'] == m.user.host
       begin
         url = `hub issue create -m "#{args}"`
-        m.reply "Issue created! #{url}"
-      rescue => e
-        User(m.user.nick).send(e)
-        m.reply 'An error has occured. The error message has been sent to you in a private message. Please report this (ironically to the issues) or on the official irc channel.'
+        if url == "" || url.nil?
+          m.reply 'An error has occured. Check your console to see the error. Possible causes: You don\'t have hub. You don\'t have git. You don\'t have your username and password in git The repository moved (Chewsterchew/Chewbotcca -> Chewbotcca/IRC). Or you\'re just doing it wrong.'
+        else
+          m.reply "Issue created! #{url}"
+        end
       end
     else
       m.reply 'You must be the bot owner to create an issue! Try making one manually: http://github.com/Chewbotcca/IRC/issues/new'
