@@ -7,7 +7,6 @@ puts 'First, we are going to make sure you have all of your gems. Press enter to
 require './requiregems.rb'
 puts 'Alright! Config time.'
 File.new('config.yaml', 'w+') unless File.exist?('config.yaml')
-config = YAML.load_file('config.yaml')
 exconfig = YAML.load_file('config.example.yaml')
 File.open('config.yaml', 'w') { |f| f.write exconfig.to_yaml }
 CONFIG = YAML.load_file('config.yaml')
