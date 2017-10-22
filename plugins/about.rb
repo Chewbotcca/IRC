@@ -27,9 +27,11 @@ class About
   def bug(m, args)
     if CONFIG['ownerhost'] == m.user.host
       begin
-        m.reply "Issue created! #{`hub issue create -m "#{args}"`}"
-      rescue
-        m.reply 'There was an error making the issue. Do you have hub installed? Did you `git clone`? Does git know who you are?'
+        url = `hub issue create -m "#{args}"`
+        m.reply "Issue created! #{url}"
+      rescue => e
+        User(m.user.nick).send(e)
+        m.reply 'An error has occured. The error message has been sent to you in a private message. Please report this (ironically to the issues) or on the official irc channel.'
       end
     else
       m.reply 'You must be the bot owner to create an issue! Try making one manually: http://github.com/Chewbotcca/IRC/issues/new'
