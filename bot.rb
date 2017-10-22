@@ -31,6 +31,12 @@ bot = Cinch::Bot.new do
     c.server = CONFIG['server']
     c.channels = [CONFIG['channels']]
 
+    c.port = if CONFIG['port'].nil?
+               "6667"
+             else
+               CONFIG['port']
+             end
+
     c.user = if CONFIG['username'].nil? || CONFIG['username'] == ''
                CONFIG['nickname']
              else

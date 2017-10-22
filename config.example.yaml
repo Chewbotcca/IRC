@@ -4,21 +4,28 @@
 # Do NOT modify or add quotation marks.         #
 # Put your options after the option:            #
 # Only modify whats INSIDE the quotation marks. #
+# When this file is modified by the program,    #
+# The comments will wipe. So set this up!       #
 #################################################
 
 ### BOT CONFIGURATION ###
 
 # Put the nickname you want for the bot. (Ex. Chewbotcca)
 nickname:
-# Put the server you want. (Ex. irc.chew.pro)
-server:
-# Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
-# Do not modify these quotation marks.
-channels:     ""
 
 # Set the bot username and realname. This is optional.
 realname:
 username:
+
+### SERVER INFORMATION ###
+
+# Put the server you want. (Ex. irc.chew.pro)
+server:
+# Server Port (default: 6667)
+port:
+# Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
+# Do not modify these quotation marks.
+channels:     ""
 
 # NickServ Password (Don't have nickserv account? Don't worry! Run !nsregister pass email and it will set up the rest.)]
 # Only tested with Atheme IRC services. Report a bug if it does not work on other services.
@@ -43,4 +50,4 @@ os:
 ### API Configuration (everything is optional)
 
 ## Wordnik API key
-wordnik: 
+wordnik:
