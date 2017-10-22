@@ -17,11 +17,11 @@ class Confirm
   include Cinch::Plugin
 
   listen_to :connect, method: :identify
-  match "#{NICKNAME}", method: :whodidthis, use_prefix: :false
+  match NICKNAME.to_s, method: :whodidthis
   match /exit/, method: :that
 
   def identify(_m)
-    User(CONFIG['ownernick']).send("Hello! It is me, Chewbotcca! Please respond with my nickname to confirm your identity, othwerwise, type `exit`")
+    User(CONFIG['ownernick']).send('Hello! It is me, Chewbotcca! Please respond with my nickname to confirm your identity, othwerwise, type `exit`')
   end
 
   def whodidthis(m)
@@ -33,9 +33,7 @@ class Confirm
   end
 
   def that(m)
-    if m.user.nick == CONFIG['ownernick']
-      exit
-    end
+    exit if m.user.nick == CONFIG['ownernick']
   end
 end
 
