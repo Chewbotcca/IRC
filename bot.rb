@@ -44,9 +44,9 @@ bot = Cinch::Bot.new do
                CONFIG['username']
              end
     c.realname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
-                   'Chewbotcca IRC Bot - http://chew.pro/ChewbotccaIRC'
+                   'Chewbotcca IRC Bot - https://git.io/ChewbotccaIRC'
                  else
-                   "#{CONFIG['realname']} - https://chew.pro/ChewbotccaIRC"
+                   "#{CONFIG['realname']} - https://git.io/ChewbotccaIRC"
                  end
 
     # Load modules.
