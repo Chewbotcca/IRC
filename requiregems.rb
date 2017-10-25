@@ -41,3 +41,4 @@ rescue LoadError
   end
 end
 require 'open-uri'
+require 'base64'
