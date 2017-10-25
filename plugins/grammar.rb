@@ -12,6 +12,8 @@ class Grammar
   match /downcase (.+)/, method: :down
   match /down (.+)/, method: :down
   match /derpify (.+)/, method: :derp
+  match /titlecase (.+)/, method: :titlecase
+  match /title (.+)/, method: :titlecase
 
   def derp(m, args)
     args.upcase!
@@ -49,5 +51,9 @@ class Grammar
 
   def reverse(m, string)
     m.reply string.reverse
+  end
+
+  def titlecase(m, string)
+    m.reply string.gsub(/\w+/, &:capitalize)
   end
 end
