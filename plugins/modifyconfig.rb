@@ -9,7 +9,7 @@ class ModifyConfig
     if pass == CONFIG['modifypass']
       CONFIG['ownerhost'] = hostto.to_s
       File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
-      m.reply 'Modified Hostname successfully! Run `!restart restartonly` to put changes into action!'
+      m.reply 'Modified Hostname successfully!'
     else
       m.reply 'Incorrect Password!'
     end
@@ -20,7 +20,7 @@ class ModifyConfig
       if option == 'ownerhost'
         CONFIG['ownerhost'] = m.user.host.to_s
         File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
-        m.reply 'Your Ownerhost has been set to your current host! Run `!restart restartonly` to put changes into action!'
+        m.reply 'Your Ownerhost has been set to your current host!'
       end
     else
       m.reply 'Incorrect Password!'
