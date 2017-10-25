@@ -10,7 +10,7 @@ class BaseS4
 
   def debase(m, args)
     decoded = Base64.decode64(args)
-    if decoded == ""
+    if decoded == ''
       m.reply 'Boi whatchu doin? that aint base64! get outta here wit yo basealphabet nonsense.'
     else
       m.reply decoded
