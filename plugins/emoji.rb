@@ -13,6 +13,6 @@ class Emoji
   end
 
   def clap(m, args)
-    m.reply args.gsub(' ','👏')
+    m.reply args.gsub(' ', ' 👏 ')
   end
 end
