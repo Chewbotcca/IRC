@@ -10,7 +10,7 @@ class Emoji
   match /spread (.+)/, method: :spread
 
   def spread(m, args)
-    m.reply args.split(' ').join('')
+    m.reply args.split('').join(' ')
   end
 
   def b(m, args)
