@@ -1,4 +1,4 @@
-class B
+class Emoji
   include Cinch::Plugin
 
   match /b (.+)/, method: :b
