@@ -12,8 +12,10 @@ File.open('config.yaml', 'w') { |f| f.write exconfig.to_yaml }
 CONFIG = YAML.load_file('config.yaml')
 puts 'Pick a nickname for the bot - REQUIRED'
 CONFIG['nickname'] = gets.chomp
-puts 'Enter the server address (hostname, IP, whatever) - REQUIRED '
+puts 'Enter the server address (hostname, IP, whatever, NO PORT yet) - REQUIRED '
 CONFIG['server'] = gets.chomp
+puts 'Enter the server port, if you don\'t know, use 6667 - REQUIRED '
+CONFIG['port'] = gets.chomp
 puts 'What channels should the bot join on startup? this must be comma seperated with #s before the names. - Optional'
 puts 'Hint! You can always invite the bot to your channel and it will join!'
 CONFIG['channels'] = gets.chomp
@@ -30,8 +32,6 @@ CONFIG['ownerhost'] = gets.chomp
 puts 'ModifyConfig Pass - Optional (recommended)'
 puts "If you want to use commands (such as to set your ownerhost, or become a bot owner), you'll need to fill this out, and keep it secret!"
 CONFIG['modifypass'] = gets.chomp
-puts 'Your computer OS. Options: Mac, Windows, Linux. - Optional (required for !restart)'
-CONFIG['os'] = gets.chomp
 puts 'Wordnik API key. Very optional and only needed for !define !antonym and !synonym'
 CONFIG['wordnik'] = gets.chomp
 puts 'Your IRC Nickname. Please use your CURRENT nickname, you will need it for the next step'

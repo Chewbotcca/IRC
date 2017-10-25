@@ -43,10 +43,6 @@ ownerhost:
 # Change this often and be careful how you use it.
 modifypass:
 
-# Your Operating System (Used for restart) Possible Choices: Mac, Windows, Linux.
-# Setting this to the wrong OS may break the bot, be careful.
-os:
-
 ### API Configuration (everything is optional)
 
 ## Wordnik API key
