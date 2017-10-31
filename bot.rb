@@ -21,15 +21,22 @@ STARTTIME = Time.now
 # Configure the Bot
 bot = Cinch::Bot.new do
   configure do |c|
-    # Check to see if the user really modified the config.
-    if c.nick.nil? || c.server.nil?
-      puts 'You did not configure your bot! Please configure the bot.'
-      exit
-    end
 
     # Bot Settings, Taken from Config.yaml
-    c.nick = CONFIG['nickname'].to_s
-    c.server = CONFIG['server']
+    c.nick = if CONFIG['nickname'] == '' || CONFIG['nickname'].nil?
+               puts 'The bot doesn\'t have a nickname! Please set one'
+               exit
+             else
+               CONFIG['nickname'].to_s
+             end
+
+    c.server = if CONFIG['server'] == '' || CONFIG['server'].nil?
+                 puts 'You did not configure a server for the bot to connect to. Please set one!'
+                 exit
+               else
+                 CONFIG['server'].to_s
+               end
+
     c.channels = [CONFIG['channels']]
 
     c.port = if CONFIG['port'].nil?
@@ -43,6 +50,7 @@ bot = Cinch::Bot.new do
              else
                CONFIG['username']
              end
+             
     c.realname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
                    'Chewbotcca IRC Bot - https://git.io/ChewbotccaIRC'
                  else
