@@ -12,7 +12,7 @@ notifications:
       - "Build #%{build_number}: %{message} Time Elapsed: %{elapsed_time}. %{build_url}"
   webhooks:
     urls:
-      - http://n.tkte.ch/h/5572/gzZnD80loltP7nsckuoVlGD7
+      - https://n.tkte.ch/h/5572/gzZnD80loltP7nsckuoVlGD7
     on_success: always # default: always
     on_failure: always # default: always
     on_start: always   # default: never
