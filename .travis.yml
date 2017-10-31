@@ -10,6 +10,13 @@ notifications:
       - "irc.chew.pro#Chewbotcca"
     template:
       - "Build #%{build_number}: %{message} Time Elapsed: %{elapsed_time}. %{build_url}"
+    on_success: always # default: always
+    on_failure: always # default: always
+    on_start: always   # default: never
+    on_cancel: always # default: always
+    on_error: always # default: always
+    skip_join: true
+    nick: builder-kitty
   webhooks:
     urls:
       - https://n.tkte.ch/h/5572/gzZnD80loltP7nsckuoVlGD7
