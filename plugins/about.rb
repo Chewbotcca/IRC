@@ -29,7 +29,7 @@ class About
       begin
         url = `hub issue create -m "#{args}"`
         if url == '' || url.nil?
-          m.reply 'An error has occured. Check your console to see the error. Possible causes: You don\'t have hub. You don\'t have git. You don\'t have your username and password in git The repository moved (Chewsterchew/Chewbotcca -> Chewbotcca/IRC). Or you\'re just doing it wrong.'
+          m.reply 'An error has occured. Check your console to see the error. Possible causes: You don\'t have hub. You don\'t have git. You don\'t have your username and password in git. The repository moved (Chewsterchew/Chewbotcca -> Chewbotcca/IRC). Or, you\'re just doing it wrong.'
         else
           m.reply "Issue created! #{url}"
         end
