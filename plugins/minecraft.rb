@@ -5,6 +5,29 @@ class Minecraft
   match /server (.+)/, method: :checkserver
   match /namemc (.+)/, method: :namemcsearch
   match /mcstatus/, method: :mcstatus
+  match /namemcf (.+)/, method: :namemcfriends
+
+  def namemcfriends(m, name)
+    name = name.delete(' ')
+    uuid = JSON.parse(RestClient.get("https://use.gameapis.net/mc/player/profile/#{name}"))['uuid_formatted']
+    friends = JSON.parse(RestClient.get("https://api.namemc.com/profile/#{uuid}/friends"))
+    if friends.empty?
+      m.reply "User #{name} doesn't have any friends on namemc! :("
+    else
+      friendcount = 0
+      amount = friends.length
+      friendlist = []
+      while friendcount < amount
+        friendlist[friendcount] = friends[friendcount]['name']
+        friendcount += 1
+        if friendlist.join(', ').length > 300
+          overload = "..and #{amount - friendcount} more."
+          amount = friendcount
+        end
+      end
+      m.reply "List of #{name}'s namemc friends: #{friendlist.join(', ')}.#{overload}"
+    end
+  end
 
   def mcstatus(m)
     statusurl = JSON.parse(RestClient.get('https://status.mojang.com/check'))
