@@ -2,6 +2,7 @@ class GitHub
   include Cinch::Plugin
 
   match /ghissue (.+) (.+)/, method: :ghissue
+  match /ghpull (.+) (.+)/, method: :ghissue
 
   def ghissue(m, repo, issuenum)
     issuenum = issuenum.to_i
