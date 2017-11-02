@@ -5,6 +5,7 @@ class GitHub
   match /ghpull (.+) (.+)/, method: :ghissue
 
   def ghissue(m, repo, issuenum)
+    issuenum = '' if issuenum == 'latest'
     issueurl = "https://api.github.com/repos/#{repo}/issues/#{issuenum}"
     begin
       parsed = JSON.parse(RestClient.get(issueurl))
@@ -12,7 +13,6 @@ class GitHub
       m.reply 'Invalid Repo or Issue number!'
       return
     end
-    issuenum = parsed['number'] if issuenum == 'latest'
     issuenum = issuenum.to_i
     if issuenum < 1
       m.reply 'Invalid Issue count!'
