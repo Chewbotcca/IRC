@@ -13,7 +13,6 @@ class GitHub
       m.reply 'Invalid Repo or Issue number!'
       return
     end
-    issuenum = issuenum.to_i
     if issuenum < 1
       m.reply 'Invalid Issue count!'
       return
