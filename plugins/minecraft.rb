@@ -9,7 +9,7 @@ class Minecraft
 
   def namemcfriends(m, name)
     name = name.delete(' ')
-    uuid = JSON.parse(RestClient.get("https://use.gameapis.net/mc/player/profile/#{name}"))['uuid_formatted']
+    uuid = JSON.parse(RestClient.get("https://api.mojang.com/users/profiles/minecraft/#{name}"))['uuid_formatted']
     friends = JSON.parse(RestClient.get("https://api.namemc.com/profile/#{uuid}/friends"))
     if friends.empty?
       m.reply "User #{name} doesn't have any friends on namemc! :("
@@ -25,7 +25,7 @@ class Minecraft
           amount = friendcount
         end
       end
-      m.reply "List of #{name}'s namemc friends: #{friendlist.join(', ')}.#{overload}"
+      m.reply "List of #{name}'s NameMC friends: #{friendlist.join(', ')}.#{overload}"
     end
   end
 
