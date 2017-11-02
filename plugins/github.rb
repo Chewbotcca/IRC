@@ -5,8 +5,8 @@ class GitHub
   match /ghpull (.+) (.+)/, method: :ghissue
 
   def ghissue(m, repo, issuenum)
-    issuenum = '' if issuenum == 'latest'
     issueurl = "https://api.github.com/repos/#{repo}/issues/#{issuenum}"
+    issueurl = "https://api.github.com/repos/#{repo}/issues" if issuenum == 'latest'
     begin
       parsed = JSON.parse(RestClient.get(issueurl))
     rescue
