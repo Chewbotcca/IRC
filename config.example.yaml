@@ -43,6 +43,10 @@ ownerhost:
 # Change this often and be careful how you use it.
 modifypass:
 
+# Do you run using bundle exec ruby bot.rb or just ruby bot.rb
+# true or false
+bundler: false
+
 ### API Configuration (everything is optional)
 
 ## Wordnik API key

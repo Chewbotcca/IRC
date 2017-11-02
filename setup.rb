@@ -3,8 +3,6 @@ puts 'This really simple GUI will guide you in setting up the bot by yourself!'
 puts 'Press enter to get started'
 puts 'WARNING: Your config will get WIPED if you continue. Only use this to setup.'
 gets
-puts 'First, we are going to make sure you have all of your gems. Press enter to install neccessary gems.'
-require './requiregems.rb'
 puts 'Alright! Config time.'
 File.new('config.yaml', 'w+') unless File.exist?('config.yaml')
 exconfig = YAML.load_file('config.example.yaml')
@@ -36,6 +34,8 @@ puts 'Wordnik API key. Very optional and only needed for !define !antonym and !s
 CONFIG['wordnik'] = gets.chomp
 puts 'Your IRC Nickname. Please use your CURRENT nickname, you will need it for the next step'
 CONFIG['ownernick'] = gets.chomp
+puts 'Do you plan to use bundler (ruby gem)? If you don\'t know what this is, assume no and say "false"'
+CONFIG['bundler'] = gets.chomp
 puts "This concludes our CONFIGURATION portion of the setup. Let's move on to gems!"
 puts "First, let's save the config to a file."
 puts 'Press enter to save'
@@ -46,13 +46,29 @@ rescue => e
   puts 'uh oh, there was an error saving. Report the following error to Chew on github'
   puts e
 end
+if CONFIG['bundler'] == true
+  puts 'Now, we will use bundler to install the gems! Please standby'
+  `bundle install`
+  puts 'All installed! Let\'s continue'
+else
+  puts 'Now, we are going to make sure you have all of your gems. Press enter to install neccessary gems.'
+  require './requiregems.rb'
+end
 puts 'Now, a confirmation bot will join with the config you created and verify your identify. Hop on your irc client!'
-`ruby scripts/confirm.rb`
+if CONFIG['bundler'] == true
+  `ruby scripts/confirm.rb`
+else
+  `bundle exec ruby scripts/confirm.rb`
+end
 puts 'You are ready to run your bot! Would you like to start this bot up now? (y/n)'
 input = gets.chomp
 if input == 'y'
-  `ruby bot.rb`
+  if CONFIG['bundler'] == true
+    `ruby bot.rb`
+  else
+    `bundle exec ruby bot.rb`
+  end
 else
-  puts 'Alright! To run, type ruby bot.rb'
+  puts 'Alright! To run, type ruby bot.rb or bundle exec ruby bot.rb'
   exit
 end
