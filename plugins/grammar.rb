@@ -30,7 +30,7 @@ class Grammar
     args = args.gsub('PLEASE', %w[PLSSSS PLZ PLEEE].sample.to_s)
     args = args.gsub('E', %w[E 3].sample.to_s)
     args = "#{args} #{['WTF', 'WTF LOL', 'LOL', 'OMG', '', 'OMG LOL'].sample}"
-    m.reply args
+    m.reply args[0..400]
   end
 
   def up(m, message)
