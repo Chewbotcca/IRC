@@ -33,3 +33,6 @@ AllCops:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
