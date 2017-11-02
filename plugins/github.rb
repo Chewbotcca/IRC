@@ -7,7 +7,11 @@ class GitHub
   def ghissue(m, repo, issuenum)
     issuenum = issuenum.to_i
     issueurl = "https://api.github.com/repos/#{repo}/issues/#{issuenum}"
-    parsed = JSON.parse(RestClient.get(issueurl))
+    begin
+      parsed = JSON.parse(RestClient.get(issueurl))
+    rescue
+      m.reply 'Invalid Repo or Issue number!'
+    end
     issueorpull = parsed['html_url'].split('/')[5]
     issueorpull = 'Issue' if issueorpull == 'issues'
     issueorpull = 'Pull' if issueorpull == 'pull'
