@@ -7,7 +7,7 @@ class GitHub
   def ghissue(m, repo, issuenum)
     issuenum = issuenum.to_i
     if issuenum < 1
-      m.reply "Invalid Issue count!"
+      m.reply 'Invalid Issue count!'
       return
     end
     issueurl = "https://api.github.com/repos/#{repo}/issues/#{issuenum}"
