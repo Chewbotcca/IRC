@@ -40,7 +40,12 @@ CONFIG['wordnik'] = gets.chomp
 puts 'Your IRC Nickname. Please use your CURRENT nickname, you will need it for the next step'
 CONFIG['ownernick'] = gets.chomp
 puts 'Do you plan to use bundler (ruby gem)? If you don\'t know what this is, assume no and say "false"'
-CONFIG['bundler'] = gets.chomp
+response = gets.chomp
+if response == 'true'
+  CONFIG['bundler'] = true
+else
+  CONFIG['bundler'] = false
+end
 puts "This concludes our CONFIGURATION portion of the setup. Let's move on to gems!"
 puts "First, let's save the config to a file."
 puts 'Press enter to save'
