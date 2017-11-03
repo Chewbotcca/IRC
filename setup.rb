@@ -4,6 +4,11 @@ puts 'Press enter to get started'
 puts 'WARNING: Your config will get WIPED if you continue. Only use this to setup.'
 gets
 puts 'Alright! Config time.'
+begin
+  require 'yaml'
+rescue LoadError
+  puts 'YAML not found! Is your ruby ok?'
+end
 File.new('config.yaml', 'w+') unless File.exist?('config.yaml')
 exconfig = YAML.load_file('config.example.yaml')
 File.open('config.yaml', 'w') { |f| f.write exconfig.to_yaml }
