@@ -39,13 +39,8 @@ puts 'Wordnik API key. Very optional and only needed for !define !antonym and !s
 CONFIG['wordnik'] = gets.chomp
 puts 'Your IRC Nickname. Please use your CURRENT nickname, you will need it for the next step'
 CONFIG['ownernick'] = gets.chomp
-puts 'Do you plan to use bundler (ruby gem)? If you don\'t know what this is, assume no and say "false"'
-response = gets.chomp
-if response == 'true'
-  CONFIG['bundler'] = true
-else
-  CONFIG['bundler'] = false
-end
+puts 'Do you plan to use bundler (ruby gem)? If you don\'t know what this is, assume no and say "false", Otherwise say "true"'
+CONFIG['bundler'] = gets.chomp
 puts "This concludes our CONFIGURATION portion of the setup. Let's move on to gems!"
 puts "First, let's save the config to a file."
 puts 'Press enter to save'
