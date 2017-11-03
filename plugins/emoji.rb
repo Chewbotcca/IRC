@@ -12,6 +12,7 @@ class Emoji
   match /breplace (.+)/, method: :breplace
   match /:b:replace (.+)/, method: :breplace
   match /🅱️replace (.+)/, method: :breplace
+  match /tm (.+)/, method: :tm
 
   def spread(m, args)
     m.reply args.split('').join(' ')
@@ -33,6 +34,17 @@ class Emoji
       getsplit = args[current].split('')
       getsplit[0] = '🅱️'
       args[current] = getsplit.join('')
+      current += 1
+    end
+    m.reply args.join(' ')
+  end
+
+  def tm(m, args)
+    args = args.split(' ')
+    amount = args.length
+    current = 0
+    while current < amount
+      args[current] = "#{args[current]}™"
       current += 1
     end
     m.reply args.join(' ')
