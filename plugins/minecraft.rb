@@ -3,6 +3,7 @@ class Minecraft
 
   match /uuid (.+)/, method: :uuid
   match /server (.+)/, method: :checkserver
+  match /mcserver (.+)/, method: :checkserver
   match /namemc (.+)/, method: :namemcsearch
   match /mcstatus/, method: :mcstatus
   match /namemcf (.+)/, method: :namemcfriends
