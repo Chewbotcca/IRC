@@ -61,6 +61,7 @@ bot = Cinch::Bot.new do
     c.port = botport
     c.user = botuser
     c.realname = botrealname
+    c.messages_per_second = 20
 
     # Load modules.
     c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, Define, Synonym, Antonym, WordRandom, Emoji, Food, TableFlip, Grammar, Formatting, BaseS4, Choose, GitHub, Flip]
