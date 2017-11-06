@@ -13,6 +13,7 @@ class Emoji
   match /:b:replace (.+)/, method: :breplace
   match /🅱️replace (.+)/, method: :breplace
   match /tm (.+)/, method: :tm
+  match /™ (.+)/, method: :tm
 
   def spread(m, args)
     m.reply args.split('').join(' ')
