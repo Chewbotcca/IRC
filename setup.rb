@@ -37,6 +37,8 @@ puts "If you want to use commands (such as to set your ownerhost, or become a bo
 CONFIG['modifypass'] = gets.chomp
 puts 'Wordnik API key. Very optional and only needed for !define !antonym and !synonym'
 CONFIG['wordnik'] = gets.chomp
+puts 'Google API key. Very optional and only needed for !youtube and such'
+CONFIG['google'] = gets.chomp
 puts 'Your IRC Nickname. Please use your CURRENT nickname, you will need it for the next step'
 CONFIG['ownernick'] = gets.chomp
 puts 'Do you plan to use bundler (ruby gem)? If you don\'t know what this is, assume no and say "false", Otherwise say "true"'

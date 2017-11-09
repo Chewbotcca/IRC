@@ -51,3 +51,6 @@ bundler: false
 
 ## Wordnik API key
 wordnik:
+
+## Google API key
+google:
