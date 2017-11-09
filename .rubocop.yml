@@ -30,6 +30,7 @@ Lint/UriEscapeUnescape:
 
 AllCops:
   TargetRubyVersion: 2.4.1
+  DisplayCopNames: true
 
 Style/FrozenStringLiteralComment:
   Enabled: false
