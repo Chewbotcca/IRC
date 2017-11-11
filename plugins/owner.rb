@@ -5,6 +5,13 @@ class Owner
   match /part (.+)/, method: :part
   match /eval (.+)/, method: :execute
   match /die/, method: :die
+  match /api (.+) (.+)/, method: :api
+
+  def api(m, service, key)
+    return unless m.user.host == CONFIG['ownerhost']
+    CONFIG[service] = key
+    File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
+  end
 
   def die(m)
     if m.user.host == CONFIG['ownerhost']
