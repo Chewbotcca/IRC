@@ -1,8 +1,17 @@
 class Google
   include Cinch::Plugin
 
-  match /youtube (.+)/, method: :youtube
+  match /video (.+)/, method: :youtube
   match /googl (.+)/, method: :googl
+  match /youtube (.+)/, method: :searchyt
+  match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :youtube
+
+  def searchyt(m, search)
+    url = URI.escape("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=#{search}&key=#{CONFIG['google']}")
+    id = JSON.parse(RestClient.get(url))['items'][0]['id']['videoId']
+    video = "http://youtu.be/#{id}"
+    youtube(m, video, true)
+  end
 
   def googl(m, url)
     m.reply JSON.parse(RestClient.post("https://www.googleapis.com/urlshortener/v1/url?key=#{CONFIG['google']}", { 'longUrl' => url }.to_json, content_type: :json))['id']
@@ -11,8 +20,9 @@ class Google
     return
   end
 
-  def youtube(m, url)
+  def youtube(m, url, provideurl = false)
     begin
+      givenurl = url
       url = url.split(/[\/,&,?,=]/)
       case url[2]
       when 'www.youtube.com'
@@ -61,6 +71,11 @@ class Google
     when '12'
       month = 'December'
     end
-    m.reply "#{Format(:bold, (info['title']).to_s)} by #{Format(:bold, (info['channelTitle']).to_s)} - length: #{length} - #{views} views - #{likes} likes - #{dislike} dislikes - Uploaded on: #{month} #{upload[2]}, #{upload[0]}."
+    urlpls = if provideurl
+               " #{givenurl}"
+             else
+               '.'
+             end
+    m.reply "#{Format(:bold, (info['title']).to_s)} by #{Format(:bold, (info['channelTitle']).to_s)} - length: #{length} - #{views} views - #{likes} likes - #{dislike} dislikes - Uploaded on: #{month} #{upload[2]}, #{upload[0]}#{urlpls}"
   end
 end
