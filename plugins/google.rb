@@ -11,6 +11,9 @@ class Google
     id = JSON.parse(RestClient.get(url))['items'][0]['id']['videoId']
     video = "http://youtu.be/#{id}"
     youtube(m, video, true)
+  rescue
+    m.reply 'This commmand requires a Google API key!'
+    return
   end
 
   def googl(m, url)
