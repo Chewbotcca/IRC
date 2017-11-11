@@ -31,6 +31,8 @@ class Google
         id = url[5]
       when 'youtu.be'
         id = url[3]
+      else
+        return
       end
       url = JSON.parse(RestClient.get("https://www.googleapis.com/youtube/v3/videos?id=#{id}&key=#{CONFIG['google']}&part=snippet,contentDetails,statistics"))
     rescue
