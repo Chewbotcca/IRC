@@ -12,7 +12,6 @@ class Google
     video = "http://youtu.be/#{id}"
     youtube(m, video, true)
   rescue
-    m.reply 'This commmand requires a Google API key!'
     return
   end
 
