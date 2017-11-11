@@ -2,6 +2,16 @@ class Google
   include Cinch::Plugin
 
   match /youtube (.+)/, method: :youtube
+  match /googl (.+)/, method: :googl
+
+  def googl(m, url)
+    begin
+      m.reply JSON.parse(RestClient.post("https://www.googleapis.com/urlshortener/v1/url?key=#{CONFIG['google']}", { 'longUrl' => url }.to_json, content_type: :json))['id']
+    rescue
+      m.reply 'This command requires a Google API key!'
+      return
+    end
+  end
 
   def youtube(m, url)
     begin
