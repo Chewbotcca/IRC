@@ -11,6 +11,7 @@ class Owner
     return unless m.user.host == CONFIG['ownerhost']
     CONFIG[service] = key
     File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
+    m.reply "#{service} API key set to: `#{key}`!"
   end
 
   def die(m)
