@@ -47,8 +47,11 @@ class Google
     views = stats['viewCount'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
     likes = stats['likeCount'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
     dislike = stats['dislikeCount'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+    intdislike = dislike.delete(',').to_i
+    intlike = likes.delete(',').to_i
     upload = info['publishedAt'][0..9]
     upload = upload.split('-')
+    percent = ((intlike - intdislike) / intlike.to_f * 100).round(2)
     case upload[1]
     when '01'
       month = 'January'
@@ -80,6 +83,6 @@ class Google
              else
                '.'
              end
-    m.reply "#{Format(:bold, (info['title']).to_s)} by #{Format(:bold, (info['channelTitle']).to_s)} - length: #{length} - #{views} views - #{likes} likes - #{dislike} dislikes - Uploaded on: #{month} #{upload[2]}, #{upload[0]}#{urlpls}"
+    m.reply "#{Format(:bold, (info['title']).to_s)} by #{Format(:bold, (info['channelTitle']).to_s)} | length: #{Format(:bold, length.to_s)} | #{Format(:bold, views.to_s)} views | #{Format(:bold, likes.to_s)} likes - #{Format(:bold, dislike.to_s)} dislikes (#{Format(:bold, percent.to_s)}%) | Uploaded on #{Format(:bold, "#{month} #{upload[2]}, #{upload[0]}#{urlpls}")}"
   end
 end
