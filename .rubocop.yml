@@ -40,3 +40,6 @@ Metrics/PerceivedComplexity:
 
 Style/RegexpLiteral:
   Enabled: false
+
+Metrics/ClassLength:
+  Max: 150
