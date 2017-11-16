@@ -7,7 +7,7 @@ class Food
   match /cake (.+)/, method: :cake
   match /biscuit (.+)/, method: :biscuit
   match /sandwich (.+)/, method: :sandwich
-  match /fortune (.+)/, method: :fortune
+  match /fortune/, method: :fortune
 
   def fortune(m)
     fortunes = [
