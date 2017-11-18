@@ -13,7 +13,7 @@ class Channel
     end
     data = YAML.load_file(filename)
     count = data['count']
-    data[count+1] = "#{m.user}: #{m.message}"
+    data[count + 1] = "#{m.user}: #{m.message}"
     data['count'] += 1
     File.open(filename, 'w') { |f| f.write data.to_yaml }
   end
