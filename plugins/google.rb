@@ -5,6 +5,22 @@ class Google
   match /googl (.+)/, method: :googl
   match /youtube (.+)/, method: :searchyt
   match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :youtube
+  match /youtime (.+)/, method: :duration
+
+  def duration(m, search)
+    url = URI.escape("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=#{search}&key=#{CONFIG['google']}")
+    id = JSON.parse(RestClient.get(url))['items'][0]['id']['videoId']
+    begin
+      url = JSON.parse(RestClient.get("https://www.googleapis.com/youtube/v3/videos?id=#{id}&key=#{CONFIG['google']}&part=snippet,contentDetails,statistics"))
+    rescue
+      m.reply 'This command requires a Google API key!'
+      return
+    end
+    length = url['items'][0]['contentDetails']['duration']
+    length = length[2..length.length]
+    length.downcase!
+    m.reply "Length of YouTube video is: #{Format(:bold, length.to_s)}. (URL: http://youtu.be/#{id})"
+  end
 
   def searchyt(m, search)
     url = URI.escape("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=#{search}&key=#{CONFIG['google']}")
