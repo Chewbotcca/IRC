@@ -2,3 +2,7 @@ config.yaml
 CafeBabeMigration.txt
 Gemfile.lock
 data/versions.json
+data/logs/*.yaml
+!data/logs/logs.example.yaml
+data/channel/*.yaml
+!data/channel/channel.example.yaml
