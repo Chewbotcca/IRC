@@ -16,7 +16,7 @@ class Grammar
   match /title (.+)/, method: :titlecase
   match /swap (.+)/, method: :swap
   match /swapcase (.+)/, method: :swap
-  
+
   def derp(m, args)
     args.upcase!
     args = args.gsub('BECAUSE', %w[BECUZ BECAS CUZ BECZ].sample.to_s)
