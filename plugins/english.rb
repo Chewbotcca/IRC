@@ -1,4 +1,4 @@
-class Define
+class English
   include Cinch::Plugin
 
   match /define (.+)/, method: :define
