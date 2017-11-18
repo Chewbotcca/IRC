@@ -8,7 +8,7 @@ class Cleverbot
     begin
       response = JSON.parse(RestClient.get(URI.escape("https://www.cleverbot.com/getreply?key=#{CONFIG['cleverbot']}&input=#{input}&cs=&callback=ProcessReply")))
     rescue
-      m.reply "An error occured! Make sure you have a Cleverbot API key!"
+      m.reply 'An error occured! Make sure you have a Cleverbot API key!'
       return
     end
     # CS will be used eventually!!
