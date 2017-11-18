@@ -64,7 +64,7 @@ bot = Cinch::Bot.new do
     c.messages_per_second = 20
 
     # Load modules.
-    c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, English, Synonym, Antonym, WordRandom, Emoji, Food, TableFlip, Grammar, Formatting, BaseS4, Choose, GitHub, Flip, Google, Cleverbot]
+    c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, TRBMB, ModifyConfig, NickServ, InviteToJoin, RonQuote, EBall, Bitcoin, QRCode, About, English, Emoji, Food, TableFlip, Grammar, Formatting, BaseS4, Choose, GitHub, Flip, Google, Cleverbot]
   end
 end
 # START THE BOT
