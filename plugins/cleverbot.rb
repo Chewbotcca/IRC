@@ -5,7 +5,12 @@ class Cleverbot
   match /cb (.+)/, method: :cleverbot
 
   def cleverbot(m, input)
-    response = JSON.parse(RestClient.get(URI.escape("https://www.cleverbot.com/getreply?key=#{CONFIG['cleverbot']}&input=#{input}&cs=&callback=ProcessReply")))
+    begin
+      response = JSON.parse(RestClient.get(URI.escape("https://www.cleverbot.com/getreply?key=#{CONFIG['cleverbot']}&input=#{input}&cs=&callback=ProcessReply")))
+    rescue
+      m.reply "An error occured! Make sure you have a Cleverbot API key!"
+      return
+    end
     # CS will be used eventually!!
     CONFIG['cs'] = response['cs']
     File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
