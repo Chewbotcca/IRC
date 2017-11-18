@@ -14,7 +14,9 @@ class Grammar
   match /derpify (.+)/, method: :derp
   match /titlecase (.+)/, method: :titlecase
   match /title (.+)/, method: :titlecase
-
+  match /swap (.+)/, method: :swap
+  match /swapcase (.+)/, method: :swap
+  
   def derp(m, args)
     args.upcase!
     args = args.gsub('BECAUSE', %w[BECUZ BECAS CUZ BECZ].sample.to_s)
@@ -31,6 +33,10 @@ class Grammar
     args = args.gsub('E', %w[E 3].sample.to_s)
     args = "#{args} #{['WTF', 'WTF LOL', 'LOL', 'OMG', '', 'OMG LOL'].sample}"
     m.reply args[0..400]
+  end
+
+  def swap(m, message)
+    m.reply message.swapcase
   end
 
   def up(m, message)
