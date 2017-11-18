@@ -54,3 +54,8 @@ wordnik:
 
 ## Google API key
 google:
+
+## Cleverbot API Key
+cleverbot:
+## Cleverbot State, leave blank unless you know what this is!
+cs:
