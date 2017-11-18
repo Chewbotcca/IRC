@@ -1,7 +1,7 @@
 class Channel
   include Cinch::Plugin
 
-  listen_to :channel,    method: :log_public_message
+  listen_to :channel, method: :log_public_message, strip_colors: true
 
   def log_public_message(m)
     channel = m.channel.to_s[1..m.channel.to_s.length]
