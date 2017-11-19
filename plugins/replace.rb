@@ -34,7 +34,7 @@ class Replace
         useme = removed
         current = 0
       else
-        count -= 1
+        current -= 1
       end
     end
     if useme == ''
