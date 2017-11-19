@@ -28,6 +28,7 @@ class Channel
   end
 
   def log_public_message(m)
+    return if m.params[1][0..1] == 's/'
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.yaml"
     unless File.exist?(filename)
