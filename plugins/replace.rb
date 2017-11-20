@@ -16,13 +16,15 @@ class Replace
     end
     data = YAML.load_file(filename)
     count = data['count']
-    if message.split('/').length < 2
-      m.reply 'YELLING'
-      return
-    end
+    return if message.split('/').length > 2
+    return if message.split('/').empty?
     split = message.split('/')
     find = split[0]
-    replace = split[1]
+    replace = if message.split('/').length == 1
+                ''
+              else
+                split[1]
+              end
     # Yay let's search every message
     current = count
     useme = ''
@@ -40,7 +42,11 @@ class Replace
     if useme == ''
       return
     else
-      replaced = useme.gsub(find, Format(:bold, replace))
+      replaced = if replace == ''
+                   useme.delete(find)
+                 else
+                   useme.gsub(find, Format(:bold, replace))
+                 end
       m.reply "Correction, #{user}. \"#{replaced}\""
       data[count + 1] = "#{user}: #{useme.gsub(find, replace)}"
       data['count'] += 1
