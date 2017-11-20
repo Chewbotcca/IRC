@@ -17,6 +17,6 @@ class Streams
       online = Format(:red, 'Currently Offline.')
     end
     followers = parse['numFollowers']
-    m.reply "Info for Mixer user #{Format(:bold, user)}. #{online} Followers: #{Format(:bold, followers}! Stream Title: #{Format(:bold, parsed['name'])}. Total Views: #{Format(:bold, parsed['viewersTotal'])}. URL: http://mixer.com/#{user}"
+    m.reply "Info for Mixer user #{Format(:bold, user)}. #{online} Followers: #{Format(:bold, followers)}! Stream Title: #{Format(:bold, parsed['name'])}. Total Views: #{Format(:bold, parsed['viewersTotal'])}. URL: http://mixer.com/#{user}"
   end
 end
