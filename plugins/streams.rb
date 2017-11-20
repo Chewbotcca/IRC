@@ -11,11 +11,11 @@ class Streams
       m.reply 'User not found!'
       return
     end
-    if parse['online']
-      online = Format(:green, 'Currently Streaming!')
-    else
-      online = Format(:red, 'Currently Offline.')
-    end
+    online = if parse['online']
+               Format(:green, 'Currently Streaming!')
+             else
+               Format(:red, 'Currently Offline.')
+             end
     followers = parse['numFollowers']
     m.reply "Info for Mixer user #{Format(:bold, user)}. #{online} Followers: #{Format(:bold, followers)}! Stream Title: #{Format(:bold, parsed['name'])}. Total Views: #{Format(:bold, parsed['viewersTotal'])}. URL: http://mixer.com/#{user}"
   end
