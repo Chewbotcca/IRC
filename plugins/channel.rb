@@ -16,9 +16,7 @@ class Channel
       return
     end
     data = false
-    while data == false
-      data = YAML.load_file(filename)
-    end
+    data = YAML.load_file(filename) while data == false
     count = data['count']
     ichoose = rand(1..count)
     colon = data[ichoose].index(':')
