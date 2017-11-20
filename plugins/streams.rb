@@ -4,7 +4,7 @@ class Streams
   match /mixer (.+)/, method: :mixer
 
   def mixer(m, user)
-    user.delete!(' ')
+    user = user.delete(' ')
     begin
       parse = JSON.parse(RestClient.get("https://mixer.com/api/v1/channels/#{user}"))
     rescue
@@ -14,9 +14,9 @@ class Streams
     online = if parse['online']
                Format(:green, 'Currently Streaming!')
              else
-               Format(:red, 'Currently Offline.')
+               Format(:red, 'Currently Offline')
              end
-    followers = parse['numFollowers']
-    m.reply "Info for Mixer user #{Format(:bold, user)}. #{online} Followers: #{Format(:bold, followers)}! Stream Title: #{Format(:bold, parsed['name'])}. Total Views: #{Format(:bold, parsed['viewersTotal'])}. URL: http://mixer.com/#{user}"
+    followers = parse['numFollowers'].to_s
+    m.reply "Info for Mixer user #{Format(:bold, user)} | #{Format(:bold, online)} | Followers: #{Format(:bold, followers)} | Stream Title: #{Format(:bold, parse['name'])} | Total Views: #{Format(:bold, parse['viewersTotal'].to_s)} | URL: http://mixer.com/#{user}"
   end
 end
