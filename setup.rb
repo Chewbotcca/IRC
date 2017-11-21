@@ -1,5 +1,4 @@
 class Setup
-
   def initalize
     begin
       require 'yaml'
