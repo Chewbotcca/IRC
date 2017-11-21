@@ -26,6 +26,9 @@ port:
 # Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
 # Do not modify these quotation marks.
 channels:     ""
+## Connect using SSL? (Set to true to enable)
+ssl: false
+
 
 # NickServ Password (Don't have nickserv account? Don't worry! Run !nsregister pass email and it will set up the rest.)]
 # Only tested with Atheme IRC services. Report a bug if it does not work on other services.

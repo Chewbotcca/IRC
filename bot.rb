@@ -51,6 +51,12 @@ botrealname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
                 "#{CONFIG['realname']} - https://git.io/ChewbotccaIRC"
               end
 
+botssl = if CONFIG['ssl'].nil? || CONFIG['ssl'] == '' || CONFIG['ssl'] == 'false'
+           'false'
+         else
+           'true'
+         end
+
 # Configure the Bot
 bot = Cinch::Bot.new do
   configure do |c|
@@ -62,6 +68,7 @@ bot = Cinch::Bot.new do
     c.user = botuser
     c.realname = botrealname
     c.messages_per_second = 20
+    c.ssl.use = botssl
 
     # Load modules.
     c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, Quotes, ModifyConfig, NickServ, InviteToJoin, EBall, Bitcoin, QRCode, About, English, Emoji, Food, TableFlip, Grammar, Formatting, BaseS4, Choose, GitHub, Flip, Google, Cleverbot, Channel, Language, Replace, Streams]
