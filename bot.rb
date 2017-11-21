@@ -57,6 +57,12 @@ botssl = if CONFIG['ssl'].nil? || CONFIG['ssl'] == '' || CONFIG['ssl'] == 'false
            'true'
          end
 
+botserverpass = if CONFIG['serverpass'].nil? || CONFIG['serverpass'] == ''
+                  nil
+                else
+                  CONFIG['serverpass']
+                end
+
 # Configure the Bot
 bot = Cinch::Bot.new do
   configure do |c|
@@ -69,6 +75,7 @@ bot = Cinch::Bot.new do
     c.realname = botrealname
     c.messages_per_second = 20
     c.ssl.use = botssl
+    c.password = botserverpass
 
     # Load modules.
     c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, Quotes, ModifyConfig, NickServ, InviteToJoin, EBall, Bitcoin, QRCode, About, English, Emoji, Food, TableFlip, Grammar, Formatting, BaseS4, Choose, GitHub, Flip, Google, Cleverbot, Channel, Language, Replace, Streams]
