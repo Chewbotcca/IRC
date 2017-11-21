@@ -67,7 +67,8 @@ class Google
     intlike = likes.delete(',').to_i
     upload = info['publishedAt'][0..9]
     upload = upload.split('-')
-    percent = ((intlike - intdislike) / intlike.to_f * 100).round(2)
+    totallikes = intdislike + intlike
+    percent = (intlike / totallikes.to_f * 100).round(2)
     case upload[1]
     when '01'
       month = 'January'
