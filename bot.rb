@@ -52,7 +52,7 @@ botrealname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
               end
 
 botssl = if CONFIG['ssl'].nil? || CONFIG['ssl'] == '' || CONFIG['ssl'] == 'false'
-           'false'
+           nil
          else
            'true'
          end
