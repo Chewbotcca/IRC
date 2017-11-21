@@ -7,6 +7,7 @@ class Channel
   match /quote (.+)/, method: :userquote
 
   def userquote(m, user)
+    user.delete!(' ')
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.yaml"
     unless File.exist?(filename)
