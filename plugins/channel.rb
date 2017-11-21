@@ -48,8 +48,15 @@ class Channel
     m.reply 'Consider the channel log history c l e a r e d.'
   end
 
+  def dontlog(m)
+    msg = m.params[1]
+    return true if msg[0..1] == 's/'
+    return true if msg[0..5] == '!quote'
+    false
+  end
+
   def log_public_message(m)
-    return if m.params[1][0..1] == 's/'
+    return if dontlog
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.yaml"
     unless File.exist?(filename)
