@@ -40,6 +40,7 @@ class Replace
       end
     end
     if useme == ''
+      m.reply "Could not find phrase #{Format(:bold, find)} in the logs!"
       return
     else
       replaced = if replace == ''
