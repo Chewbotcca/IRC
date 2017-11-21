@@ -63,6 +63,12 @@ botserverpass = if CONFIG['serverpass'].nil? || CONFIG['serverpass'] == ''
                   CONFIG['serverpass']
                 end
 
+botprefix = if CONFIG['prefix'].nil? || CONFIG['prefix'] == ''
+              /!/
+            else
+              Regexp.new CONFIG['prefix']
+            end
+
 # Configure the Bot
 bot = Cinch::Bot.new do
   configure do |c|
@@ -76,6 +82,7 @@ bot = Cinch::Bot.new do
     c.messages_per_second = 20
     c.ssl.use = botssl
     c.password = botserverpass
+    c.plugins.prefix = botprefix
 
     # Load modules.
     c.plugins.plugins = [Minecraft, Owner, Restart, RandomCat, MemeDB, Quotes, ModifyConfig, NickServ, InviteToJoin, EBall, Bitcoin, QRCode, About, English, Emoji, Food, TableFlip, Grammar, Formatting, BaseS4, Choose, GitHub, Flip, Google, Cleverbot, Channel, Language, Replace, Streams]

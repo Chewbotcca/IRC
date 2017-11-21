@@ -17,6 +17,8 @@ nickname:
 realname:
 username:
 
+# Bot Prefix. Defautl is !
+
 ### SERVER INFORMATION ###
 
 # Put the server you want. (Ex. irc.chew.pro)
