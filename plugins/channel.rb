@@ -22,7 +22,6 @@ class Channel
     data = YAML.load_file(filename) while data == false
     count = data['count']
     users = {}.to_hash
-
     # Yay let's search every message
     current = count
     while current > 1
@@ -43,6 +42,7 @@ class Channel
     if users.length > 2
       m.reply "3rd: #{Format(:bold, users[2][0].to_s)} with #{Format(:bold, users[2][1].to_s)} messages!"
     end
+    m.reply "Altogether, everyone has sent #{Format(:bold, count.to_s)} messages! Woah!"
   end
 
   def userquote(m, user)
