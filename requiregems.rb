@@ -12,7 +12,7 @@ rescue LoadError
   end
 end
 begin
-  require 'RestClient'
+  require 'restclient'
 rescue LoadError
   puts "You're missing the gem `rest-client`. Would you like to install this now? (y/n)"
   input = gets.chomp
@@ -32,7 +32,7 @@ require 'json'
 require 'net/http'
 require 'yaml'
 begin
-  require 'Nokogiri'
+  require 'nokogiri'
 rescue LoadError
   puts "You're missing the gem `nokogiri`. Would you like to install this now? (y/n)"
   input = gets.chomp
