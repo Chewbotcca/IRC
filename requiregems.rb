@@ -20,8 +20,12 @@ rescue LoadError
     `gem install rest-client`
     puts 'Gem installed! Continuing..'
   else
-    puts 'To continue, install the rest-client gem'
-    exit
+    puts 'Without rest-client, commands like !cat, !trbmb, !youtube, and many more will not work! It is recommended to say n, unless you are testing a plugin that does not require rest-client, continue? (y/n)'
+    input = gets.chomp
+    if input == 'n'
+      puts 'To continue, install the rest-client gem'
+      exit
+    end
   end
 end
 require 'json'
@@ -36,8 +40,12 @@ rescue LoadError
     `gem install nokogiri`
     puts 'Gem installed! Continuing..'
   else
-    puts 'To continue, install the nokogiri gem'
-    exit
+    puts 'Without Nokogiri, !cat will not work. Continue? (y/n)'
+    input = gets.chomp
+    if input == 'n'
+      puts 'To continue, install the nokogiri gem'
+      exit
+    end
   end
 end
 require 'open-uri'
