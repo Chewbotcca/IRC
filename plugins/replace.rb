@@ -48,7 +48,7 @@ class Replace
                  else
                    useme.gsub(find, Format(:bold, replace))
                  end
-      replaced = replaced[0..400]        
+      replaced = replaced[0..400]
       m.reply "Correction, #{user}. \"#{replaced}\""
       data[count + 1] = "#{user}: #{useme.gsub(find, replace)}"
       data['count'] += 1
