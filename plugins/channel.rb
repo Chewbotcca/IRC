@@ -47,7 +47,7 @@ class Channel
   end
 
   def topwords(m)
-    m.reply 'Gathering top speakers in the channel....'
+    m.reply 'Gathering top words in the channel....'
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.yaml"
     unless File.exist?(filename)
@@ -70,6 +70,8 @@ class Channel
       currentword = 0
       while currentword < eachword.length
         word = eachword[currentword]
+        word = word.tr('^A-Za-z0-9', '')
+        word.downcase!
         if users[word].nil?
           users[word] = 1
         else
