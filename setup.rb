@@ -1,5 +1,5 @@
 class Setup
-  def initalize
+  def initialize
     begin
       require 'yaml'
     rescue LoadError
