@@ -5,6 +5,32 @@ class Music
   match /spartist (.+)/, method: :spotifyartist
   timer 3600, method: :updatespotify
   match /spotifyapi/, method: :checkperms
+  match /spotify (.+)/, method: :spotifytrack
+
+  def spotifytrack(m, song)
+    uri = URI.parse("https://api.spotify.com/v1/search?q=#{song}&type=track&market=US&limit=1")
+    request = Net::HTTP::Get.new(uri)
+    request['Accept'] = 'application/json'
+    request['Authorization'] = "Bearer #{CONFIG['spotify']}"
+
+    req_options = {
+      use_ssl: uri.scheme == 'https'
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    parse = JSON.parse(response.body)
+    track = parse['tracks']['items'][0]
+    name = track['name']
+    albumtype = track['album']['album_type'].capitalize
+    album = track['album']['name']
+    artist = track['artists'][0]['name']
+    url = track['external_urls']['spotify']
+
+    m.reply "#{Format(:bold, name)} | found in the #{albumtype} #{Format(:bold, album)} by #{Format(:bold, artist)} | #{url}"
+  end
 
   def checkperms(m)
     updatespotify if m.user.host == CONFIG['ownerhost']
