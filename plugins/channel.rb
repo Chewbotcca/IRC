@@ -36,13 +36,17 @@ class Channel
       current -= 1
     end
     users = users.sort.sort_by { |_x, y| y }.reverse
+    sleep 1
     m.reply "1st: #{Format(:bold, users[0][0].to_s)} with #{Format(:bold, users[0][1].to_s)} messages!"
+    sleep 1
     if users.length > 1
       m.reply "2nd: #{Format(:bold, users[1][0].to_s)} with #{Format(:bold, users[1][1].to_s)} messages!"
     end
+    sleep 1
     if users.length > 2
       m.reply "3rd: #{Format(:bold, users[2][0].to_s)} with #{Format(:bold, users[2][1].to_s)} messages!"
     end
+    sleep 1
     m.reply "Altogether, everyone has sent #{Format(:bold, count.to_s)} messages! Woah!"
   end
 
@@ -82,10 +86,13 @@ class Channel
       current -= 1
     end
     users = users.sort.sort_by { |_x, y| y }.reverse
+    sleep 1
     m.reply "1st: Word #{Format(:bold, users[0][0].to_s)} used #{Format(:bold, users[0][1].to_s)} times!"
+    sleep 1
     if users.length > 1
       m.reply "2nd: Word #{Format(:bold, users[1][0].to_s)} used #{Format(:bold, users[1][1].to_s)} times!"
     end
+    sleep 1
     if users.length > 2
       m.reply "3rd: Word #{Format(:bold, users[2][0].to_s)} used #{Format(:bold, users[2][1].to_s)} times!"
     end
