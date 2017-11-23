@@ -110,18 +110,27 @@ class Grammar
 
   def derp(m, args)
     args.upcase!
+    args = args.gsub('THE', %w[TEH DA DAH THE].sample.to_s)
+    args = args.gsub('E', %w[E 3 A].sample.to_s)
+    args = args.gsub('?', ['??!!!', '!?!?!', '???!!', '????'].sample.to_s)
+    args = args.gsub('!', ['!!11!', '!11!!1', '!!1!1'].sample.to_s)
+    args = args.gsub('YOU\'RE', %w[UR YOUR YORE].sample.to_s)
+    args = args.gsub('YOUR', ['UR', 'YOUR', 'YOU\'RE', 'YORE'].sample.to_s)
+    args = args.gsub('YOU', %w[U UU OU YU].sample.to_s)
+    args = args.gsub('WHAT', %w[WAT WHT WUT WAAT].sample.to_s)
+    args = args.gsub('HECK', %w[HEK HEC HECC HEKK].sample.to_s)
+    args = args.gsub('ARE', %w[R AR ARE].sample.to_s)
+    args = args.gsub('WHY', %w[Y YYYY WYY].sample.to_s)
+    args = args.gsub('TOO', %w[2 TWO TO].sample.to_s)
+    args = args.gsub('TO', %w[2 TWO TO].sample.to_s)
+    args = args.gsub('TWO', %w[2 TWO TO].sample.to_s)
+    args = args.gsub('BE', %w[B 🅱️].sample.to_s)
     args = args.gsub('BECAUSE', %w[BECUZ BECAS CUZ BECZ].sample.to_s)
     args = args.gsub('THAT', %w[DAT TAT DHAT DATA THAT].sample.to_s)
     args = args.gsub('SCHOOL', %w[SKEWL SCHEWL SCOOL SKMOOP SKOWL].sample.to_s)
     args = args.gsub('LIKE', %w[LIAK LIEK LOKE LICK LIKE].sample.to_s)
     args = args.gsub('HELP', %w[HALP HEEPL HAAPLE HELP].sample.to_s)
-    args = args.gsub('THE', %w[TEH DA DAH THE].sample.to_s)
-    args = args.gsub('?', ['??!!!', '!?!?!', '???!!', '??/??'].sample.to_s)
-    args = args.gsub('!', ['!!11!', '!11!!1', '!!1!1'].sample.to_s)
-    args = args.gsub('YOU\'RE', %w[UR YOUR YORE].sample.to_s)
-    args = args.gsub('YOUR', ['UR', 'YOUR', 'YOU\'RE', 'YORE'].sample.to_s)
     args = args.gsub('PLEASE', %w[PLSSSS PLZ PLEEE].sample.to_s)
-    args = args.gsub('E', %w[E 3].sample.to_s)
     args = "#{args} #{['WTF', 'WTF LOL', 'LOL', 'OMG', '', 'OMG LOL'].sample}"
     m.reply args[0..400]
   end
