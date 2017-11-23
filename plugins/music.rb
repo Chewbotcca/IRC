@@ -4,6 +4,12 @@ class Music
   match /spalbum (.+)/, method: :spotifyalbum
   match /spartist (.+)/, method: :spotifyartist
   timer 3600, method: :updatespotify
+  match /spotifyapi/, method: :checkperms
+
+  def checkperms(m)
+    updatespotify if m.user.host == CONFIG['ownerhost']
+    nil
+  end
 
   def updatespotify
     return if CONFIG['spotifyclientid'] == '' || CONFIG['spotifyclientid'].nil?
