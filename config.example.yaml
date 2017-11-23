@@ -65,3 +65,11 @@ google:
 cleverbot:
 ## Cleverbot State, leave blank unless you know what this is!
 cs:
+
+## Spotify is a mess
+# Placeholder for Spotify Auth Token
+spotify:
+# Your application's client ID
+spotifyclientid:
+# Your appliation's client secret
+spotifysecret:

@@ -3,6 +3,32 @@ class Music
 
   match /spalbum (.+)/, method: :spotifyalbum
   match /spartist (.+)/, method: :spotifyartist
+  timer 3600, method: :updatespotify
+
+  def updatespotify
+    return if CONFIG['spotifyclientid'] == '' || CONFIG['spotifyclientid'].nil?
+    return if CONFIG['spotifysecret'] == '' || CONFIG['spotifysecret'].nil?
+    encodeid = Base64.encode64("#{CONFIG['spotifyclientid']}:#{CONFIG['spotifysecret']}")
+
+    uri = URI.parse('https://accounts.spotify.com/api/token')
+    request = Net::HTTP::Post.new(uri)
+    request['Authorization'] = "Basic #{encodeid.delete("\n")}"
+    request.set_form_data(
+      'grant_type' => 'client_credentials'
+    )
+
+    req_options = {
+      use_ssl: uri.scheme == 'https'
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    parsed = JSON.parse(response.body)
+    CONFIG['spotify'] = parsed['access_token']
+    File.open(filename, 'w') { |f| f.write CONFIG.to_yaml }
+  end
 
   def spotifyartist(m, search)
     uri = URI.parse("https://api.spotify.com/v1/search?q=#{search}&type=artist&market=US&limit=1")
