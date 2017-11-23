@@ -7,7 +7,20 @@ class Music
   match /spotifyapi/, method: :checkperms
   match /spotify (.+)/, method: :spotifytrack
 
+  def checkspotifykey
+    return 'no-key' if CONFIG['spotify'].nil? || CONFIG['spotify'] == ''
+    return 'missing-client' if CONFIG['spotifyclientid'].nil? || CONFIG['spotifyclientid'] == '' || CONFIG['spotifysecret'].nil? || CONFIG['spotifysecret'] == ''
+    true
+  end
+
   def spotifytrack(m, song)
+    unless checkspotifykey == true
+      updatekey if checkspotifykey == 'no-key'
+      if checkspotifykey == 'missing-client' || checkspotifykey == 'no-key'
+        m.reply 'Missing Spotify Client Credentials! MSCC!!'
+        return
+      end
+    end
     uri = URI.parse("https://api.spotify.com/v1/search?q=#{song}&type=track&market=US&limit=1")
     request = Net::HTTP::Get.new(uri)
     request['Accept'] = 'application/json'
@@ -63,6 +76,13 @@ class Music
   end
 
   def spotifyartist(m, search)
+    unless checkspotifykey == true
+      updatekey if checkspotifykey == 'no-key'
+      if checkspotifykey == 'missing-client' || checkspotifykey == 'no-key'
+        m.reply 'Missing Spotify Client Credentials! MSCC!!'
+        return
+      end
+    end
     uri = URI.parse("https://api.spotify.com/v1/search?q=#{search}&type=artist&market=US&limit=1")
     request = Net::HTTP::Get.new(uri)
     request['Accept'] = 'application/json'
@@ -87,6 +107,13 @@ class Music
   end
 
   def spotifyalbum(m, search)
+    unless checkspotifykey == true
+      updatekey if checkspotifykey == 'no-key'
+      if checkspotifykey == 'missing-client' || checkspotifykey == 'no-key'
+        m.reply 'Missing Spotify Client Credentials! MSCC!!'
+        return
+      end
+    end
     uri = URI.parse("https://api.spotify.com/v1/search?q=#{search}&type=album&market=US&limit=1")
     request = Net::HTTP::Get.new(uri)
     request['Accept'] = 'application/json'
