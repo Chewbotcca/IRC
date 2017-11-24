@@ -15,6 +15,10 @@ class Music
   match /lastfmcompare (.+) (.+)/, method: :lastcompare
 
   def lastcompare(m, user1, user2)
+    if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
+      m.reply 'This command requires an API key from last.fm!'
+      return
+    end
     lastfmtrack(m, user1)
     sleep 1
     lastfmtrack(m, user2)
