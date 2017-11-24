@@ -85,6 +85,7 @@ class Music
       art3scrob = base[2]['playcount']
       m.reply "3rd: #{Format(:bold, art3name)} with #{Format(:bold, art3scrob)} scrobbles."
     end
+    sleep 1
     m.reply "View more: http://www.last.fm/user/#{user}/library/artists?date_preset=ALL_TIME"
   end
 
