@@ -23,11 +23,11 @@ class Music
 
     begin
       np = base['@attr']['nowplaying']
-      timeago = 'Now Playing.'
+      timeago = np
       playing = true
     rescue
       np = base['date']['uts']
-      t = Time.now.to_i - np.to_i 
+      t = Time.now.to_i - np.to_i
       mm, ss = t.divmod(60)
       hh, mm = mm.divmod(60)
       dd, hh = hh.divmod(24)
