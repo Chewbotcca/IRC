@@ -43,6 +43,8 @@ class Music
     url = track['external_urls']['spotify']
 
     m.reply "#{Format(:bold, name)} | found in the #{albumtype} #{Format(:bold, album)} by #{Format(:bold, artist)} | #{url}"
+  rescue
+    m.reply 'No songs found with the given parameters!'
   end
 
   def checkperms(m)
