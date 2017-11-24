@@ -12,6 +12,13 @@ class Music
   match /lastfmart (.+)/, method: :lastfmartist
   match /lastfmtracks (.+)/, method: :lastfmtoptracks
   match /ltop (.+)/, method: :lastfmtoptracks
+  match /lastfmcompare (.+) (.+)/, method: :lastcompare
+
+  def lastcompare(m, user1, user2)
+    lastfmtrack(m, user1)
+    sleep 1
+    lastfmtrack(m, user2)
+  end
 
   def lastfmtoptracks(m, user)
     if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
