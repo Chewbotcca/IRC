@@ -6,6 +6,41 @@ class Music
   timer 3600, method: :updatespotify
   match /spotifyapi/, method: :checkperms
   match /spotify (.+)/, method: :spotifytrack
+  match /lastfm (.+)/, method: :lastfmtrack
+
+  def lastfmtrack(m, user)
+    if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
+      m.reply 'This command requires an API key from last.fm!'
+      return
+    end
+    parse = JSON.parse(RestClient.get("http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=#{user}&api_key=#{CONFIG['lastfm']}&format=json"))
+
+    base = parse['recenttracks']['track'][0]
+
+    artist = base['artist']['#text']
+    track = base['name']
+    album = base['album']['#text']
+
+    begin
+      np = base['@attr']['nowplaying']
+      timeago = 'Now Playing.'
+      playing = true
+    rescue
+      np = base['date']['uts']
+      t = Time.now.to_i - np.to_i 
+      mm, ss = t.divmod(60)
+      hh, mm = mm.divmod(60)
+      dd, hh = hh.divmod(24)
+      timeago = format('%d days, %d hours, %d minutes and %d seconds', dd, hh, mm, ss)
+      playing = false
+    end
+
+    if playing
+      m.reply "#{Format(:bold, user)} is currently listening to #{Format(:bold, track)} by #{Format(:bold, artist)} found in the album #{Format(:bold, album)}."
+    else
+      m.reply "#{Format(:bold, user)} last listened to #{Format(:bold, track)} by #{Format(:bold, artist)} found in the album #{Format(:bold, album)} about #{Format(:bold, timeago)} ago."
+    end
+  end
 
   def checkspotifykey
     return 'no-key' if CONFIG['spotify'].nil? || CONFIG['spotify'] == ''
