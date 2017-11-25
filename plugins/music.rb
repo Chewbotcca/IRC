@@ -25,6 +25,8 @@ class Music
 
     base = parse['topalbums']['album']
 
+    user = parse['topalbums']['@attr']['user']
+
     amount = base.length
 
     if amount.zero?
@@ -73,6 +75,8 @@ class Music
 
     base = parse['toptracks']['track']
 
+    user = parse['toptracks']['@attr']['user']
+
     amount = base.length
 
     if amount.zero?
@@ -111,6 +115,8 @@ class Music
 
     base = parse['topartists']['artist']
 
+    user = parse['topartists']['@attr']['user']
+
     amount = base.length
 
     if amount.zero?
@@ -148,6 +154,8 @@ class Music
     parse = JSON.parse(RestClient.get("http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=#{user}&api_key=#{CONFIG['lastfm']}&format=json"))
 
     base = parse['recenttracks']['track'][0]
+
+    user = parse['recenttracks']['@attr']['user']
 
     artist = base['artist']['#text']
     track = base['name']
