@@ -14,7 +14,7 @@ I made this bot for my IRC Network. It's ok, I guess.
 
 ### Install extremely lazily
 
-If you simply run `ruby bot.rb`, a GUI will help you install all the gems needed.
+If you simply run `ruby setup.rb`, a GUI will help you setup the bot!
 
 ### Install via `gem install`
 
@@ -52,7 +52,7 @@ I run some of my chewbotccas on the following servers using the following nickna
 Server IP        | Nickname   | Help Channel
 ---------------- | ---------- | ------------
 irc.chew.pro     | Chewbotcca | #Chewbotcca
-irc.freenode.com | Chewbotcca | #Chewbotcca
+irc.freenode.net | Chewbotcca | #Chewbotcca
 irc.esper.net    | Chewbotcca | #Chew
 irc.spi.gt       | Chewbotcca | #Chewbotcca
 
