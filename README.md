@@ -6,7 +6,7 @@ I made this bot for my IRC Network. It's ok, I guess.
 
 ## Downloading
 
-1) Download using `git clone https://github.com/Chewbotcca/IRC`
+1) Download using `git clone https://github.com/Chewbotcca/IRC.git`
 
 2) Install ruby. don't ask me how just google it
 
