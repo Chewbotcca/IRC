@@ -51,7 +51,7 @@ botrealname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
                 "#{CONFIG['realname']} - https://git.io/ChewbotccaIRC"
               end
 
-botssl = if CONFIG['ssl'].nil? || CONFIG['ssl'] == '' || CONFIG['ssl'] == 'false'
+botssl = if CONFIG['ssl'].nil? || CONFIG['ssl'] == '' || CONFIG['ssl'] == 'false' || CONFIG['ssl'] == false
            nil
          else
            'true'
