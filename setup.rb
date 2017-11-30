@@ -107,6 +107,15 @@ class Setup
       puts 'Cleverbot API key.'
       @config['cleverbot'] = gets.chomp
 
+      puts 'Spotify Client ID (application).'
+      @config['spotifyclientid'] = gets.chomp
+
+      puts 'Spotify Client Secret (application).'
+      @config['spotifysecret'] = gets.chomp
+
+      puts 'Last.fm API key.'
+      @config['lastfm'] = gets.chomp
+
       puts 'It turns out you\'re done configuring APO settings!'
       save
       config
