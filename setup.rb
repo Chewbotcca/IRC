@@ -78,6 +78,10 @@ class Setup
       puts 'Not registered? THe bot has a built in nickserv registration process!'
       @config['nickservpass'] = gets.chomp
 
+      puts 'Bot Prefix - Optional'
+      puts 'What should be the bot\'s prefix? Leave empty for the default, "!"'
+      @config['prefix'] = gets.chomp
+
       puts 'It turns out you\'re done configuring bot settings!'
       save
       config

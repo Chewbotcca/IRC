@@ -17,7 +17,8 @@ nickname:
 realname:
 username:
 
-# Bot Prefix. Defautl is !
+# Bot Prefix. Default is !
+prefix:
 
 ### SERVER INFORMATION ###
 
