@@ -1,5 +1,4 @@
 config.yaml
-CafeBabeMigration.txt
 Gemfile.lock
 data/versions.json
 data/logs/*.yaml
