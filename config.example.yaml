@@ -74,3 +74,6 @@ spotify:
 spotifyclientid:
 # Your appliation's client secret
 spotifysecret:
+
+## Last.fm API Key
+lastfm:
