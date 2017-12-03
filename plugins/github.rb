@@ -7,7 +7,7 @@ class GitHub
 
   def grabinfo(m, url)
     url = url.split('/')
-    if url[2] == "github.com"
+    if url[2] == 'github.com'
       if url[5] == 'issue' || url[5] == 'pull'
         repo = "#{url[3]}/#{url[4]}"
         issuenum = url[6]
