@@ -3,8 +3,20 @@ class GitHub
 
   match /ghissue (.+) (.+)/, method: :ghissue
   match /ghpull (.+) (.+)/, method: :ghissue
+  match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :grabinfo
 
-  def ghissue(m, repo, issuenum)
+  def grabinfo(m, url)
+    url = url.split('/')
+    if url[2] == "github.com"
+      if url[5] == 'issue' || url[5] == 'pull'
+        repo = "#{url[3]}/#{url[4]}"
+        issuenum = url[6]
+        ghissue(m, repo, issuenum, false)
+      end
+    end
+  end
+
+  def ghissue(m, repo, issuenum, showurl = true)
     if issuenum == 'latest'
       issuenum = JSON.parse(RestClient.get("https://api.github.com/repos/#{repo}/issues"))[0]['number'].to_i
     end
@@ -24,6 +36,10 @@ class GitHub
       statusformatted += " by #{parsed['closed_by']['login']}"
     end
     statusformatted = Format(:bold, Format(:green, 'Open')) if status == 'open'
-    m.reply "#{issueorpull} ##{issuenum} (#{statusformatted}): #{parsed['html_url']} | #{parsed['title']}"
+    if showurl == true
+      m.reply "GitHub #{issueorpull} ##{issuenum} (#{statusformatted}): #{parsed['html_url']} | #{parsed['title']}"
+    else
+      m.reply "GitHub #{issueorpull} ##{issuenum} (#{statusformatted}): #{parsed['title']}"
+    end
   end
 end
