@@ -71,16 +71,16 @@ class Channel
   end
 
   def getrank(m, user)
-    return 'owner' if m.channel.owners.join(' ').split(' ').include?(user)
-    return 'admin' if m.channel.admins.join(' ').split(' ').include?(user)
-    return 'op' if m.channel.ops.join(' ').split(' ').include?(user)
-    return 'half-op' if m.channel.half_ops.join(' ').split(' ').include?(user)
-    return 'voiced' if m.channel.voiced.join(' ').split(' ').include?(user)
-    'no rank'
+    return 5 if m.channel.owners.join(' ').split(' ').include?(user)
+    return 4 if m.channel.admins.join(' ').split(' ').include?(user)
+    return 3 if m.channel.ops.join(' ').split(' ').include?(user)
+    return 2 if m.channel.half_ops.join(' ').split(' ').include?(user)
+    return 1 if m.channel.voiced.join(' ').split(' ').include?(user)
+    0
   end
 
   def clearlog(m)
-    if getrank(m, m.user.name) != 'admin' && getrank(m, m.user.name) != 'owner' && getrank(m, m.user.name) != 'op'
+    if getrank(m, m.user.name) < 3
       m.reply 'Only channel operators may reset the history!'
       return
     end
