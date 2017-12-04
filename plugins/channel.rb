@@ -5,6 +5,33 @@ class Channel
   match /resethistory/, method: :clearlog
   match /rquote/, method: :quote
   match /quote (.+)/, method: :userquote
+  match /channel (.+) (.+)/, method: :channelconfig
+
+  def channelconfig(m, option, setting)
+    if getrank(m, m.user.name) > 1
+      channel = m.channel.to_s[1..m.channel.to_s.length]
+      filename = "data/channels/#{channel}.yaml"
+      unless File.exist?(filename)
+        File.new(filename, 'w+')
+        exconfig = YAML.load_file('data/channels/channel.example.yaml')
+        exconfig['name'] = channel
+        File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+      end
+      data = false
+      data = YAML.load_file(filename) while data == false
+    end
+    case option
+    when 'youtubelinks'
+      if getrank(m, m.user.name) < 2
+        m.reply 'Only half-ops and above may modify the config option `channelconfig`!'
+        return
+      end
+      data['youtubelinks'] = setting
+      File.open(filename, 'w') { |f| f.write data.to_yaml }
+      m.reply "👍 Option `youtubelinks` set to `#{setting}`."
+      return
+    end
+  end
 
   def userquote(m, user)
     user.delete!(' ')
