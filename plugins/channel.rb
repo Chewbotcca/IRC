@@ -23,7 +23,7 @@ class Channel
     case option
     when 'youtubelinks'
       if getrank(m, m.user.name) < 2
-        m.reply 'Only half-ops and above may modify the config option `channelconfig`!'
+        m.reply 'Only half-ops and above may modify the config option `youtubelinks`!'
         return
       end
       data['youtubelinks'] = setting
