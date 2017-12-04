@@ -26,7 +26,7 @@ class Google
     url = URI.escape("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=#{search}&key=#{CONFIG['google']}")
     id = JSON.parse(RestClient.get(url))['items'][0]['id']['videoId']
     video = "http://youtu.be/#{id}"
-    youtube(m, video, true)
+    youtube(m, video, true, true)
   rescue
     return
   end
@@ -38,7 +38,18 @@ class Google
     return
   end
 
-  def youtube(m, url, provideurl = false)
+  def youtube(m, url, provideurl = false, bypassconfig = false)
+    channel = m.channel.to_s[1..m.channel.to_s.length]
+    filename = "data/channels/#{channel}.yaml"
+    unless File.exist?(filename)
+      File.new(filename, 'w+')
+      exconfig = YAML.load_file('data/channels/channel.example.yaml')
+      exconfig['name'] = channel
+      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+    end
+    data = false
+    data = YAML.load_file(filename) while data == false
+    return if data['youtubelinks'] == 'false' && bypassconfig == false
     begin
       givenurl = url
       url = url.split(/[\/,&,?,=]/)
