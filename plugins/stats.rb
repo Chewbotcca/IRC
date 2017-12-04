@@ -1,5 +1,5 @@
 class Stats
-  include Cinch::Plugins
+  include Cinch::Plugin
 
   match /topspeaker/, method: :top
   match /topwords/, method: :topwords
