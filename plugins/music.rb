@@ -176,9 +176,9 @@ class Music
     end
 
     if playing
-      m.reply "#{Format(:bold, user)} is currently listening to #{Format(:bold, track)} by #{Format(:bold, artist)} found in the album #{Format(:bold, album)}."
+      m.reply "#{Format(:bold, user)} is currently listening to #{Format(:bold, track)} by #{Format(:bold, artist)} from the album #{Format(:bold, album)}."
     else
-      m.reply "#{Format(:bold, user)} last listened to #{Format(:bold, track)} by #{Format(:bold, artist)} found in the album #{Format(:bold, album)} about #{Format(:bold, timeago)} ago."
+      m.reply "#{Format(:bold, user)} last listened to #{Format(:bold, track)} by #{Format(:bold, artist)} from the album #{Format(:bold, album)} about #{Format(:bold, timeago)} ago."
     end
   end
 
@@ -217,7 +217,7 @@ class Music
     artist = track['artists'][0]['name']
     url = track['external_urls']['spotify']
 
-    m.reply "#{Format(:bold, name)} | found in the #{albumtype} #{Format(:bold, album)} by #{Format(:bold, artist)} | #{url}"
+    m.reply "#{Format(:bold, name)} | from the #{albumtype} #{Format(:bold, album)} by #{Format(:bold, artist)} | #{url}"
   rescue
     m.reply 'No songs found with the given parameters!'
   end
