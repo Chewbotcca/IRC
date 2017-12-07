@@ -66,7 +66,7 @@ class Google
       if CONFIG['google'] == '' || CONFIG['google'].nil?
         m.reply 'This command requires a Google API key!'
       else
-        m.reply "There was an error grabbing YouTube link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.gsub("\n",'')}```."
+        m.reply "There was an error grabbing YouTube link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.delete("\n")}```."
       end
       return
     end
