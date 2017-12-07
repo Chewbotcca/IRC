@@ -62,8 +62,12 @@ class Google
         return
       end
       url = JSON.parse(RestClient.get("https://www.googleapis.com/youtube/v3/videos?id=#{id}&key=#{CONFIG['google']}&part=snippet,contentDetails,statistics"))
-    rescue
-      m.reply 'This command requires a Google API key!'
+    rescue => e
+      if CONFIG['google'] == '' || CONFIG['google'].nil?
+        m.reply 'This command requires a Google API key!'
+      else
+        m.reply "There was an error grabbing YouTube link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.gsub("\n",'')}```."
+      end
       return
     end
     stats = url['items'][0]['statistics']
