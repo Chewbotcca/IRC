@@ -39,14 +39,16 @@ class Setup
 
     puts 'What would you like to configure?'
     puts '[1] - Bot information (REQUIRED)'
-    puts '[2] - Owner information'
-    puts '[3] - API Keys'
-    puts '[4] - Main Menu'
+    puts '[2] - Connection information (REQUIRED)'
+    puts '[3] - Owner information'
+    puts '[4] - API Keys'
+    puts '[5] - Main Menu'
     input = gets.chomp
 
     configure('bot') if input == '1'
-    configure('owner') if input == '2'
-    configure('api') if input == '3'
+    configure('server') if input == '2'
+    configure('owner') if input == '3'
+    configure('api') if input == '4'
     welcome
   end
 
@@ -55,27 +57,18 @@ class Setup
       puts 'Pick a nickname for the bot - REQUIRED'
       @config['nickname'] = gets.chomp
 
-      puts 'Enter the server address (hostname, IP, whatever, NO PORT yet) - REQUIRED '
-      @config['server'] = gets.chomp
-
-      puts 'Enter the server port, if you don\'t know, use 6667 - REQUIRED '
-      @config['port'] = gets.chomp
-
-      puts 'Connect using SSL? (true/false)'
-      @config['ssl'] = gets.chomp
-
       puts 'What channels should the bot join on startup? this must be comma seperated with #s before the names. - Optional'
       puts 'Hint! You can always invite the bot to your channel and it will join!'
       @config['channels'] = gets.chomp
 
-      puts "What should be the bot's realname? This is shown on a whois. - Optional"
+      puts "What should be the bot's realname? This is shown in a whois. - Optional"
       @config['realname'] = gets.chomp
 
       puts 'What should be the bot\'s USERNAME (this is what\'s shown before the @ in a hostname. e.g. chew!THIS@blah) - Optional'
       @config['username'] = gets.chomp
 
       puts 'NickServ Password - Optional'
-      puts 'Not registered? THe bot has a built in nickserv registration process!'
+      puts 'Not registered? The bot has a built in NickServ registration process!'
       @config['nickservpass'] = gets.chomp
 
       puts 'Bot Prefix - Optional'
@@ -83,6 +76,21 @@ class Setup
       @config['prefix'] = gets.chomp
 
       puts 'It turns out you\'re done configuring bot settings!'
+      save
+      config
+    end
+
+    if section == 'server'
+      puts 'Enter the server address (hostname, IP, whatever, NO PORT yet) - REQUIRED'
+      @config['server'] = gets.chomp
+
+      puts 'Enter the server port, if you don\'t know, use 6667 - REQUIRED'
+      @config['port'] = gets.chomp
+
+      puts 'Connect using SSL? (true/false)'
+      @config['ssl'] = gets.chomp
+
+      puts 'Done configuring server connection information!'
       save
       config
     end
