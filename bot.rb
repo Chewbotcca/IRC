@@ -63,13 +63,12 @@ botserverpass = if CONFIG['serverpass'].nil? || CONFIG['serverpass'] == ''
                   CONFIG['serverpass']
                 end
 
-botprefix = if CONFIG['prefix'].nil? || CONFIG['prefix'] == ''
-              /!/
-              CONFIG['prefix'] = '!'
-              File.open(filename, 'w') { |f| f.write CONFIG.to_yaml }
-            else
-              Regexp.new CONFIG['prefix']
-            end
+if CONFIG['prefix'].nil? || CONFIG['prefix'] == ''
+  CONFIG['prefix'] = '!'
+  File.open(filename, 'w') { |f| f.write CONFIG.to_yaml }
+end
+
+botprefix = Regexp.new CONFIG['prefix']
 
 # Configure the Bot
 bot = Cinch::Bot.new do
