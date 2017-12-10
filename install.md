@@ -20,26 +20,31 @@
 
 It's go time.
 
-### Install extremely lazily
+### Installing Gems
 
-If you simply run `ruby setup.rb`, a GUI will help you setup the bot!
+You're gonna need the following gems:
 
-### Install via `gem install`
+- `cinch`
 
-1) If on Mac or Linux, run `./scripts/installgems.sh` then `ruby bot.rb` otherwise:
+- `nokogiri`
 
-```bash
-gem install cinch nokogiri rest-client
-ruby bot.rb
-```
+- `rest-client`
 
-### Install using bundler
+We have many ways to get these gems.
 
-1) Download bundler gem with `gem install bundler`
+- Run `ruby requiregems.rb`, then answer "y" to any prompts.
 
-2) `bundle install`
+- Run `./scripts/installgems.sh` (Linux/Mac/Git Bash for Windows only).
 
-3) `bundle exec ruby bot.rb`
+- Run `gem install cinch nokogiri rest-client`
+
+If you prefer bundler, feel free to run `bundle install`.
+
+### Setting up the config.
+
+Simply run `ruby setup.rb` to be guided through all the Chewbotcca setup! If you hate the G U I z o n e, you can always modify the config.example.yaml directly.
+
+## Help.
 
 IF YOU'RE CONFUSED (which i already am), just send an issue.
 
