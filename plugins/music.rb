@@ -249,7 +249,7 @@ class Music
 
     parsed = JSON.parse(response.body)
     CONFIG['spotify'] = parsed['access_token']
-    File.open(filename, 'w') { |f| f.write CONFIG.to_yaml }
+    File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
   end
 
   def spotifyartist(m, search)
