@@ -128,7 +128,7 @@ class Setup
       puts 'Last.fm API key.'
       @config['lastfm'] = gets.chomp
 
-      puts 'It turns out you\'re done configuring APO settings!'
+      puts 'It turns out you\'re done configuring API settings!'
       save
       config
     end
