@@ -65,7 +65,7 @@ botserverpass = if CONFIG['serverpass'].nil? || CONFIG['serverpass'] == ''
 
 if CONFIG['prefix'].nil? || CONFIG['prefix'] == ''
   CONFIG['prefix'] = '!'
-  File.open(filename, 'w') { |f| f.write CONFIG.to_yaml }
+  File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
 end
 
 botprefix = Regexp.new CONFIG['prefix']
