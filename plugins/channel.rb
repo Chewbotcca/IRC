@@ -125,6 +125,7 @@ class Channel
     return true if msg[0..1] == 's/'
     return true if msg[0..5] == '!quote'
     return true if msg[0..6] == '!rquote'
+    return true if msg[0..8] == '!wordused'
     false
   end
 

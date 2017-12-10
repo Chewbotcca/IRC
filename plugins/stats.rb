@@ -3,6 +3,63 @@ class Stats
 
   match /topspeaker/, method: :top
   match /topwords/, method: :topwords
+  match /wordused (.+)/, method: :wordused
+  match /messagecount/, method: :messages
+
+  def messages(m)
+    channel = m.channel.to_s[1..m.channel.to_s.length]
+    filename = "data/logs/#{channel}.yaml"
+    unless File.exist?(filename)
+      File.new(filename, 'w+')
+      exconfig = YAML.load_file('data/logs/channel.example.yaml')
+      exconfig['name'] = channel
+      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+    end
+    data = false
+    data = YAML.load_file(filename) while data == false
+    m.reply "Overall, everyone has sent #{Format(:bold, data['count'])} messages!"
+  end
+
+  def wordused(m, wordz)
+    channel = m.channel.to_s[1..m.channel.to_s.length]
+    filename = "data/logs/#{channel}.yaml"
+    unless File.exist?(filename)
+      File.new(filename, 'w+')
+      exconfig = YAML.load_file('data/logs/channel.example.yaml')
+      exconfig['name'] = channel
+      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+    end
+    data = false
+    data = YAML.load_file(filename) while data == false
+    users = {}.to_hash
+    count = data['count']
+    # Yay let's search every message
+    current = count
+    while current > 1
+      colon = data[current].index(':')
+      removed = data[current][colon + 2..data[current].length]
+      eachword = removed.split(' ')
+      currentword = 0
+      while currentword < eachword.length
+        word = eachword[currentword]
+        word = word.tr('^A-Za-z0-9', '')
+        word.downcase!
+        if users[word].nil?
+          users[word] = 1
+        else
+          users[word] += 1
+        end
+        currentword += 1
+      end
+      current -= 1
+    end
+    users.each do |x, y|
+      if x == wordz
+        m.reply "Word #{Format(:bold, wordz)} used #{Format(:bold, y.to_s)} times!"
+        next
+      end
+    end
+  end
 
   def top(m)
     m.reply 'Gathering top speakers in the channel....'
@@ -19,7 +76,6 @@ class Stats
     data = YAML.load_file(filename) while data == false
     count = data['count']
     users = {}.to_hash
-    # Yay let's search every message
     current = count
     while current > 1
       colon = data[current].index(':')
