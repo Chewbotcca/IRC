@@ -10,7 +10,7 @@ class Minecraft
 
   def namemcfriends(m, name)
     name = name.delete(' ')
-    uuid = JSON.parse(RestClient.get("https://api.mojang.com/users/profiles/minecraft/#{name}"))['uuid_formatted']
+    uuid = JSON.parse(RestClient.get("https://api.mojang.com/users/profiles/minecraft/#{name}"))['id']
     friends = JSON.parse(RestClient.get("https://api.namemc.com/profile/#{uuid}/friends"))
     if friends.empty?
       m.reply "User #{name} doesn't have any friends on namemc! :("
