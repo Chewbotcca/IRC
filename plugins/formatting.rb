@@ -6,11 +6,15 @@ class Formatting
   match /usa (.+)/, method: :usa
 
   def rainbow(m, args)
+    rainbow = "#{CONFIG['prefix']}rainbow"
+    wrainbow = "#{CONFIG['prefix']}wrainbow"0
     case m.params[1].split(' ')[0]
-    when '!rainbow'
+    when rainbow
       args = args.split('')
-    when '!wrainbow'
+    when wrainbow
       args = args.split(' ')
+    else
+      return
     end
     amount = args.length
     current = 0
@@ -42,9 +46,9 @@ class Formatting
       end
     end
     case m.params[1].split(' ')[0]
-    when '!rainbow'
+    when rainbow
       m.reply message.join('')
-    when '!wrainbow'
+    when wrainbow
       m.reply message.join(' ')
     end
   end
