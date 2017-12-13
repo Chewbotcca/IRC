@@ -7,7 +7,7 @@ class Formatting
 
   def rainbow(m, args)
     rainbow = "#{CONFIG['prefix']}rainbow"
-    wrainbow = "#{CONFIG['prefix']}wrainbow"0
+    wrainbow = "#{CONFIG['prefix']}wrainbow"
     case m.params[1].split(' ')[0]
     when rainbow
       args = args.split('')
