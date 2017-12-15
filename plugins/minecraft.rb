@@ -14,6 +14,7 @@ class Minecraft
     friends = JSON.parse(RestClient.get("https://api.namemc.com/profile/#{uuid}/friends"))
     if friends.empty?
       m.reply "User #{name} doesn't have any friends on namemc! :("
+      return
     else
       friendcount = 0
       amount = friends.length
