@@ -46,8 +46,8 @@ botuser = if CONFIG['username'].nil? || CONFIG['username'] == ''
           end
 
 commits = `git rev-list master | wc -l`.to_i
-if commits == 0
-  commits = ''
+if commits.zero?
+  commit = ''
 else
   commit = " | Version: #{commits}"
 end
