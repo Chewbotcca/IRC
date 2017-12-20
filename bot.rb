@@ -45,10 +45,17 @@ botuser = if CONFIG['username'].nil? || CONFIG['username'] == ''
             CONFIG['username']
           end
 
+commits = `git rev-list master | wc -l`.to_i
+if commits == 0
+  commits = ''
+else
+  commit = " | Version: #{commits}"
+end
+
 botrealname = if CONFIG['realname'].nil? || CONFIG['realname'] == ''
-                'Chewbotcca IRC Bot - https://git.io/ChewbotccaIRC'
+                "Chewbotcca IRC Bot - https://git.io/ChewbotccaIRC#{commit}"
               else
-                "#{CONFIG['realname']} - https://git.io/ChewbotccaIRC"
+                "#{CONFIG['realname']} - https://git.io/ChewbotccaIRC#{commit}"
               end
 
 botssl = if CONFIG['ssl'].nil? || CONFIG['ssl'] == '' || CONFIG['ssl'] == 'false' || CONFIG['ssl'] == false
