@@ -15,6 +15,49 @@ class Music
   match /lastfmtracks (.+)/, method: :lastfmtoptracks
   match /ltop (.+)/, method: :lastfmtoptracks
   match /lastfmcompare (.+) (.+)/, method: :lastcompare
+  match /lttr (.+)/, method: :lastfmtracks
+
+  def lastfmtracks(m, user)
+    if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
+      m.reply 'This command requires an API key from last.fm!'
+      return
+    end
+    parse = JSON.parse(RestClient.get("http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&period=overall&limit=3&user=#{user}&api_key=#{CONFIG['lastfm']}&format=json"))
+
+    base = parse['toptracks']['track']
+    user = parse['toptracks']['@attr']['user']
+
+    amount = base.length
+
+    if amount.zero?
+      m.reply 'User has no top tracks!'
+      return
+    end
+    m.reply "Top 3 Tracks for #{user}"
+    if amount.positive?
+      sleep 1
+      track1name = base[0]['name']
+      art1name = base[0]['artist']['name']
+      track1scrob = base[0]['playcount']
+      m.reply "1st: #{Format(:bold, track1name)} by #{Format(:bold, art1name)} with #{Format(:bold, track1scrob)} scrobbles."
+    end
+    if amount > 1
+      sleep 1
+      track2name = base[1]['name']
+      art2name = base[1]['artist']['name']
+      track2scrob = base[1]['playcount']
+      m.reply "2nd: #{Format(:bold, track2name)} by #{Format(:bold, art2name)} with #{Format(:bold, track2scrob)} scrobbles."
+    end
+    if amount > 2
+      sleep 1
+      track3name = base[2]['name']
+      art3name = base[2]['artist']['name']
+      track3scrob = base[2]['playcount']
+      m.reply "3rd: #{Format(:bold, track3name)} by #{Format(:bold, art3name)} with #{Format(:bold, track3scrob)} scrobbles."
+    end
+    sleep 1
+    m.reply "View more: http://www.last.fm/user/#{user}/library/tracks?date_preset=ALL_TIME"
+  end
 
   def lastfmalbum(m, user)
     if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
