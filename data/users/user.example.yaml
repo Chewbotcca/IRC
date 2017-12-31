@@ -1,0 +1,23 @@
+---
+# What is the user's nickname?
+nick:
+
+# What is the user's hostname?
+host:
+
+# What is the user's username?
+user:
+
+# How should we check their permissions? Options:
+# host - Secure, as host is usually user-specific. Not recommended for web-client staff.
+# username - Not secure, as usually, the username is changeable.
+# nickname - Very unsecure, anyone with the nick has this permission access.
+# userhost - Secure, Check their username and host, secure as usually both can't be changed
+# password - Coming soon!
+# all - Super secure, User has to match all 3 credentials to be authenticated.
+authtype:
+
+# Their rank, choices are:
+# Owner - Every single perm, Recommended to have highest security.
+# Admin - Has most perms
+rank:
