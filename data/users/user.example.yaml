@@ -17,7 +17,13 @@ user:
 # all - Super secure, User has to match all 3 credentials to be authenticated.
 authtype:
 
-# Their rank, choices are:
-# Owner - Every single perm, Recommended to have highest security.
-# Admin - Has most perms
-rank:
+# Their permissions. Must be true or false, no quotation marks
+
+## Allow the user to run !restart and !update
+restart: false
+
+## Allow the user to bypass channel rank specific commands (!channel, !leave, etc).
+fullchannelperms: false
+
+## Allow the user to run (!part and !join chans)
+botchans: false
