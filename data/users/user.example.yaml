@@ -30,3 +30,6 @@ botchans: false
 
 ## Allow the user to run !eval
 eval: false
+
+## Allow the user to kill the bot
+die: false
