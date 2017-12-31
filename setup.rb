@@ -16,7 +16,7 @@ class Setup
     exit if @config == false
   end
 
-  def welcome(skipwelcome = false)
+  def welcome(skipwelcome = true)
     unless skipwelcome
       puts 'Welcome to Chewbotcca IRC bot setup'
       puts 'This really simple GUI will guide you in setting up the bot by yourself!'
@@ -167,4 +167,4 @@ class Setup
 end
 
 jerry = Setup.new
-jerry.welcome
+jerry.welcome(false)
