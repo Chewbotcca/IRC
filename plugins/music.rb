@@ -16,6 +16,88 @@ class Music
   match /ltop (.+)/, method: :lastfmtoptracks
   match /lastfmcompare (.+) (.+)/, method: :lastcompare
   match /lttr (.+)/, method: :lastfmtracks
+  match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :spotifylink
+
+  def spotifylink(m, url)
+    url = url.split(/[\/,&,?,=]/)
+    case url[2]
+    when 'open.spotify.com'
+      id = url[4]
+    else
+      return
+    end
+    if url[3] == 'track'
+      uri = URI.parse("https://api.spotify.com/v1/tracks/#{id}")
+      request = Net::HTTP::Get.new(uri)
+      request['Accept'] = 'application/json'
+      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
+
+      req_options = {
+        use_ssl: uri.scheme == 'https'
+      }
+
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+
+      parse = JSON.parse(response.body)
+      name = parse['name']
+      album = parse['album']
+      alname = album['name']
+      altype = album['album_type']
+      artist = parse['artists'][0]
+      artistname = artist['name']
+
+      m.reply "Song info: #{Format(:bold, name)} | from the #{altype} #{Format(:bold, alname)} by #{Format(:bold, artistname)}"
+    end
+    if url[3] == 'album'
+      uri = URI.parse("https://api.spotify.com/v1/albums/#{id}")
+      request = Net::HTTP::Get.new(uri)
+      request['Accept'] = 'application/json'
+      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
+
+      req_options = {
+        use_ssl: uri.scheme == 'https'
+      }
+
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+
+      parse = JSON.parse(response.body)
+      name = parse['name']
+      artist = parse['artists'][0]
+      artistname = artist['name']
+
+      m.reply "Album info: #{Format(:bold, name)} by #{Format(:bold, artistname)}"
+    end
+    if url[3] == 'artist'
+      uri = URI.parse("https://api.spotify.com/v1/artists/#{id}")
+      request = Net::HTTP::Get.new(uri)
+      request['Accept'] = 'application/json'
+      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
+
+      req_options = {
+        use_ssl: uri.scheme == 'https'
+      }
+
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+
+      parse = JSON.parse(response.body)
+      name = parse['name']
+
+      m.reply "Artist info: #{Format(:bold, name)}"
+    end
+  rescue => e
+    if CONFIG['google'] == '' || CONFIG['google'].nil?
+      m.reply 'This command requires a Spotify API key!'
+    else
+      m.reply "There was an error grabbing Spotify link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.delete("\n")}```."
+    end
+    return
+  end
 
   def lastfmtracks(m, user)
     if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
