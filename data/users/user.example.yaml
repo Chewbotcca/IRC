@@ -9,12 +9,12 @@ host:
 user:
 
 # How should we check their permissions? Options:
-# host - Secure, as host is usually user-specific. Not recommended for web-client staff.
-# username - Not secure, as usually, the username is changeable.
-# nickname - Very unsecure, anyone with the nick has this permission access.
-# userhost - Secure, Check their username and host, secure as usually both can't be changed
+# host - Secure, as host is usually user-specific. Not recommended for web-client staff. Requires "host" configured
+# username - Not secure, as usually, the username is changeable. Requires "user" configured
+# nickname - Very unsecure, anyone with the nick has this permission access. Requires "nick" configured
+# userhost - Secure, Check their username and host, secure as usually both can't be changed. Requires "user" & "nick" configured
 # password - Coming soon!
-# all - Super secure, User has to match all 3 credentials to be authenticated.
+# all - Super secure, User has to match all 3 credentials to be authenticated. Requires all configured
 authtype:
 
 # Their permissions. Must be true or false, no quotation marks
