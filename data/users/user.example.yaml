@@ -27,3 +27,6 @@ fullchannelperms: false
 
 ## Allow the user to run (!part and !join chans)
 botchans: false
+
+## Allow the user to run !eval
+eval: false
