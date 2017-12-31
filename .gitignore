@@ -5,3 +5,5 @@ data/logs/*.yaml
 !data/logs/logs.example.yaml
 data/channels/*.yaml
 !data/channels/channel.example.yaml
+data/users/*.yaml
+!data/users/user.example.yaml
