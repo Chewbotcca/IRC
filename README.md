@@ -11,3 +11,4 @@ I made this bot for my IRC Network. It's ok, I guess.
 | [Credits / API](credits)
 | [Official Public Chewbotccas](use)
 | [User-maintained Bots](community)
+| [Permission Guide](permissions)
