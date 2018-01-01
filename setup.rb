@@ -162,7 +162,7 @@ class Setup
   end
 
   def staff(section)
-    puts 'What is this staff members name? It can be a nickname, or a custom name.'
+    puts 'What is this staff members IRC nickname?'
     name = gets.chomp
     stafffile = "data/staff/#{name}.yaml"
     if File.exist?(stafffile)
@@ -173,7 +173,7 @@ class Setup
       end
     end
     File.new(stafffile, 'w+')
-    exconfig = YAML.load_file("data/staff/staff.example.yaml")
+    exconfig = YAML.load_file('data/staff/staff.example.yaml')
     File.open(stafffile, 'w') { |f| f.write exconfig.to_yaml }
     staffdata = YAML.load_file(stafffile)
     if section == 'host'
@@ -184,10 +184,6 @@ class Setup
       puts 'What is the staff member\'s username?'
       staffdata['user'] = gets.chomp
     end
-    if section == 'nickname'
-      puts 'What is the staff member\'s nickname?'
-      staffdata['nick'] = gets.chomp
-    end
     if section == 'userhost'
       puts 'What is the staff member\'s hostname?'
       staffdata['host'] = gets.chomp
@@ -195,8 +191,6 @@ class Setup
       staffdata['user'] = gets.chomp
     end
     if section == 'all'
-      puts 'What is the staff member\'s nickname?'
-      staffdata['nick'] = gets.chomp
       puts 'What is the staff member\'s hostname?'
       staffdata['host'] = gets.chomp
       puts 'What is the staff member\'s username?'
@@ -220,12 +214,13 @@ class Setup
     input = gets.chomp
     staffdata['die'] = true?(input)
     staffdata['authtype'] = section
+    staffdata['nick'] = name
     File.open(stafffile, 'w') { |f| f.write staffdata.to_yaml }
     puts "Staff Member #{name} completely set up! Bombs away!"
   end
 
   def true?(obj)
-    obj.to_s == "true"
+    obj.to_s == 'true'
   end
 end
 
