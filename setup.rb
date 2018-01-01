@@ -40,14 +40,14 @@ class Setup
     puts 'What would you like to configure?'
     puts '[1] - Bot information (REQUIRED)'
     puts '[2] - Connection information (REQUIRED)'
-    puts '[3] - Owner information'
+    puts '[3] - Set up Staff ranks'
     puts '[4] - API Keys'
     puts '[5] - Main Menu'
     input = gets.chomp
 
     configure('bot') if input == '1'
     configure('server') if input == '2'
-    configure('owner') if input == '3'
+    staffauth if input == '3'
     configure('api') if input == '4'
     welcome
   end
@@ -141,28 +141,91 @@ class Setup
     puts e
   end
 
-  def owner
-    puts 'Your IRC Nickname. Please use your CURRENT nickname, you will need it for the next step'
-    @config['ownernick'] = gets.chomp
+  def staffauth
+    puts 'First, we must decide how you want to authenticate'
 
-    puts 'Do you plan to use bundler (ruby gem)? If you don\'t know what this is, assume no and say "false", Otherwise say "true"'
-    @config['bundler'] = gets.chomp
+    puts 'What authentication method do you want?'
+    puts '[1] - host - Match according to hostname. Not recommended for web-client users'
+    puts '[2] - username - Match according to username. Recommended for IRCCloud users! Not recommeneded for normal users.'
+    puts '[3] - nickname - Match according to nickname. Not recommeneded as people can literally change their nick if it\'t not taken'
+    puts '[4] - userhost - Use options 1 and 2, match according to host nad username.'
+    puts '[5] - all - Use options 1, 2, and 3, match according to all 3 options.'
+    puts '[6] - Main Menu'
+    input = gets.chomp
 
-    save
+    staff('host') if input == '1'
+    staff('username') if input == '2'
+    staff('nickname') if input == '3'
+    staff('userhost') if input == '4'
+    staff('all') if input == '5'
+    config
+  end
 
-    if @config['bundler'] == 'true'
-      puts 'Now, we will use bundler to install the gems! Please standby'
-      `bundle install`
-      puts 'All installed! Let\'s continue'
+  def staff(section)
+    puts 'What is this staff members name? It can be a nickname, or a custom name.'
+    name = gets.chomp
+    stafffile = "data/staff/#{name}.yaml"
+    if File.exist?(stafffile)
+      puts 'There is already a staff member with that name! Overwrite their data? (y/n)'
+      if gets.chomp == 'n'
+        puts 'Sending you back to authentication method page'
+        staffauth
+      end
     end
-    puts 'Now, we are going to make sure you have all of your gems. Press enter to install neccessary gems.'
-    require './requiregems.rb'
-    puts 'Now, a confirmation bot will join with the config you created and verify your identify. Hop on your irc client!'
-    if @config['bundler'] == 'true'
-      `ruby scripts/confirm.rb`
-    else
-      `bundle exec ruby scripts/confirm.rb`
+    File.new(stafffile, 'w+')
+    exconfig = YAML.load_file("data/staff/staff.example.yaml")
+    File.open(stafffile, 'w') { |f| f.write exconfig.to_yaml }
+    staffdata = YAML.load_file(stafffile)
+    if section == 'host'
+      puts 'What is the staff member\'s hostname?'
+      staffdata['host'] = gets.chomp
     end
+    if section == 'username'
+      puts 'What is the staff member\'s username?'
+      staffdata['user'] = gets.chomp
+    end
+    if section == 'nickname'
+      puts 'What is the staff member\'s nickname?'
+      staffdata['nick'] = gets.chomp
+    end
+    if section == 'userhost'
+      puts 'What is the staff member\'s hostname?'
+      staffdata['host'] = gets.chomp
+      puts 'What is the staff member\'s username?'
+      staffdata['user'] = gets.chomp
+    end
+    if section == 'all'
+      puts 'What is the staff member\'s nickname?'
+      staffdata['nick'] = gets.chomp
+      puts 'What is the staff member\'s hostname?'
+      staffdata['host'] = gets.chomp
+      puts 'What is the staff member\'s username?'
+      staffdata['user'] = gets.chomp
+    end
+    puts 'Good! The rank and stuff is set up! Let\'s get to the perms'
+    puts 'Answer all with "true" or "false"'
+    puts 'Should they have access to !restart and !update?'
+    input = gets.chomp
+    staffdata['restart'] = true?(input)
+    puts 'Should they have access modify channel perms, regardless of rank on the channel?'
+    input = gets.chomp
+    staffdata['fullchannelperms'] = true?(input)
+    puts 'Should they have access to make the bot leave and join chans?'
+    input = gets.chomp
+    staffdata['botchans'] = true?(input)
+    puts 'Should they have access to !eval?'
+    input = gets.chomp
+    staffdata['eval'] = true?(input)
+    puts 'Should they have access to !die?'
+    input = gets.chomp
+    staffdata['die'] = true?(input)
+    staffdata['authtype'] = section
+    File.open(stafffile, 'w') { |f| f.write staffdata.to_yaml }
+    puts "Staff Member #{name} completely set up! Bombs away!"
+  end
+
+  def true?(obj)
+    obj.to_s == "true"
   end
 end
 
