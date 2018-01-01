@@ -6,6 +6,22 @@ class Owner
   match /eval (.+)/, method: :execute
   match /die/, method: :die
   match /api (.+) (.+)/, method: :api
+  match /uperms/, method: :perms
+
+  def perms(m)
+    stafffile = "data/staff/#{m.user.name}.yaml"
+    unless File.exist?(stafffile)
+      m.reply "You aren't a staff member! You have no perms!"
+    end
+    staffdata = YAML.load_file(stafffile)
+    perms = []
+    perms += ['restart'] if staffdata['restart'] == true
+    perms += ['fullchannelperms'] if staffdata['fullchannelperms'] == true
+    perms += ['botchans'] if staffdata['botchans'] == true
+    perms += ['eval'] if staffdata['eval'] == true
+    perms += ['die'] if staffdata['die'] == true
+    m.reply "Your perms are: #{perms.join(', ')}"
+  end
 
   def api(m, service, key)
     return unless authenticate(m) && checkperm(m, m.user.name, 'eval')
