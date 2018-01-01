@@ -25,12 +25,12 @@ class Setup
     end
     puts 'What would you like to Configure (type number then press enter)'
     puts '[1] - Configure the bot'
-    puts '[2] - Set up owner perms'
+    puts '[2] - Set up staff members'
     puts '[3] - Exit!'
     input = gets.chomp
 
     config if input == '1'
-    owner if input == '2'
+    staffauth if input == '2'
     exit
   end
 
@@ -40,15 +40,13 @@ class Setup
     puts 'What would you like to configure?'
     puts '[1] - Bot information (REQUIRED)'
     puts '[2] - Connection information (REQUIRED)'
-    puts '[3] - Set up Staff ranks'
-    puts '[4] - API Keys'
-    puts '[5] - Main Menu'
+    puts '[3] - API Keys'
+    puts '[4] - Main Menu'
     input = gets.chomp
 
     configure('bot') if input == '1'
     configure('server') if input == '2'
-    staffauth if input == '3'
-    configure('api') if input == '4'
+    configure('api') if input == '3'
     welcome
   end
 
