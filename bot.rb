@@ -100,7 +100,7 @@ end
 def authenticate(m)
   name = m.user.name
   stafffile = "data/staff/#{name}.yaml"
-  false unless File.exist?(stafffile)
+  return false unless File.exist?(stafffile)
   staffdata = YAML.load_file(stafffile)
   authtype = staffdata['authtype']
   if authtype == 'host'
