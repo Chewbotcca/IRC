@@ -21,7 +21,10 @@ class About
     mm, ss = t.divmod(60)
     hh, mm = mm.divmod(60)
     dd, hh = hh.divmod(24)
-    m.reply format('Uptime: %d days, %d hours, %d minutes and %d seconds', dd, hh, mm, ss)
+    days = format('%d days, ', dd) if dd != 0
+    hours = format('%d hours, ', hh) if hh != 0
+    mins = format('%d minutes, ', mm) if mm != 0
+    m.reply "#{days}#{hours}#{mins}#{secs}."
   end
 
   def bug(m, args)
