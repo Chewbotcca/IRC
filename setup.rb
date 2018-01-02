@@ -93,20 +93,6 @@ class Setup
       config
     end
 
-    if section == 'owner'
-      puts 'Owner hostmask - Optional'
-      puts "If you don't know, this can be added later."
-      @config['ownerhost'] = gets.chomp
-
-      puts 'ModifyConfig Pass - Optional (recommended)'
-      puts "If you want to use commands (such as to set your ownerhost, or become a bot owner), you'll need to fill this out, and keep it secret!"
-      @config['modifypass'] = gets.chomp
-
-      puts 'It turns out you\'re done configuring owner settings!'
-      save
-      config
-    end
-
     if section == 'api'
       puts 'Wordnik API key. Very optional and only needed for !define !antonym and !synonym'
       @config['wordnik'] = gets.chomp
