@@ -2,7 +2,7 @@ config.yaml
 Gemfile.lock
 data/versions.json
 data/logs/*.yaml
-!data/logs/logs.example.yaml
+data/logs/*.txt
 data/channels/*.yaml
 !data/channels/channel.example.yaml
 data/staff/*.yaml
