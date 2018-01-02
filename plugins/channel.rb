@@ -36,29 +36,25 @@ class Channel
   def userquote(m, user)
     user.delete!(' ')
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
+    filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
       File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/logs.example.yaml')
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
       m.reply 'There is no log! No log = No quotes! Try again, bucko'
       return
     end
-    data = false
-    data = YAML.load_file(filename) while data == false
-    count = data['count']
+    log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = log.length
     # Search to see if user exists.....
     # We're gonna wanna downcase the user, case sensitivity, my dudes.
     downuser = user.downcase
-    # Yay let's search every message
     current = count
-    while current > 1
-      colon = data[current].index(':')
-      userquote = data[current][0..colon - 1]
+    while current > 0
+      colon = log[current-1].index(':')
+      userquote = log[current-1][0..colon - 1]
       userquote.downcase!
       if userquote.include?(downuser)
         found = true
-        current = 0
+        current = -1
       else
         found = false
         current -= 1
@@ -69,31 +65,28 @@ class Channel
       return
     end
     while userquote != user
-      ichoose = rand(1..count)
-      colon = data[ichoose].index(':')
-      removed = data[ichoose][colon + 2..data[ichoose].length]
-      userquote = data[ichoose][0..colon - 1]
+      ichoose = rand(0..count-1)
+      colon = log[ichoose].index(':')
+      removed = log[ichoose][colon + 2..log[ichoose].length].chomp
+      userquote = log[ichoose][13..colon - 1]
     end
     m.reply "Long ago, #{user} said: \"#{removed}\""
   end
 
   def quote(m)
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
+    filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
       File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/logs.example.yaml')
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
       m.reply 'There is no log! No log = No quotes! Try again, bucko'
       return
     end
-    data = false
-    data = YAML.load_file(filename) while data == false
-    count = data['count']
-    ichoose = rand(1..count)
-    colon = data[ichoose].index(':')
-    removed = data[ichoose][colon + 2..data[ichoose].length]
-    user = data[ichoose][0..colon - 1]
+    log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = log.length
+    ichoose = rand(0..count-1)
+    colon = log[ichoose].index(':')
+    removed = log[ichoose][colon + 2..log[ichoose].length].chomp
+    user = log[ichoose][13..colon - 1]
     m.reply "Long ago, #{user} said: \"#{removed}\""
   end
 
@@ -108,21 +101,20 @@ class Channel
   end
 
   def clearlog(m)
+    return if Time.now - STARTTIME < 10
     if getrank(m, m.user.name) < 3
       m.reply 'Only channel operators may reset the history!'
       return
     end
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
-    File.delete(filename)
-    File.new(filename, 'w+')
-    exconfig = YAML.load_file('data/logs/logs.example.yaml')
-    File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+    filename = "data/logs/#{channel}.txt"
+    File.open(filename, 'w') {|file| file.truncate(0) }
     m.reply 'Consider the channel log history c l e a r e d.'
   end
 
   def dontlog(m)
     msg = m.params[1]
+    return true if Time.now - STARTTIME < 10
     return true if msg[0..1] == 's/'
     return true if msg[0..1] == 'S/'
     return true if msg[0..5] == '!quote'
@@ -134,16 +126,13 @@ class Channel
   def log_public_message(m)
     return if dontlog(m)
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
-    unless File.exist?(filename)
-      File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/logs.example.yaml')
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
-    end
-    data = YAML.load_file(filename)
-    count = data['count']
-    data[count + 1] = "#{m.user}: #{m.message}"
-    data['count'] += 1
-    File.open(filename, 'w') { |f| f.write data.to_yaml }
+    filename = "data/logs/#{channel}.txt"
+    File.new(filename, 'w+') unless File.exist?(filename)
+    author = if m.user.name == '' || m.user.name.nil?
+               'Unknown'
+             else
+               m.user.name
+             end
+    File.open(filename, 'a+') { |f| f.puts("[#{Time.now.to_i}] #{author}: #{m.message}") }
   end
 end
