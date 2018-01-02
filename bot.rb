@@ -75,11 +75,11 @@ if CONFIG['prefix'].nil? || CONFIG['prefix'] == ''
   File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
 end
 
-if CONFIG['prefixstart'].nil? || CONFIG['prefixstart'] == '' || CONFIG['prefixstart'] == 'true' || CONFIG['prefixstart'] == true
-  botprefix = /^#{Regexp.quote(CONFIG['prefix'])}/
-else
-  botprefix =  /#{Regexp.quote(CONFIG['prefix'])}/
-end
+botprefix = if CONFIG['prefixstart'].nil? || CONFIG['prefixstart'] == '' || CONFIG['prefixstart'] == 'true' || CONFIG['prefixstart'] == true
+              /^#{Regexp.quote(CONFIG['prefix'])}/
+            else
+              /#{Regexp.quote(CONFIG['prefix'])}/
+            end
 
 # Configure the Bot
 bot = Cinch::Bot.new do
