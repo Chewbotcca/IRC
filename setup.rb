@@ -62,7 +62,7 @@ class Setup
       puts "What should be the bot's realname? This is shown in a whois. - Optional"
       @config['realname'] = gets.chomp
 
-      puts 'What should be the bot\'s USERNAME (this is what\'s shown before the @ in a hostname. e.g. chew!THIS@blah) - Optional'
+      puts 'What should be the bot\'s USERNAME? (this is what\'s shown before the @ in a hostname. e.g. chew!THIS@blah) - Optional'
       @config['username'] = gets.chomp
 
       puts 'NickServ Password - Optional'
@@ -72,6 +72,11 @@ class Setup
       puts 'Bot Prefix - Optional'
       puts 'What should be the bot\'s prefix? Leave empty for the default, "!"'
       @config['prefix'] = gets.chomp
+
+      puts 'Bot Prefix Location - Optional'
+      puts 'Should commands HAVE to be at the beginning of messages, or can they be anywhere? (true/false)'
+      input = gets.chomp
+      @config['prefixstart'] = true?(input)
 
       puts 'It turns out you\'re done configuring bot settings!'
       save
@@ -86,7 +91,8 @@ class Setup
       @config['port'] = gets.chomp
 
       puts 'Connect using SSL? (true/false)'
-      @config['ssl'] = gets.chomp
+      input = gets.chomp
+      @config['ssl'] = true?(input)
 
       puts 'Done configuring server connection information!'
       save

@@ -20,6 +20,9 @@ username:
 # Bot Prefix. Default is !
 prefix:
 
+# Should commands HAVE to be at the beginning of messages, or can they be anywhere. (true/false)
+prefixstart: true
+
 # Do you run using bundle exec ruby bot.rb or just ruby bot.rb
 # true or false
 bundler: false
