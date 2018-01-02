@@ -20,6 +20,10 @@ username:
 # Bot Prefix. Default is !
 prefix:
 
+# Do you run using bundle exec ruby bot.rb or just ruby bot.rb
+# true or false
+bundler: false
+
 ### SERVER INFORMATION ###
 
 # Put the server you want. (Ex. irc.chew.pro)
@@ -37,22 +41,6 @@ serverpass:
 # NickServ Password (Don't have nickserv account? Don't worry! Run !nsregister pass email and it will set up the rest.)]
 # Only tested with Atheme IRC services. Report a bug if it does not work on other services.
 nickservpass:
-
-### OWNER CONFIGURATION ###
-
-# Your hostname, this is what comes after the @ in a whois. (ex. sid35940@is.a.pretty.kitty, host is is.a.pretty.kitty)
-# If unsure, set a modifypass below and run !configure ownerhost
-ownerhost:
-
-# This is the password used to modify the ownerhost in order to do restart commands, etc.
-# In case you have no access to the config file or you're on the go.
-# This can is recommended to only be used in PM, because if leaked will allow the user to kill or restart the bot, and make it join any channel.
-# Change this often and be careful how you use it.
-modifypass:
-
-# Do you run using bundle exec ruby bot.rb or just ruby bot.rb
-# true or false
-bundler: false
 
 ### API Configuration (everything is optional)
 
