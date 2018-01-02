@@ -70,7 +70,16 @@ class Channel
       removed = log[ichoose][colon + 2..log[ichoose].length].chomp
       userquote = log[ichoose][13..colon - 1]
     end
-    m.reply "Long ago, #{user} said: \"#{removed}\""
+    time = log[ichoose][1..10]
+    t = Time.now.to_i - time.to_i
+    mm, ss = t.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    days = format('%d days, ', dd) if dd != 0
+    hours = format('%d hours, ', hh) if hh != 0
+    mins = format('%d minutes, ', mm) if mm != 0
+    secs = format('%d seconds', ss) if ss != 0
+    m.reply "#{days}#{hours}#{mins}#{secs} ago, #{user} said: \"#{removed}\""
   end
 
   def quote(m)
@@ -87,7 +96,16 @@ class Channel
     colon = log[ichoose].index(':')
     removed = log[ichoose][colon + 2..log[ichoose].length].chomp
     user = log[ichoose][13..colon - 1]
-    m.reply "Long ago, #{user} said: \"#{removed}\""
+    time = log[ichoose][1..10]
+    t = Time.now.to_i - time.to_i
+    mm, ss = t.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    days = format('%d days, ', dd) if dd != 0
+    hours = format('%d hours, ', hh) if hh != 0
+    mins = format('%d minutes, ', mm) if mm != 0
+    secs = format('%d seconds', ss) if ss != 0
+    m.reply "#{days}#{hours}#{mins}#{secs} ago, #{user} said: \"#{removed}\""
   end
 
   def getrank(m, user)
