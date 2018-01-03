@@ -133,7 +133,7 @@ class Channel
   def dontlog(m)
     msg = m.params[1]
     return true if Time.now - STARTTIME < 10
-    return true if msg[0..CONFIG['prefix'].length-1] == CONFIG['prefix']
+    return true if msg[0..CONFIG['prefix'].length - 1] == CONFIG['prefix']
     return true if msg[0..1] == 's/'
     return true if msg[0..1] == 'S/'
     false
