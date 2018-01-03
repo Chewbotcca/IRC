@@ -24,7 +24,10 @@ class Owner
   end
 
   def api(m, service, key)
-    return unless authenticate(m) && checkperm(m, m.user.name, 'eval')
+    return unless authenticate(m) && checkperm(m, m.user.name, 'changeconfig')
+    unless %w[wordnik google cleverbot spotifyclientid spotifysecret lastfm].include? service
+      m.reply 'Invalid API service!'
+    end
     CONFIG[service] = key
     File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
     m.reply "#{service} API key set to: `#{key}`!"
