@@ -3,7 +3,25 @@ class Formatting
 
   match /rainbow (.+)/, method: :rainbow
   match /wrainbow (.+)/, method: :rainbow
+  match /colorbarf (.+)/, method: :colorbarf
+  match /multicolor (.+)/, method: :colorbarf
   match /usa (.+)/, method: :usa
+
+  def colorbarf(m, args)
+    args = args.split('')
+    amount = args.length
+    current = 0
+    message = Array.new(amount, '')
+    while current < amount
+      begin
+        message[current] = "#{rand(1..99)}#{args[current]}"
+        current -= 1
+      rescue
+        current = amount
+      end
+    end
+    m.reply message.join('')
+  end
 
   def rainbow(m, args)
     rainbow = "#{CONFIG['prefix']}rainbow"
