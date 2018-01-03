@@ -6,7 +6,7 @@ require './requiregems.rb'
 # Load config from file
 begin
   CONFIG = YAML.load_file('config.yaml')
-rescue
+rescue StandardError
   puts 'Config file not found, this is fatal, running setup.'
   `ruby setup.rb`
   exit
@@ -117,14 +117,10 @@ def authenticate(m)
     return true if staffdata['nick'] == m.user.nick
   end
   if authtype == 'userhost'
-    if staffdata['user'] == m.user.user && staffdata['host'] == m.user.host
-      return true
-    end
+    return true if staffdata['user'] == m.user.user && staffdata['host'] == m.user.host
   end
   if authtype == 'all'
-    if staffdata['user'] == m.user.user && staffdata['host'] == m.user.host && staffdata['nick'] == m.user.nick
-      return true
-    end
+    return true if staffdata['user'] == m.user.user && staffdata['host'] == m.user.host && staffdata['nick'] == m.user.nick
   end
   false
 end
