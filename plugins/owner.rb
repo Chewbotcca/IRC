@@ -20,6 +20,8 @@ class Owner
     perms += ['botchans'] if staffdata['botchans'] == true
     perms += ['eval'] if staffdata['eval'] == true
     perms += ['die'] if staffdata['die'] == true
+    perms += ['changeconfig'] if staffdata['changeconfig'] == true
+    perms += ['changepermissions'] if staffdata['changepermissions'] == true
     m.reply "Your perms are: #{perms.join(', ')}"
   end
 
