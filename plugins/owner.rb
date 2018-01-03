@@ -32,12 +32,11 @@ class Owner
 
   def die(m)
     if authenticate(m) && checkperm(m, m.user.name, 'die')
-
       m.reply 'Shutting down the bot peacefully...'
       sleep 1
       eval exit
     else
-      m.reply "You can't kill the bot! (If you are the owner of the bot, you did not configure properly! Otherwise, stop trying to KILL the bot!)"
+      m.reply "You can't kill me because you're not allowed to! Muhaha! I live on!"
     end
   end
 
