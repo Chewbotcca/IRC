@@ -5,19 +5,20 @@ Plugin       | Command                                     | Aliases            
 About        | `!about`                                    | None                                    | Shows information about the bot.
 About        | `!ping`                                     | None                                    | Pings the bot to see if it's alive. u ok?
 About        | `!uptime`                                   | None                                    | Check bot uptime.
-About        | `!bug [description]`                        | `!suggestion` `!issue`                  | Report a bug to the github repo. Requires git, hub, and your github credentials cached in git.
+About        | `!bug [description]`                        | `!suggestion` `!issue`                  | Report a bug to the GitHub repo. Requires git, hub, and your github credentials cached in git.
 Base64       | `!base64 [string]`                          | None                                    | Encode [string] with base64
 Base64       | `!debase64 [string]`                        | None                                    | Decode [string] from base64
 Base64       | `!isbase64 [string]`                        | None                                    | Checks to see if a string really is base64.
 Bitcoin      | `!bitcoin`                                  | None                                    | Returns current bitcoin value.
 Bitcoin      | `!zetacoin`                                 | None                                    | Returns current Zetacoin value.
 Bitcoin      | `!litecoin`                                 | None                                    | Returns current Litecoin value.
-Bitcoin      | `!darkcoin`                                 | `!dash`                                 | Returns current Darkcoin/dash value.
+Bitcoin      | `!darkcoin`                                 | `!dash`                                 | Returns current Darkcoin/Dash value.
+Bitcoin      | `!dogecoin`                                 | None                                    | Returns current DogeCoin value.
 Channel      | `!rquote`                                   | None                                    | Finds a random quote in the logs.
 Channel      | `!quote [user]`                             | None                                    | Find a quote from a specific [user].
 Channel      | `!resethistory`                             | None                                    | Reset channel log. Requires op or above. (Any of +oaq)
 Channel      | `!channel [option] [setting]`               | None                                    | Modify channel options.
-Cleverbot    | `!cleverbot [string]`                       | `!cb`                                   | Asks cleverbot a question.
+Cleverbot    | `!cleverbot [string]`                       | `!cb`                                   | Asks Cleverbot a question.
 Emoji        | `!b [string]`                               | `!:b:` `!🅱️`                           | Replaces all occurrences of B in [string] with 🅱️.
 Emoji        | `!clap [string]`                            | `!:clap:` `!👏`                         | Replaces all spaces with 👏.
 Emoji        | `!br [string]`                              | `!breplace` `!:b:replace` `!🅱️replace` | Replaces the first letter of each word in [string] with 🅱️
@@ -56,9 +57,9 @@ Language     | `!leet [text]`                              | None               
 MemeDB       | `!memedb [meme]`                            | None                                    | Find a Meme in the MemeDB
 Minecraft    | `!uuid [user]`                              | None                                    | Shows UUID for a [user].
 Minecraft    | `!server [ip]`                              | None                                    | Looks up a server [ip] for stats. Provide an IP please.
-Minecraft    | `!namemc [user]`                            | None                                    | Searches namemc for a term.
-Minecraft    | `!mcstatus`                                 | None                                    | Finds mojang and minecraft status.
-Minecraft    | `!namemcf [user]`                           | None                                    | Finds [user]'s friends on namemc.
+Minecraft    | `!namemc [user]`                            | None                                    | Searches NameMC for a term.
+Minecraft    | `!mcstatus`                                 | None                                    | Finds Mojang and Minecraft status.
+Minecraft    | `!namemcf [user]`                           | None                                    | Finds [user]'s friends on NameMC.
 Misc         | `!8ball [message]`                          | None                                    | Shake the magic 8ball.
 Misc         | `!flip`                                     | `!coin`                                 | Flips a SINGULAR coin.
 Misc         | `!qrcode [string]`                          | `!qr`                                   | Generate a QR Code from [string]!
