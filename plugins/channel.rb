@@ -48,9 +48,9 @@ class Channel
     # We're gonna wanna downcase the user, case sensitivity, my dudes.
     downuser = user.downcase
     current = count
-    while current > 0
-      colon = log[current-1].index(':')
-      userquote = log[current-1][0..colon - 1]
+    while current.positive?
+      colon = log[current - 1].index(':')
+      userquote = log[current - 1][0..colon - 1]
       userquote.downcase!
       if userquote.include?(downuser)
         found = true
@@ -65,7 +65,7 @@ class Channel
       return
     end
     while userquote != user
-      ichoose = rand(0..count-1)
+      ichoose = rand(0..count - 1)
       colon = log[ichoose].index(':')
       removed = log[ichoose][colon + 2..log[ichoose].length].chomp
       userquote = log[ichoose][13..colon - 1]
@@ -92,7 +92,7 @@ class Channel
     end
     log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
     count = log.length
-    ichoose = rand(0..count-1)
+    ichoose = rand(0..count - 1)
     colon = log[ichoose].index(':')
     removed = log[ichoose][colon + 2..log[ichoose].length].chomp
     user = log[ichoose][13..colon - 1]
@@ -126,7 +126,7 @@ class Channel
     end
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.txt"
-    File.open(filename, 'w') {|file| file.truncate(0) }
+    File.open(filename, 'w') { |file| file.truncate(0) }
     m.reply 'Consider the channel log history c l e a r e d.'
   end
 

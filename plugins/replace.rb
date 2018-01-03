@@ -26,7 +26,7 @@ class Replace
     # Yay let's search every message
     current = count
     useme = ''
-    while current > 0
+    while current.positive?
       colon = log[current - 1].index(':')
       removed = log[current - 1][colon + 2..log[current - 1].length]
       user = log[current - 1][0..colon - 1]
