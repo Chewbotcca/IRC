@@ -15,7 +15,7 @@ class Stats
     end
     log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
     count = log.length
-    m.reply "Overall, everyone has sent #{Format(:bold, count)} messages!"
+    m.reply "Overall, everyone has sent #{Format(:bold, count.to_s)} messages!"
   end
 
   def wordused(m, wordz)
