@@ -7,6 +7,33 @@ class Owner
   match /die/, method: :die
   match /api (.+) (.+)/, method: :api
   match /uperms/, method: :perms
+  match /config (.+) (.+)/, method: :config
+  match /permissions (.+) (.+) (.+)/, method: :permissions
+
+  def config(m, option, setting)
+    return unless authenticate(m) && checkperm(m, m.user.name, 'changeconfig')
+    CONFIG[option] = setting
+    File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
+    m.reply "#{option} successfully set to: `#{setting}`!"
+  end
+
+  def permissions(m, nick, perm, setting)
+    return unless authenticate(m) && checkperm(m, m.user.name, 'changepermissions')
+    file = "data/staff/#{nick}.yaml"
+    m.reply "That staff member doesn't exist!" unless File.exist?(file)
+    unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions].include? perm
+      m.reply 'Invalid permission!'
+    end
+    data = YAML.load_file(file)
+    setting = true?(setting)
+    data[perm] = setting
+    File.open(file, 'w') { |f| f.write data.to_yaml }
+    m.reply "Permission `#{perm}` successfully set to `#{setting}` for Staff member #{nick}!"
+  end
+
+  def true?(obj)
+    obj.to_s == 'true'
+  end
 
   def perms(m)
     stafffile = "data/staff/#{m.user.name}.yaml"
