@@ -33,3 +33,9 @@ eval: false
 
 ## Allow the user to kill the bot
 die: false
+
+## Allow the user to run !config to change the bot config options.
+changeconfig: false
+
+## Allow the user to run !permissions to change staff permissions.
+changepermissions: false
