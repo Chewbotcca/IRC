@@ -17,6 +17,6 @@ class Cleverbot
     on = response['interaction_count']
     interaction = "interaction_#{on}_other"
     m.reply "Cleverbot says: #{response[interaction]}"
-    File.open("data/logs/#{channel = m.channel.to_s[1..m.channel.to_s.length]}.txt", 'a+') { |f| f.puts("[#{Time.now.to_i}] [BOT]Cleverbot: #{response[interaction]}") }
+    File.open("data/logs/#{m.channel.to_s[1..m.channel.to_s.length]}.txt", 'a+') { |f| f.puts("[#{Time.now.to_i}] [BOT]Cleverbot: #{response[interaction]}") }
   end
 end
