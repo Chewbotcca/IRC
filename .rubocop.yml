@@ -43,3 +43,6 @@ Style/RegexpLiteral:
 
 Metrics/ClassLength:
   Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
