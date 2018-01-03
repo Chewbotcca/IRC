@@ -35,9 +35,7 @@ class Owner
 
   def perms(m)
     stafffile = "data/staff/#{m.user.name}.yaml"
-    unless File.exist?(stafffile)
-      m.reply "You aren't a staff member! You have no perms!"
-    end
+    m.reply "You aren't a staff member! You have no perms!" unless File.exist?(stafffile)
     staffdata = YAML.load_file(stafffile)
     perms = []
     perms += ['restart'] if staffdata['restart'] == true
