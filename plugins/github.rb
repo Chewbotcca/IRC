@@ -17,9 +17,7 @@ class GitHub
   end
 
   def ghissue(m, repo, issuenum, showurl = true)
-    if issuenum == 'latest'
-      issuenum = JSON.parse(RestClient.get("https://api.github.com/repos/#{repo}/issues"))[0]['number'].to_i
-    end
+    issuenum = JSON.parse(RestClient.get("https://api.github.com/repos/#{repo}/issues"))[0]['number'].to_i if issuenum == 'latest'
     issueurl = "https://api.github.com/repos/#{repo}/issues/#{issuenum}"
     begin
       parsed = JSON.parse(RestClient.get(issueurl))
