@@ -22,7 +22,7 @@ Metrics/CyclomaticComplexity:
 Style/GuardClause:
   Enabled: false
 
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Enabled: false
 
 Lint/UriEscapeUnescape:
