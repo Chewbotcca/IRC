@@ -12,8 +12,8 @@ class Music
   match /lastfmart (.+)/, method: :lastfmartist
   match /lastfmalbum (.+)/, method: :lastfmalbum
   match /ltal (.+)/, method: :lastfmalbum
-  match /lastfmtracks (.+)/, method: :lastfmtoptracks
-  match /ltop (.+)/, method: :lastfmtoptracks
+  match /lastfmtracks (.+)/, method: :lastfmtracks
+  match /ltop (.+)/, method: :lastfmtracks
   match /lastfmcompare (.+) (.+)/, method: :lastcompare
   match /lttr (.+)/, method: :lastfmtracks
   match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :spotifylink
@@ -189,46 +189,6 @@ class Music
     lastfmtrack(m, user1)
     sleep 1
     lastfmtrack(m, user2)
-  end
-
-  def lastfmtoptracks(m, user)
-    if CONFIG['lastfm'].nil? || CONFIG['lastfm'] == ''
-      m.reply 'This command requires an API key from last.fm!'
-      return
-    end
-    parse = JSON.parse(RestClient.get("http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&period=overall&limit=3&user=#{user}&api_key=#{CONFIG['lastfm']}&format=json"))
-
-    base = parse['toptracks']['track']
-
-    user = parse['toptracks']['@attr']['user']
-
-    amount = base.length
-
-    if amount.zero?
-      m.reply 'User has no top tracks!'
-      return
-    end
-    m.reply "Top 3 Tracks for #{user}"
-    if amount.positive?
-      sleep 1
-      art1name = base[0]['name']
-      art1scrob = base[0]['playcount']
-      m.reply "1st: #{Format(:bold, art1name)} with #{Format(:bold, art1scrob)} scrobbles."
-    end
-    if amount > 1
-      sleep 1
-      art2name = base[1]['name']
-      art2scrob = base[1]['playcount']
-      m.reply "2nd: #{Format(:bold, art2name)} with #{Format(:bold, art2scrob)} scrobbles."
-    end
-    if amount > 2
-      sleep 1
-      art3name = base[2]['name']
-      art3scrob = base[2]['playcount']
-      m.reply "3rd: #{Format(:bold, art3name)} with #{Format(:bold, art3scrob)} scrobbles."
-    end
-    sleep 1
-    m.reply "View more: http://www.last.fm/user/#{user}/library/tracks?date_preset=ALL_TIME"
   end
 
   def lastfmtopartist(m, user)
