@@ -5,6 +5,7 @@ class Cleverbot
   match /cb (.+)/, method: :cleverbot
 
   def cleverbot(m, input)
+    File.open("data/logs/#{m.channel.to_s[1..m.channel.to_s.length]}.txt", 'a+') { |f| f.puts("[#{Time.now.to_i}] #{m.user.name}: #{input}") }
     begin
       response = JSON.parse(RestClient.get(URI.escape("https://www.cleverbot.com/getreply?key=#{CONFIG['cleverbot']}&input=#{input}&cs=&callback=ProcessReply")))
     rescue
