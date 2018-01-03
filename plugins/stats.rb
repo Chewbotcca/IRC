@@ -8,36 +8,30 @@ class Stats
 
   def messages(m)
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
+    filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
       File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/channel.example.yaml')
-      exconfig['name'] = channel
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+      return
     end
-    data = false
-    data = YAML.load_file(filename) while data == false
-    m.reply "Overall, everyone has sent #{Format(:bold, data['count'])} messages!"
+    log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = log.length
+    m.reply "Overall, everyone has sent #{Format(:bold, count)} messages!"
   end
 
   def wordused(m, wordz)
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
+    filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
       File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/channel.example.yaml')
-      exconfig['name'] = channel
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+      return
     end
-    data = false
-    data = YAML.load_file(filename) while data == false
+    data = File.readlines(filename) { |line| line.split.map(&:to_s).join }
     users = {}.to_hash
-    count = data['count']
-    # Yay let's search every message
+    count = data.length
     current = count
-    while current > 1
-      colon = data[current].index(':')
-      removed = data[current][colon + 2..data[current].length]
+    while current.positive?
+      colon = data[current - 1].index(':')
+      removed = data[current - 1][colon + 2..data[current - 1].length]
       eachword = removed.split(' ')
       currentword = 0
       while currentword < eachword.length
@@ -64,22 +58,18 @@ class Stats
   def top(m)
     m.reply 'Gathering top speakers in the channel....'
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
+    filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
       File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/logs.example.yaml')
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
-      m.reply 'There is no log! No log = No top! Try again, bucko'
       return
     end
-    data = false
-    data = YAML.load_file(filename) while data == false
-    count = data['count']
+    data = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = data.length
     users = {}.to_hash
     current = count
-    while current > 1
-      colon = data[current].index(':')
-      user = data[current][0..colon - 1]
+    while current.positive?
+      colon = data[current - 1].index(':')
+      user = data[current - 1][13..colon - 1]
       if users[user].nil?
         users[user] = 1
       else
@@ -90,12 +80,12 @@ class Stats
     users = users.sort.sort_by { |_x, y| y }.reverse
     sleep 1
     m.reply "1st: #{Format(:bold, users[0][0].to_s)} with #{Format(:bold, users[0][1].to_s)} messages! #{Format(:bold, "(#{(users[0][1].to_f / count * 100).round(2)}%)")}"
-    sleep 1
     if users.length > 1
+      sleep 1
       m.reply "2nd: #{Format(:bold, users[1][0].to_s)} with #{Format(:bold, users[1][1].to_s)} messages! #{Format(:bold, "(#{(users[1][1].to_f / count * 100).round(2)}%)")}"
     end
-    sleep 1
     if users.length > 2
+      sleep 1
       m.reply "3rd: #{Format(:bold, users[2][0].to_s)} with #{Format(:bold, users[2][1].to_s)} messages! #{Format(:bold, "(#{(users[2][1].to_f / count * 100).round(2)}%)")}"
     end
     sleep 1
@@ -105,23 +95,18 @@ class Stats
   def topwords(m)
     m.reply 'Gathering top words in the channel....'
     channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/logs/#{channel}.yaml"
+    filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
       File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/logs/logs.example.yaml')
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
-      m.reply 'There is no log! No log = No top! Try again, bucko'
       return
     end
-    data = false
-    data = YAML.load_file(filename) while data == false
-    count = data['count']
+    data = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = data.length
     users = {}.to_hash
-    # Yay let's search every message
     current = count
-    while current > 1
-      colon = data[current].index(':')
-      removed = data[current][colon + 2..data[current].length]
+    while current.positive?
+      colon = data[current - 1].index(':')
+      removed = data[current - 1][colon + 2..data[current - 1].length]
       eachword = removed.split(' ')
       currentword = 0
       while currentword < eachword.length
@@ -140,12 +125,12 @@ class Stats
     users = users.sort.sort_by { |_x, y| y }.reverse
     sleep 1
     m.reply "1st: Word #{Format(:bold, users[0][0].to_s)} used #{Format(:bold, users[0][1].to_s)} times!"
-    sleep 1
     if users.length > 1
+      sleep 1
       m.reply "2nd: Word #{Format(:bold, users[1][0].to_s)} used #{Format(:bold, users[1][1].to_s)} times!"
     end
-    sleep 1
     if users.length > 2
+      sleep 1
       m.reply "3rd: Word #{Format(:bold, users[2][0].to_s)} used #{Format(:bold, users[2][1].to_s)} times!"
     end
   end
