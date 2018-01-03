@@ -6,9 +6,7 @@ class NickServ
   match /nsverify (.+)/, method: :verify
 
   def identify(_m)
-    unless CONFIG['nickservpass'].nil? || CONFIG['nickservpass'] == ''
-      User('NickServ').send("identify #{CONFIG['nickservpass']}")
-    end
+    User('NickServ').send("identify #{CONFIG['nickservpass']}") unless CONFIG['nickservpass'].nil? || CONFIG['nickservpass'] == ''
   end
 
   def register(m, pass, email)
