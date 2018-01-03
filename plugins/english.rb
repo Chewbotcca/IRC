@@ -6,6 +6,31 @@ class English
   match /wordrandom/, method: :randomword
   match /synonym (.+)/, method: :synonym
   match /antonym (.+)/, method: :antonym
+  match /urban (.+)/, method: :urban
+
+  def urban(m, word)
+    parse = JSON.parse(RestClient.get("http://api.urbandictionary.com/v0/define?term=#{word}"))
+    if parse['result_type'].to_s == 'no_results'
+      m.reply "No results found for term #{Format(:bold, word)}!"
+      return
+    end
+    info = parse['list'][0]
+    definition = info['definition'].to_s
+    definition = definition.delete("\n")
+    if definition.length > 200
+      definition = definition[0..200]
+      definition = "#{definition}..."
+    end
+    up = info['thumbs_up'].to_s
+    author = info['author'].to_s
+    example = info['example'].to_s
+    down = info['thumbs_down'].to_s
+    total = up.to_i + down.to_i
+    ratio = (up.to_f / total.to_f * 100).round(2).to_s
+    word = info['word'].to_s
+    url = info['permalink']
+    m.reply "Urban Dictionary defintion for #{Format(:bold, word)}: #{Format(:bold, definition)} | Author: #{Format(:bold, author.to_s)} | #{Format(:bold, up)} 👍 - #{Format(:bold, down)} 👎 (#{Format(:bold, ratio)}%) | Example: #{Format(:bold, example)} | URL: #{url}"
+  end
 
   def checkapi
     if CONFIG['wordnik'] == '' || CONFIG['wordnik'].nil?
