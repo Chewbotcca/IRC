@@ -21,9 +21,7 @@ class Owner
     return unless authenticate(m) && checkperm(m, m.user.name, 'changepermissions')
     file = "data/staff/#{nick}.yaml"
     m.reply "That staff member doesn't exist!" unless File.exist?(file)
-    unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions].include? perm
-      m.reply 'Invalid permission!'
-    end
+    m.reply 'Invalid permission!' unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions].include? perm
     data = YAML.load_file(file)
     setting = true?(setting)
     data[perm] = setting
@@ -54,9 +52,7 @@ class Owner
 
   def api(m, service, key)
     return unless authenticate(m) && checkperm(m, m.user.name, 'changeconfig')
-    unless %w[wordnik google cleverbot spotifyclientid spotifysecret lastfm].include? service
-      m.reply 'Invalid API service!'
-    end
+    m.reply 'Invalid API service!' unless %w[wordnik google cleverbot spotifyclientid spotifysecret lastfm].include? service
     CONFIG[service] = key
     File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
     m.reply "#{service} API key set to: `#{key}`!"
