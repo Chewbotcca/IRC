@@ -203,6 +203,12 @@ class Setup
     puts 'Should they have access to !die?'
     input = gets.chomp
     staffdata['die'] = true?(input)
+    puts 'Should they have access to change the config (!config [option])?'
+    input = gets.chomp
+    staffdata['changeconfig'] = true?(input)
+    puts 'Should they have access to change staff permissions (!permissions)?'
+    input = gets.chomp
+    staffdata['changepermissions'] = true?(input)
     staffdata['authtype'] = section
     staffdata['nick'] = name
     File.open(stafffile, 'w') { |f| f.write staffdata.to_yaml }
