@@ -13,11 +13,10 @@ Bitcoin      | `!bitcoin`                                  | None               
 Bitcoin      | `!zetacoin`                                 | None                                    | Returns current Zetacoin value.
 Bitcoin      | `!litecoin`                                 | None                                    | Returns current Litecoin value.
 Bitcoin      | `!darkcoin`                                 | `!dash`                                 | Returns current Darkcoin/dash value.
-Channel      | `!topspeakers`                              | None                                    | Returns a list of top speakers in the channel.
-Channel      | `!topwords`                                 | None                                    | Returns a list of top words in the channel.
 Channel      | `!rquote`                                   | None                                    | Finds a random quote in the logs.
 Channel      | `!quote [user]`                             | None                                    | Find a quote from a specific [user].
 Channel      | `!resethistory`                             | None                                    | Reset channel log. Requires op or above. (Any of +oaq)
+Channel      | `!channel [option] [setting]`               | None                                    | Modify channel options.
 Cleverbot    | `!cleverbot [string]`                       | `!cb`                                   | Asks cleverbot a question.
 Emoji        | `!b [string]`                               | `!:b:` `!🅱️`                           | Replaces all occurrences of B in [string] with 🅱️.
 Emoji        | `!clap [string]`                            | `!:clap:` `!👏`                         | Replaces all spaces with 👏.
@@ -67,14 +66,14 @@ Misc         | `!choose [1,2]`                             | None               
 ModifyConfig | `!configureownerhost [modifypass] [hostto]` | None                                    | Sets specified hostname to [hostto]
 ModifyConfig | `!configure [modifypass] [option]`          | None                                    | Currently just sets ownerhost to your host.
 ModifyConfig | `!addowner [modifypass] [hosttoadd]`        | None                                    | Add owner [hosttoadd] as an owner.
-Music        | `!spalbum [search]`                         | None                                    | Searches spotify for [album].
-Music        | `!spartist [search]`                        | None                                    | Searches spotify for [artist].
-Music        | `!spotifyapi`                               | None                                    | Force updates spotify api key from client id and secret. BOT OWNER ONLY.
-Music        | `!spotify [song]`                           | None                                    | Searches spotify for [song].
+Music        | `!spalbum [search]`                         | None                                    | Searches Spotify for [album].
+Music        | `!spartist [search]`                        | None                                    | Searches Spotify for [artist].
+Music        | `!spotifyapi`                               | None                                    | Force updates Spotify api key from client id and secret. BOT OWNER ONLY.
+Music        | `!spotify [song]`                           | None                                    | Searches Spotify for [song].
 Music        | `!lastfm [user]`                            | None                                    | Find stats for last.fm [user].
 Music        | `!lastfmartist [user]`                      | `!ltar` `!lastfmart`                    | Find top artists for [user].
 Music        | `!lastfmalbum [user]`                       | `!ltal`                                 | Find top albums for [user].
-Music        | `!lastfmtracks [user]`                      | `!ltop`                                 | Find top tracks for [user].
+Music        | `!lastfmtracks [user]`                      | `!ltop` `!lttr`                         | Find top tracks for [user].
 Music        | `!lastfmcompare [user1] [user2]`            | None                                    | Compare 2 last.fm users.
 NickServ     | `!nsregister [pass] [email]`                | None                                    | Registers with NickServ. Owner only.
 NickServ     | `!nsverify [code]`                          | None                                    | Verify registration. Owner only.
@@ -83,6 +82,7 @@ Owner        | `!part [channel]`                           | None               
 Owner        | `!die`                                      | None                                    | Shut down the bot :( Bot Owner Only.
 Owner        | `!eval`                                     | None                                    | Evaluates ruby Expressions. Bot Owner Only.
 Owner        | `!api [service] [key]`                      | None                                    | Sets API [service] to [key]. Bot owner only!
+Owner        | `!uperms`                                   | None                                    | Find what perms you have
 Quotes       | `!ron`                                      | None                                    | Generates a Ron Swanson Quote
 Quotes       | `!trbmb`                                    | None                                    | Generates a random [TRBMB](http://trbmb.chew.pw) phrase
 RandomCat    | `!cat`                                      | None                                    | Shows a random cat.
@@ -90,14 +90,19 @@ RandomCat    | `!mcat [1-5]`                               | `!multicat` `!kitte
 Replace      | `s/[find]/[replace]`                        | None                                    | Replaces first occurrence of [find] in the logs with [replace].
 Restart      | `!restart`                                  | None                                    | Restarts the Bot. Bot Owner Only.
 Restart      | `!update`                                   | None                                    | Updates the Bot. Bot Owner Only.
+Stats        | `!topspeakers`                              | None                                    | Returns a list of top speakers in the channel.
+Stats        | `!topwords`                                 | None                                    | Returns a list of top words in the channel.
+Stats        | `!wordused [word]`                          | None                                    | See how many times [word] was used in the channel.
+Stats        | `!messagecount`                             | None                                    | Find the total message count in the logs
 Streams      | `!mixer [user]`                             | None                                    | Shows mixer stats for user.
 
 ## Commands with no Prefix
 
 Plugin       | Description                | Usage
------------- | -------------------------- | ------------------------------------------
+------------ | -------------------------- | ------------------------------------------------
 Channel      | Log all message            | Say a message in chat.
+GitHub       | Describe GH Issues/Pulls   | Put a GitHub issue or pull request link in chat.
 Google       | Describe youtube links     | Say a youtube link in chat.
 InviteToJoin | Joins a channel            | Invite the bot to the channel
-Music        | Refresh spotify token      | Nothing, wait an hour or run `!spotifyapi`
-NickServ     | Authenticate with nickserv | Nothing, start the bot.
+Music        | Refresh Spotify token      | Nothing, wait an hour or run `!spotifyapi`
+NickServ     | Authenticate with NickServ | Nothing, start the bot.
