@@ -26,6 +26,31 @@ class Music
     else
       return
     end
+    if url[5] == 'playlist'
+      user = url[4]
+      id = url[6]
+      uri = URI.parse("https://api.spotify.com/v1/users/#{user}/playlists/#{id}")
+      request = Net::HTTP::Get.new(uri)
+      request['Accept'] = 'application/json'
+      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
+
+      req_options = {
+        use_ssl: uri.scheme == 'https'
+      }
+
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+
+      parse = JSON.parse(response.body)
+      name = parse['name']
+      creator = parse['owner']['id']
+      description = parse['description']
+      songs = parse['tracks']['total'].to_s
+      followers = parse['followers']['total'].to_s
+
+      m.reply "Playlist Info: #{Format(:bold, name)} by #{Format(:bold, creator)} | Description: #{Format(:bold, description)} | Tracks: #{Format(:bold, songs)} | Followers: #{Format(:bold, followers)}"
+    end
     if url[3] == 'track'
       uri = URI.parse("https://api.spotify.com/v1/tracks/#{id}")
       request = Net::HTTP::Get.new(uri)
