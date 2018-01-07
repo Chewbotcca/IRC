@@ -285,7 +285,7 @@ class Music
   end
 
   def checkperms(m)
-    updatespotify if m.user.host == CONFIG['ownerhost']
+    updatespotify if authenticate(m) && checkperm(m, m.user.name, 'changeconfig')
     nil
   end
 
