@@ -18,6 +18,23 @@ class Music
   match /lttr (.+)/, method: :lastfmtracks
   match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :spotifylink
 
+  def spotifyapi(uri)
+    uri = URI.parse(uri)
+    request = Net::HTTP::Get.new(uri)
+    request['Accept'] = 'application/json'
+    request['Authorization'] = "Bearer #{CONFIG['spotify']}"
+
+    req_options = {
+      use_ssl: uri.scheme == 'https'
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    JSON.parse(response.body)
+  end
+
   def spotifylink(m, url)
     url = url.split(/[\/,&,?,=]/)
     case url[2]
@@ -29,20 +46,7 @@ class Music
     if url[5] == 'playlist'
       user = url[4]
       id = url[6]
-      uri = URI.parse("https://api.spotify.com/v1/users/#{user}/playlists/#{id}")
-      request = Net::HTTP::Get.new(uri)
-      request['Accept'] = 'application/json'
-      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-      req_options = {
-        use_ssl: uri.scheme == 'https'
-      }
-
-      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-      end
-
-      parse = JSON.parse(response.body)
+      parse = spotifyapi("https://api.spotify.com/v1/users/#{user}/playlists/#{id}")
       name = parse['name']
       creator = parse['owner']['id']
       description = parse['description']
@@ -52,20 +56,7 @@ class Music
       m.reply "Playlist Info: #{Format(:bold, name)} by #{Format(:bold, creator)} | Description: #{Format(:bold, description)} | Tracks: #{Format(:bold, songs)} | Followers: #{Format(:bold, followers)}"
     end
     if url[3] == 'track'
-      uri = URI.parse("https://api.spotify.com/v1/tracks/#{id}")
-      request = Net::HTTP::Get.new(uri)
-      request['Accept'] = 'application/json'
-      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-      req_options = {
-        use_ssl: uri.scheme == 'https'
-      }
-
-      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-      end
-
-      parse = JSON.parse(response.body)
+      parse = spotifyapi("https://api.spotify.com/v1/tracks/#{id}")
       name = parse['name']
       album = parse['album']
       alname = album['name']
@@ -76,20 +67,7 @@ class Music
       m.reply "Song info: #{Format(:bold, name)} | from the #{altype} #{Format(:bold, alname)} by #{Format(:bold, artistname)}"
     end
     if url[3] == 'album'
-      uri = URI.parse("https://api.spotify.com/v1/albums/#{id}")
-      request = Net::HTTP::Get.new(uri)
-      request['Accept'] = 'application/json'
-      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-      req_options = {
-        use_ssl: uri.scheme == 'https'
-      }
-
-      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-      end
-
-      parse = JSON.parse(response.body)
+      parse = spotifyapi("https://api.spotify.com/v1/albums/#{id}")
       name = parse['name']
       artist = parse['artists'][0]
       artistname = artist['name']
@@ -97,25 +75,12 @@ class Music
       m.reply "Album info: #{Format(:bold, name)} by #{Format(:bold, artistname)}"
     end
     if url[3] == 'artist'
-      uri = URI.parse("https://api.spotify.com/v1/artists/#{id}")
-      request = Net::HTTP::Get.new(uri)
-      request['Accept'] = 'application/json'
-      request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-      req_options = {
-        use_ssl: uri.scheme == 'https'
-      }
-
-      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-      end
-
-      parse = JSON.parse(response.body)
+      parse = spotifyapi("https://api.spotify.com/v1/artists/#{id}")
       name = parse['name']
 
       m.reply "Artist info: #{Format(:bold, name)}"
     end
-  rescue => e
+  rescue StandardError => e
     if CONFIG['google'] == '' || CONFIG['google'].nil?
       m.reply 'This command requires a Spotify API key!'
     else
@@ -275,7 +240,7 @@ class Music
       np = base['@attr']['nowplaying']
       timeago = np
       playing = true
-    rescue
+    rescue StandardError
       np = base['date']['uts']
       t = Time.now.to_i - np.to_i
       mm, ss = t.divmod(60)
@@ -306,20 +271,7 @@ class Music
         return
       end
     end
-    uri = URI.parse("https://api.spotify.com/v1/search?q=#{song}&type=track&market=US&limit=1")
-    request = Net::HTTP::Get.new(uri)
-    request['Accept'] = 'application/json'
-    request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-    req_options = {
-      use_ssl: uri.scheme == 'https'
-    }
-
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-      http.request(request)
-    end
-
-    parse = JSON.parse(response.body)
+    parse = spotifyapi("https://api.spotify.com/v1/search?q=#{song}&type=track&market=US&limit=1")
     track = parse['tracks']['items'][0]
     name = track['name']
     albumtype = track['album']['album_type'].capitalize
@@ -328,7 +280,7 @@ class Music
     url = track['external_urls']['spotify']
 
     m.reply "#{Format(:bold, name)} | from the #{albumtype} #{Format(:bold, album)} by #{Format(:bold, artist)} | #{url}"
-  rescue
+  rescue StandardError
     m.reply 'No songs found with the given parameters!'
   end
 
@@ -370,26 +322,13 @@ class Music
         return
       end
     end
-    uri = URI.parse("https://api.spotify.com/v1/search?q=#{search}&type=artist&market=US&limit=1")
-    request = Net::HTTP::Get.new(uri)
-    request['Accept'] = 'application/json'
-    request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-    req_options = {
-      use_ssl: uri.scheme == 'https'
-    }
-
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-      http.request(request)
-    end
-
-    parse = JSON.parse(response.body)
+    parse = spotifyapi("https://api.spotify.com/v1/search?q=#{search}&type=artist&market=US&limit=1")
     parsed = parse['artists']['items'][0]
     artist = parsed['name']
     url = parsed['external_urls']['spotify']
 
     m.reply "#{Format(:bold, artist)} | #{url}"
-  rescue
+  rescue StandardError
     m.reply 'No artists found!'
   end
 
@@ -401,20 +340,7 @@ class Music
         return
       end
     end
-    uri = URI.parse("https://api.spotify.com/v1/search?q=#{search}&type=album&market=US&limit=1")
-    request = Net::HTTP::Get.new(uri)
-    request['Accept'] = 'application/json'
-    request['Authorization'] = "Bearer #{CONFIG['spotify']}"
-
-    req_options = {
-      use_ssl: uri.scheme == 'https'
-    }
-
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-      http.request(request)
-    end
-
-    parse = JSON.parse(response.body)
+    parse = spotifyapi("https://api.spotify.com/v1/search?q=#{search}&type=album&market=US&limit=1")
     parsed = parse['albums']['items'][0]
     name = parsed['name']
     artist = parsed['artists'][0]['name']
@@ -422,7 +348,7 @@ class Music
     url = parsed['external_urls']['spotify']
 
     m.reply "#{Format(:bold, name)} | #{Format(:bold, albumtype)} by #{Format(:bold, artist)} | #{url}"
-  rescue
+  rescue StandardError
     m.reply 'No Albums found!'
   end
 end
