@@ -5,6 +5,7 @@ class Stats
   match /topwords/, method: :topwords
   match /wordused (.+)/, method: :wordused
   match /messagecount/, method: :messages
+  match /messages (.+)/, method: :messagesused
 
   def messages(m)
     channel = m.channel.to_s[1..m.channel.to_s.length]
@@ -132,6 +133,36 @@ class Stats
     if users.length > 2
       sleep 1
       m.reply "3rd: Word #{Format(:bold, users[2][0].to_s)} used #{Format(:bold, users[2][1].to_s)} times!"
+    end
+  end
+
+  def messagesused(m, member)
+    channel = m.channel.to_s[1..m.channel.to_s.length]
+    filename = "data/logs/#{channel}.txt"
+    unless File.exist?(filename)
+      File.new(filename, 'w+')
+      return
+    end
+    data = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = data.length
+    users = {}.to_hash
+    current = count
+    while current.positive?
+      colon = data[current - 1].index(':')
+      user = data[current - 1][13..colon - 1]
+      if users[user].nil?
+        users[user] = 1
+      else
+        users[user] += 1
+      end
+      current -= 1
+    end
+    users = users.sort.sort_by { |_x, y| y }.reverse
+    users.each do |x, y|
+      if x == member
+        m.reply "Member #{Format(:bold, member)} has sent #{Format(:bold, y.to_s)} messages!"
+        next
+      end
     end
   end
 end
