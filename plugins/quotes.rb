@@ -6,7 +6,7 @@ class Quotes
   match /acronym (.+)/, method: :acronym
 
   def acronym(m, acro)
-    m.reply "#{acro} stands for: #{JSON.parse(RestClient.get("http://api.chew.pro/acronym/#{acro}"))['phrase']}"
+    m.reply "#{acro} stands for: #{JSON.parse(RestClient.get(URI.escape("http://api.chew.pro/acronym/#{acro}")))['phrase']}"
   end
 
   def trbmb(m)
