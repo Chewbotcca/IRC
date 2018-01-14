@@ -3,6 +3,11 @@ class Quotes
 
   match /ron/, method: :getquote
   match /trbmb/, method: :trbmb
+  match /acronym (.+)/, method: :acronym
+
+  def acronym(m, acro)
+    m.reply "#{acro} stands for: #{JSON.parse(RestClient.get("http://api.chew.pro/acronym/#{acro}"))['phrase']}"
+  end
 
   def trbmb(m)
     m.reply JSON.parse(RestClient.get('http://api.chew.pro/trbmb'))[0]
