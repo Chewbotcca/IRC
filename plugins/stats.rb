@@ -20,6 +20,7 @@ class Stats
   end
 
   def wordused(m, wordz)
+    wordz.downcase!
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
