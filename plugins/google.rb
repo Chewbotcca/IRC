@@ -6,6 +6,11 @@ class Google
   match /youtube (.+)/, method: :searchyt
   match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :youtube
   match /youtime (.+)/, method: :duration
+  match /lmgtfy (.+)/, method: :letmegooglethat
+
+  def letmegooglethat(m, search)
+    m.reply "LMGTFY Link for #{search}: #{URI.escape("http://lmgtfy.com/?q=#{search}")}"
+  end
 
   def duration(m, search)
     url = URI.escape("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=#{search}&key=#{CONFIG['google']}")
