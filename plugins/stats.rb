@@ -106,10 +106,12 @@ class Stats
     count = data.length
     users = {}.to_hash
     current = count
+    wordcount = 0
     while current.positive?
       colon = data[current - 1].index(':')
       removed = data[current - 1][colon + 2..data[current - 1].length]
       eachword = removed.split(' ')
+      wordcount += eachword.length
       currentword = 0
       while currentword < eachword.length
         word = eachword[currentword]
@@ -126,15 +128,17 @@ class Stats
     end
     users = users.sort.sort_by { |_x, y| y }.reverse
     sleep 1
-    m.reply "1st: Word #{Format(:bold, users[0][0].to_s)} used #{Format(:bold, users[0][1].to_s)} times!"
+    m.reply "1st: Word #{Format(:bold, users[0][0].to_s)} used #{Format(:bold, users[0][1].to_s)} times! #{Format(:bold, "(#{(users[0][1].to_f / wordcount * 100).round(2)}%)")}"
     if users.length > 1
       sleep 1
-      m.reply "2nd: Word #{Format(:bold, users[1][0].to_s)} used #{Format(:bold, users[1][1].to_s)} times!"
+      m.reply "2nd: Word #{Format(:bold, users[1][0].to_s)} used #{Format(:bold, users[1][1].to_s)} times! #{Format(:bold, "(#{(users[1][1].to_f / wordcount * 100).round(2)}%)")}"
     end
     if users.length > 2
       sleep 1
-      m.reply "3rd: Word #{Format(:bold, users[2][0].to_s)} used #{Format(:bold, users[2][1].to_s)} times!"
+      m.reply "3rd: Word #{Format(:bold, users[2][0].to_s)} used #{Format(:bold, users[2][1].to_s)} times! #{Format(:bold, "(#{(users[2][1].to_f / wordcount * 100).round(2)}%)")}"
     end
+    sleep 1
+    m.reply "Altogether, everyone has sent #{Format(:bold, wordcount.to_s)} words! Woah!"
   end
 
   def messagesused(m, member)
