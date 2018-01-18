@@ -8,6 +8,7 @@ class Google
   match /youtime (.+)/, method: :duration
   match /lmgtfy (.+)/, method: :letmegooglethat
   match /lmbtfy (.+)/, method: :letmebingthat
+  match /lmddgtfy (.+)/, method: :letmeddgthat
 
   def letmegooglethat(m, search)
     m.reply "LMGTFY Link for #{search}: #{URI.escape("http://lmgtfy.com/?q=#{search}")}"
@@ -15,6 +16,10 @@ class Google
 
   def letmebingthat(m, search)
     m.reply "LMBTFY Link for #{search}: #{URI.escape("http://lmgtfy.com/?s=b&q=#{search}")}"
+  end
+
+  def letmeddgthat(m, search)
+    m.reply "LMDDGTFY Link for #{search}: #{URI.escape("http://lmgtfy.com/?s=d&q=#{search}")}"
   end
 
   def duration(m, search)
