@@ -12,7 +12,7 @@
 
 1) If you have git, run `git clone https://github.com/Chewbotcca/IRC.git`. Otherwise, download the latest .ZIP from [here](https://github.com/Chewbotcca/IRC/archive/master.zip), or .tar.gz from [here](https://github.com/Chewbotcca/IRC/archive/master.tar.gz), then unzip it.
 
-2) Install ruby. don't ask me how, just google it
+2) Install ruby. don't ask me how, just [DuckDuckGo](http://lmgtfy.com/?s=d&q=how%20to%20install%20ruby) it
 
 3) Wow, you're done.
 
