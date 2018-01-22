@@ -2,6 +2,8 @@
 
 The bot allows you to have staff members, allowing you to give certain perms to certain people. Here's a list:
 
+You can change permissions by [PREFIX]permissions (staff name) (permission node) (true/false)
+
 | Permission
 | ----------
 | [restart](#restart)
@@ -31,3 +33,11 @@ This allows the staff member to run `!eval`.
 ## die
 
 This allows the staff member to `!die` and kill the bot. bye bye bot.
+
+## changeconfig
+
+This allows the staff member to `!config` and change config options.
+
+## changepermissions
+
+This allows the staff member to `!permissions`, giving anyone any permission.
