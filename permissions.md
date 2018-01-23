@@ -11,6 +11,8 @@ You can change permissions by [PREFIX]permissions (staff name) (permission node)
 | [botchans](#botchans)
 | [eval](#eval)
 | [die](#die)
+| [changeconfig](#changeconfig)
+| [changepermissions](#changepermissions)
 
 ## restart
 
