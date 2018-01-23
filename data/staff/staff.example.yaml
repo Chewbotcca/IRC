@@ -39,3 +39,9 @@ changeconfig: false
 
 ## Allow the user to run !permissions to change staff permissions.
 changepermissions: false
+
+## Allow the user to setup or modify NickServ
+nickserv: false
+
+## Allow the user to create an issue via hub
+issues: false
