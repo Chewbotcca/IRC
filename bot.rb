@@ -130,7 +130,6 @@ def checkperm(_m, user, perm)
   return unless File.exist?(stafffile)
   staffdata = YAML.load_file(stafffile)
   return true if staffdata[perm] == true
-  m.reply "You appear to be missing the permission node `#{perm}`." unless perm == 'eval'
   false
 end
 
