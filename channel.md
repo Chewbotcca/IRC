@@ -6,8 +6,8 @@ Below is the documentation for `!channel (setting) (option)`
 
 Click on the setting hyperlink to go to more documentation.
 
-Setting        | Options                     | Default Rank
--------------- | --------------------------- | ----------------
+Setting        | Options               | Default Rank
+-------------- | --------------------- | ----------------
 `youtubelinks` | **true** or **false** | Half-op or Above
 
 ### Option: YoutubeLinks
