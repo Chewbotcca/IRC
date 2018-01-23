@@ -29,7 +29,7 @@ class About
   end
 
   def bug(m, args)
-    if CONFIG['ownerhost'] == m.user.host
+    if authenticate(m) && checkperm(m, m.user.name, 'issues')
       begin
         url = `hub issue create -m "#{args}"`
         if url == '' || url.nil?

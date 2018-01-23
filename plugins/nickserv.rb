@@ -10,7 +10,7 @@ class NickServ
   end
 
   def register(m, pass, email)
-    if m.user.host == CONFIG['ownerhost']
+    if authenticate(m) && checkperm(m, m.user.name, 'nickserv')
       User('NickServ').send("register #{pass} #{email}")
       CONFIG['nickservpass'] = pass.to_s
       File.open('config.yaml', 'w') { |f| f.write CONFIG.to_yaml }
@@ -21,7 +21,7 @@ class NickServ
   end
 
   def verify(m, code)
-    if m.user.host == CONFIG['ownerhost']
+    if authenticate(m) && checkperm(m, m.user.name, 'nickserv')
       User('NickServ').send("verify register #{CONFIG['nickname']} #{code}")
       m.reply 'Hey! NickServ verified!'
     else
