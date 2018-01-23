@@ -1,5 +1,16 @@
 # Command List
 
+<link rel="stylesheet" href="http://cloudcitymc.us/assets/css/searchboxes.css">
+<link rel="stylesheet" href="searchBoxes.css">
+<script src="searchTable.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<input type="text" id="findblocks" onkeyup="searchTable(0, 'findblocks')" placeholder="Search by Plugin">
+<input type="text" id="findids" onkeyup="searchTable(1, 'findids')" placeholder="Command">
+<input type="text" id="findprice" onkeyup="searchTable(2, 'findprice')" placeholder="Aliases">
+<input type="text" id="findbuy" onkeyup="searchTable(3, 'findbuy')" placeholder="Description">
+
+{:#blocks}
 Plugin       | Command                                 | Aliases                                 | Description
 ------------ | --------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------------
 About        | `!about`                                | None                                    | Shows information about the bot.
