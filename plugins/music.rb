@@ -64,7 +64,7 @@ class Music
       artist = parse['artists'][0]
       artistname = artist['name']
 
-      m.reply "Song info: #{Format(:bold, name)} | from the #{altype} #{Format(:bold, alname)} by #{Format(:bold, artistname)}"
+      m.reply "Song info: #{Format(:bold, name)} from the #{altype} #{Format(:bold, alname)} by #{Format(:bold, artistname)}"
     end
     if url[3] == 'album'
       parse = spotifyapi("https://api.spotify.com/v1/albums/#{id}")
