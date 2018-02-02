@@ -167,8 +167,9 @@ class Stats
     users.each do |x, y|
       if x == member
         m.reply "Member #{Format(:bold, member)} has sent #{Format(:bold, y.to_s)} messages!"
-        next
+        return
       end
     end
+    m.reply "Member #{Format(:bold, member)} has never sent a message!"
   end
 end
