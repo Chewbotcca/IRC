@@ -52,9 +52,10 @@ class Stats
     users.each do |x, y|
       if x == wordz
         m.reply "Word #{Format(:bold, wordz)} used #{Format(:bold, y.to_s)} times!"
-        next
+        return
       end
     end
+    m.reply "Word #{Format(:bold, wordz)} has never been used!"
   end
 
   def top(m)
