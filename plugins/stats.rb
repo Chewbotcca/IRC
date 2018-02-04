@@ -49,13 +49,14 @@ class Stats
       end
       current -= 1
     end
+    found = false
     users.each do |x, y|
-      if x == wordz
-        m.reply "Word #{Format(:bold, wordz)} used #{Format(:bold, y.to_s)} times!"
-        next
-      end
+      next unless x == wordz
+      found = true
+      m.reply "Word #{Format(:bold, wordz)} used #{Format(:bold, y.to_s)} times!"
+      next
     end
-    m.reply "Word #{Format(:bold, wordz)} has never been used!"
+    m.reply "Word #{Format(:bold, wordz)} has never been used!" if found == false
   end
 
   def top(m)
@@ -164,12 +165,13 @@ class Stats
       current -= 1
     end
     users = users.sort.sort_by { |_x, y| y }.reverse
+    found = false
     users.each do |x, y|
-      if x == member
-        m.reply "Member #{Format(:bold, member)} has sent #{Format(:bold, y.to_s)} messages!"
-        next
-      end
+      next unless x == member
+      m.reply "Member #{Format(:bold, member)} has sent #{Format(:bold, y.to_s)} messages!"
+      found = true
+      next
     end
-    m.reply "Member #{Format(:bold, member)} has never sent a message!"
+    m.reply "Member #{Format(:bold, member)} has never sent a message!" if found == false
   end
 end
