@@ -29,7 +29,7 @@ bundler: false
 
 ### SERVER INFORMATION ###
 
-# Put the server you want. (Ex. irc.chew.pro)
+# Put the server you want. (Ex. irc.chew.chat)
 server:
 # Server Port (default: 6667)
 port:
