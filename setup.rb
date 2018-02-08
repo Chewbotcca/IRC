@@ -23,7 +23,7 @@ class Setup
       puts 'Press enter to get started'
       gets
     end
-    puts 'What would you like to Configure (type number then press enter)'
+    puts 'What would you like to do? (type number then press enter)'
     puts '[1] - Configure the bot'
     puts '[2] - Set up staff members'
     puts '[3] - Exit!'
