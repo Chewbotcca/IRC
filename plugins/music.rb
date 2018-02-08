@@ -81,7 +81,7 @@ class Music
       m.reply "Artist info: #{Format(:bold, name)}"
     end
   rescue StandardError => e
-    if CONFIG['google'] == '' || CONFIG['google'].nil?
+    if CONFIG['spotify'] == '' || CONFIG['spotify'].nil?
       m.reply 'This command requires a Spotify API key!'
     else
       m.reply "There was an error grabbing Spotify link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.delete("\n")}```."
