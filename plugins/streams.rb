@@ -2,13 +2,19 @@ class Streams
   include Cinch::Plugin
 
   match /mixer (.+)/, method: :mixer
+  match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :mixerlink
 
-  def mixer(m, user)
+  def mixerlink(m, url)
+    url = url.split('/')
+    mixer(m, url[3], false) if url[2] == 'mixer.com'
+  end
+
+  def mixer(m, user, notifynotfound = true)
     user = user.delete(' ')
     begin
       parse = JSON.parse(RestClient.get("https://mixer.com/api/v1/channels/#{user}"))
-    rescue
-      m.reply 'User not found!'
+    rescue StandardError
+      m.reply 'User not found!' if notifynotfound
       return
     end
     name = parse['token']
