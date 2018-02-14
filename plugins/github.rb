@@ -8,9 +8,10 @@ class GitHub
   def grabinfo(m, url)
     url = url.split('/')
     if url[2] == 'github.com'
-      if url[5] == 'issue' || url[5] == 'pull'
+      if url[5] == 'issues' || url[5] == 'pull'
         repo = "#{url[3]}/#{url[4]}"
         issuenum = url[6]
+        issuenum = issuenum[0..0] if issuenum.include? 'issue'
         ghissue(m, repo, issuenum, false)
       end
     end
@@ -21,7 +22,7 @@ class GitHub
     issueurl = "https://api.github.com/repos/#{repo}/issues/#{issuenum}"
     begin
       parsed = JSON.parse(RestClient.get(issueurl))
-    rescue
+    rescue StandardError
       m.reply 'Invalid Repo or Issue number!'
       return
     end
