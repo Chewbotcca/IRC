@@ -20,7 +20,10 @@ class Owner
   def permissions(m, nick, perm, setting)
     return unless authenticate(m) && checkperm(m, m.user.name, 'changepermissions')
     file = "data/staff/#{nick}.yaml"
-    m.reply "That staff member doesn't exist!" unless File.exist?(file)
+    unless File.exist?(file)
+      m.reply "That staff member doesn't exist!"
+      return
+    end
     unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions nickserv issues].include? perm
       m.reply 'Invalid permission!'
       return
