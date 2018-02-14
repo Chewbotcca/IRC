@@ -21,7 +21,10 @@ class Owner
     return unless authenticate(m) && checkperm(m, m.user.name, 'changepermissions')
     file = "data/staff/#{nick}.yaml"
     m.reply "That staff member doesn't exist!" unless File.exist?(file)
-    m.reply 'Invalid permission!' unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions].include? perm
+    unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions nickserv issues].include? perm
+      m.reply 'Invalid permission!'
+      return
+    end
     data = YAML.load_file(file)
     setting = true?(setting)
     data[perm] = setting
@@ -45,6 +48,8 @@ class Owner
     perms += ['die'] if staffdata['die'] == true
     perms += ['changeconfig'] if staffdata['changeconfig'] == true
     perms += ['changepermissions'] if staffdata['changepermissions'] == true
+    perms += ['nickserv'] if staffdata['nickserv'] == true
+    perms += ['issues'] if staffdata['issues'] == true
     m.reply "Your perms are: #{perms.join(', ')}"
   end
 
