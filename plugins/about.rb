@@ -39,7 +39,7 @@ class About
         end
       end
     else
-      m.reply 'You must be the bot owner to create an issue! Try making one manually: http://github.com/Chewbotcca/IRC/issues/new'
+      m.reply 'You must have the "issues" staff perm to create an issue! Try making one manually: http://github.com/Chewbotcca/IRC/issues/new'
     end
   end
 end
