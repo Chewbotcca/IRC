@@ -2,6 +2,7 @@ class Google
   include Cinch::Plugin
 
   match /video (.+)/, method: :youtube
+  match /yt (.+)/, method: :youtube
   match /googl (.+)/, method: :googl
   match /youtube (.+)/, method: :searchyt
   match %r{(https?://.*?)(?:\s|$|,|\.\s|\.$)}, use_prefix: false, method: :youtube
