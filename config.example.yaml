@@ -23,10 +23,6 @@ prefix:
 # Should commands HAVE to be at the beginning of messages, or can they be anywhere. (true/false)
 prefixstart: true
 
-# Do you run using bundle exec ruby bot.rb or just ruby bot.rb
-# true or false
-bundler: false
-
 ### SERVER INFORMATION ###
 
 # Put the server you want. (Ex. irc.chew.chat)
