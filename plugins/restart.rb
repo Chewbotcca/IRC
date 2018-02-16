@@ -4,6 +4,7 @@ class Restart
   match /restart/, method: :restart
   match /update/, method: :update
   match /updates/, method: :updates
+  match /version/, method: :updates
 
   def restart(m)
     return if Time.now - STARTTIME < 10
@@ -38,16 +39,18 @@ class Restart
   end
 
   def updates(m)
-    unless authenticate(m) && checkperm(m, m.user.name, 'restart')
-      m.reply 'You are not allowed to check for updates!'
-      return
-    end
+    response = `git rev-list origin/master | wc -l`.to_i
+    commits = `git rev-list master | wc -l`.to_i
+    m.reply "You are running Chewbotcca version #{commits}"
     m.reply 'Checking for updates...'
-    response = `git fetch`
-    if response == ''
-      m.reply 'No new updates available.'
+    if response == commits
+      m.reply 'You are running the latest version.'
+    elsif response < commits
+      m.reply "You are running an un-released version! Are you a developer? (Their Version: #{response})"
+    elsif authenticate(m) && checkperm(m, m.user.name, 'restart')
+      m.reply "You are #{response - commits} version(s) behind! Run `#{CONFIG['prefix']}update` to update"
     else
-      m.reply "New updates found! Run `#{CONFIG['prefix']}update` to update"
+      m.reply "You are #{response - commits} version(s) behind!"
     end
   end
 end
