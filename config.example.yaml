@@ -37,7 +37,7 @@ ssl: false
 ## Have a server password? Put it below! Otherwise, leave it blank!
 serverpass:
 
-# NickServ Password (Don't have nickserv account? Don't worry! Run !nsregister pass email and it will set up the rest.)]
+# NickServ Password (Don't have nickserv account? Don't worry! Run !nsregister pass email and it will set up the rest.)
 # Only tested with Atheme IRC services. Report a bug if it does not work on other services.
 nickservpass:
 
