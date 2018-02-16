@@ -19,6 +19,9 @@ authtype:
 
 # Their permissions. Must be true or false, no quotation marks
 
+## Give the user all perms? (Typically the bot owner)
+all: false
+
 ## Allow the user to run !restart and !update
 restart: false
 

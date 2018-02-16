@@ -129,6 +129,7 @@ def checkperm(_m, user, perm)
   stafffile = "data/staff/#{user}.yaml"
   return unless File.exist?(stafffile)
   staffdata = YAML.load_file(stafffile)
+  return true if staffdata['all'] == true
   return true if staffdata[perm] == true
   false
 end
