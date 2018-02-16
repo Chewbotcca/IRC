@@ -187,27 +187,24 @@ class Setup
     staffdata['all'] = input
     if input == false
       puts 'Should they have access to !restart and !update?'
-      input = gets.chomp
-      staffdata['restart'] = true?(input)
+      staffdata['restart'] = true?(gets.chomp)
       puts 'Should they have access modify channel perms, regardless of rank on the channel?'
-      input = gets.chomp
-      staffdata['fullchannelperms'] = true?(input)
+      staffdata['fullchannelperms'] = true?(gets.chomp)
       puts 'Should they have access to make the bot leave and join chans?'
-      input = gets.chomp
-      staffdata['botchans'] = true?(input)
+      staffdata['botchans'] = true?(gets.chomp)
       puts 'Should they have access to !eval?'
-      input = gets.chomp
-      staffdata['eval'] = true?(input)
+      staffdata['eval'] = true?(gets.chomp)
       puts 'Should they have access to !die?'
-      input = gets.chomp
-      staffdata['die'] = true?(input)
+      staffdata['die'] = true?(gets.chomp)
       puts 'Should they have access to change the config (!config [option])?'
-      input = gets.chomp
-      staffdata['changeconfig'] = true?(input)
+      staffdata['changeconfig'] = true?(gets.chomp)
       puts 'Should they have access to change staff permissions (!permissions)?'
-      input = gets.chomp
+      staffdata['changepermissions'] = true?(gets.chomp)
+      puts 'Should they have access to register with nickserv (!nsregister)?'
+      staffdata['nickserv'] = true?(gets.chomp)
+      puts 'Should they have access to report issues (!bug, !issue, !suggestion)?'
+      staffdata['issues'] = true?(gets.chomp)
     end
-    staffdata['changepermissions'] = true?(input)
     staffdata['authtype'] = section
     staffdata['nick'] = name
     File.open(stafffile, 'w') { |f| f.write staffdata.to_yaml }
