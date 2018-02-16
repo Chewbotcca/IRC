@@ -39,7 +39,7 @@ class Restart
   end
 
   def updates(m)
-    `git fetch`
+    `git fetch` if authenticate(m) && checkperm(m, m.user.name, 'restart')
     response = `git rev-list origin/master | wc -l`.to_i
     commits = `git rev-list master | wc -l`.to_i
     m.reply "You are running Chewbotcca version #{commits}"
