@@ -39,18 +39,19 @@ class Restart
   end
 
   def updates(m)
+    `git fetch`
     response = `git rev-list origin/master | wc -l`.to_i
     commits = `git rev-list master | wc -l`.to_i
     m.reply "You are running Chewbotcca version #{commits}"
-    m.reply 'Checking for updates...'
-    if response == commits
-      m.reply 'You are running the latest version.'
-    elsif response < commits
-      m.reply "You are running an un-released version! Are you a developer? (Their Version: #{response})"
-    elsif authenticate(m) && checkperm(m, m.user.name, 'restart')
-      m.reply "You are #{response - commits} version(s) behind! Run `#{CONFIG['prefix']}update` to update"
-    else
-      m.reply "You are #{response - commits} version(s) behind!"
+    if authenticate(m) && checkperm(m, m.user.name, 'restart')
+      m.reply 'Checking for updates...'
+      if response == commits
+        m.reply 'You are running the latest version.'
+      elsif response < commits
+        m.reply "You are running an un-released version! Are you a developer? (Their Version: #{response})"
+      else
+        m.reply "You are #{response - commits} version(s) behind! Run `#{CONFIG['prefix']}update` to update"
+      end
     end
   end
 end
