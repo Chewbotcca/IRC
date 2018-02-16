@@ -126,7 +126,7 @@ class Setup
 
   def save
     File.open('config.yaml', 'w') { |f| f.write @config.to_yaml }
-  rescue => e
+  rescue StandardError => e
     puts 'uh oh, there was an error saving. Report the following error to Chew on github'
     puts e
   end
@@ -174,13 +174,7 @@ class Setup
       puts 'What is the staff member\'s username?'
       staffdata['user'] = gets.chomp
     end
-    if section == 'userhost'
-      puts 'What is the staff member\'s hostname?'
-      staffdata['host'] = gets.chomp
-      puts 'What is the staff member\'s username?'
-      staffdata['user'] = gets.chomp
-    end
-    if section == 'all'
+    if %w[userhost all].include? section
       puts 'What is the staff member\'s hostname?'
       staffdata['host'] = gets.chomp
       puts 'What is the staff member\'s username?'
