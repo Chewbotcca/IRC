@@ -182,26 +182,31 @@ class Setup
     end
     puts 'Good! The rank and stuff is set up! Let\'s get to the perms'
     puts 'Answer all with "true" or "false"'
-    puts 'Should they have access to !restart and !update?'
-    input = gets.chomp
-    staffdata['restart'] = true?(input)
-    puts 'Should they have access modify channel perms, regardless of rank on the channel?'
-    input = gets.chomp
-    staffdata['fullchannelperms'] = true?(input)
-    puts 'Should they have access to make the bot leave and join chans?'
-    input = gets.chomp
-    staffdata['botchans'] = true?(input)
-    puts 'Should they have access to !eval?'
-    input = gets.chomp
-    staffdata['eval'] = true?(input)
-    puts 'Should they have access to !die?'
-    input = gets.chomp
-    staffdata['die'] = true?(input)
-    puts 'Should they have access to change the config (!config [option])?'
-    input = gets.chomp
-    staffdata['changeconfig'] = true?(input)
-    puts 'Should they have access to change staff permissions (!permissions)?'
-    input = gets.chomp
+    puts 'Should this user have all permissions? (Only recommended for bot owners)'
+    input = true?(gets.chomp)
+    staffdata['all'] = input
+    if input == false
+      puts 'Should they have access to !restart and !update?'
+      input = gets.chomp
+      staffdata['restart'] = true?(input)
+      puts 'Should they have access modify channel perms, regardless of rank on the channel?'
+      input = gets.chomp
+      staffdata['fullchannelperms'] = true?(input)
+      puts 'Should they have access to make the bot leave and join chans?'
+      input = gets.chomp
+      staffdata['botchans'] = true?(input)
+      puts 'Should they have access to !eval?'
+      input = gets.chomp
+      staffdata['eval'] = true?(input)
+      puts 'Should they have access to !die?'
+      input = gets.chomp
+      staffdata['die'] = true?(input)
+      puts 'Should they have access to change the config (!config [option])?'
+      input = gets.chomp
+      staffdata['changeconfig'] = true?(input)
+      puts 'Should they have access to change staff permissions (!permissions)?'
+      input = gets.chomp
+    end
     staffdata['changepermissions'] = true?(input)
     staffdata['authtype'] = section
     staffdata['nick'] = name
