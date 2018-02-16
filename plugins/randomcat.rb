@@ -22,7 +22,7 @@ class RandomCat
     amount = 1 if amount.to_i < 1
     amount = 5 if amount.to_i > 5
     while currentcat.to_i < amount.to_i
-      whichcat = rand(2)
+      whichcat = rand(0..1)
       showcat = if whichcat.zero?
                   JSON.parse(RestClient.get('http://random.cat/meow'))['file']
                 else
