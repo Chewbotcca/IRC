@@ -148,7 +148,7 @@ class Setup
     staff('nickname') if input == '3'
     staff('userhost') if input == '4'
     staff('all') if input == '5'
-    config
+    welcome
   end
 
   def staff(section)
