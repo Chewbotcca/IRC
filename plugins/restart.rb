@@ -43,8 +43,10 @@ class Restart
     response = `git rev-list origin/master | wc -l`.to_i
     commits = `git rev-list master | wc -l`.to_i
     m.reply "You are running Chewbotcca version #{commits}"
+    sleep 1
     if authenticate(m) && checkperm(m, m.user.name, 'restart')
       m.reply 'Checking for updates...'
+      sleep 1
       if response == commits
         m.reply 'You are running the latest version.'
       elsif response < commits
