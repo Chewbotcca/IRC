@@ -126,7 +126,6 @@ class Attack
       "puts sugar between #{user}'s bedsheets.",
       "pours sand into #{user}'s breakfast.",
       "mixes epoxy into #{user}'s toothpaste.",
-      "puts Icy-Hot in #{user}'s lube container.",
       "forces #{user} to use a Commodore 64 for all their word processing.",
       "puts #{user} in a room with several heavily armed manic depressives.",
       "makes #{user} watch reruns of \"Blue's Clues\".",
