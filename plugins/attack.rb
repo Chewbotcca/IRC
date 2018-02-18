@@ -73,6 +73,7 @@ class Attack
   end
 
   def lart(m, user)
+    user.delete!(' ')
     templates = [
       "smacks #{user} in the face with a burlap sack full of broken glass.",
       "swaps #{user}'s shampoo with glue.",
