@@ -97,7 +97,7 @@ bot = Cinch::Bot.new do
     c.plugins.prefix = botprefix
 
     # Load modules.
-    c.plugins.plugins = [Misc, Minecraft, Owner, Restart, RandomCat, MemeDB, Quotes, NickServ, InviteToJoin, Bitcoin, About, English, Emoji, Food, Grammar, Formatting, BaseS4, GitHub, Google, Cleverbot, Channel, Language, Replace, Streams, Music, Stats]
+    c.plugins.plugins = [Misc, Minecraft, Owner, Restart, RandomCat, MemeDB, Quotes, NickServ, InviteToJoin, Bitcoin, About, English, Emoji, Food, Grammar, Formatting, BaseS4, GitHub, Google, Cleverbot, Channel, Language, Replace, Streams, Music, Stats, Attack]
   end
 end
 
