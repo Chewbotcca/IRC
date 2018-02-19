@@ -24,13 +24,18 @@ class Channel
       colon = log[current - 1].index(':')
       user = log[current - 1][13..colon - 1]
       if user == member
+        spot = current
         current = -1
         found = true
       else
         current -= 1
       end
     end
-    time = log[current - 1][1..10]
+    if found == false
+      m.reply "User #{member} has never spoken!"
+      return
+    end
+    time = log[spot - 1][1..10]
     t = Time.now.to_i - time.to_i
     mm, ss = t.divmod(60)
     hh, mm = mm.divmod(60)
