@@ -40,20 +40,28 @@ class Owner
   end
 
   def perms(m)
+    if authenticate(m) == false
+      m.reply "You aren't authenticated! Make sure your credentials match the one in the staff file."
+      return
+    end
     stafffile = "data/staff/#{m.user.name}.yaml"
     m.reply "You aren't a staff member! You have no perms!" unless File.exist?(stafffile)
     staffdata = YAML.load_file(stafffile)
     perms = []
-    perms += ['restart'] if staffdata['restart'] == true
-    perms += ['fullchannelperms'] if staffdata['fullchannelperms'] == true
-    perms += ['botchans'] if staffdata['botchans'] == true
-    perms += ['eval'] if staffdata['eval'] == true
-    perms += ['die'] if staffdata['die'] == true
-    perms += ['changeconfig'] if staffdata['changeconfig'] == true
-    perms += ['changepermissions'] if staffdata['changepermissions'] == true
-    perms += ['nickserv'] if staffdata['nickserv'] == true
-    perms += ['issues'] if staffdata['issues'] == true
-    m.reply "Your perms are: #{perms.join(', ')}"
+    if staffdata['all'] == false
+      perms += ['restart'] if staffdata['restart'] == true
+      perms += ['fullchannelperms'] if staffdata['fullchannelperms'] == true
+      perms += ['botchans'] if staffdata['botchans'] == true
+      perms += ['eval'] if staffdata['eval'] == true
+      perms += ['die'] if staffdata['die'] == true
+      perms += ['changeconfig'] if staffdata['changeconfig'] == true
+      perms += ['changepermissions'] if staffdata['changepermissions'] == true
+      perms += ['nickserv'] if staffdata['nickserv'] == true
+      perms += ['issues'] if staffdata['issues'] == true
+      m.reply "Your perms are: #{perms.join(', ')}"
+    else
+      m.reply 'You have all permissions.'
+    end
   end
 
   def api(m, service, key)
@@ -78,7 +86,7 @@ class Owner
     if authenticate(m) && checkperm(m, m.user.name, 'eval')
       begin
         m.reply eval code
-      rescue => e
+      rescue StandardError => e
         evalerrors = [
           'Well, excuse me, mr nobrain, cant even eval correctly smh.',
           "You can't eval? Why are you running a bot!",
