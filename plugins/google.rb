@@ -10,6 +10,18 @@ class Google
   match /lmgtfy (.+)/, method: :letmegooglethat
   match /lmbtfy (.+)/, method: :letmebingthat
   match /lmddgtfy (.+)/, method: :letmeddgthat
+  match /randvideo/, method: :reallyrandom
+
+  def reallyrandom(m)
+    array = ('a'..'z').to_a + ('0'..'9').to_a + ['_'] + ['-']
+    id = ''
+    i = 0
+    while i < 11
+      id = "#{id}#{array.sample}"
+      i += 1
+    end
+    youtube(m, "http://www.youtube.com/watch?v=#{id}", true)
+  end
 
   def letmegooglethat(m, search)
     m.reply "LMGTFY Link for #{search}: #{URI.escape("http://lmgtfy.com/?q=#{search}")}"
@@ -28,7 +40,7 @@ class Google
     id = JSON.parse(RestClient.get(url))['items'][0]['id']['videoId']
     begin
       url = JSON.parse(RestClient.get("https://www.googleapis.com/youtube/v3/videos?id=#{id}&key=#{CONFIG['google']}&part=snippet,contentDetails,statistics"))
-    rescue
+    rescue StandardError
       m.reply 'This command requires a Google API key!'
       return
     end
@@ -43,13 +55,13 @@ class Google
     id = JSON.parse(RestClient.get(url))['items'][0]['id']['videoId']
     video = "http://youtu.be/#{id}"
     youtube(m, video, true, true)
-  rescue
+  rescue StandardError
     return
   end
 
   def googl(m, url)
     m.reply JSON.parse(RestClient.post("https://www.googleapis.com/urlshortener/v1/url?key=#{CONFIG['google']}", { 'longUrl' => url }.to_json, content_type: :json))['id']
-  rescue
+  rescue StandardError
     m.reply 'This command requires a Google API key!'
     return
   end
@@ -78,12 +90,17 @@ class Google
         return
       end
       url = JSON.parse(RestClient.get("https://www.googleapis.com/youtube/v3/videos?id=#{id}&key=#{CONFIG['google']}&part=snippet,contentDetails,statistics"))
-    rescue => e
+    rescue StandardError => e
       if CONFIG['google'] == '' || CONFIG['google'].nil?
         m.reply 'This command requires a Google API key!'
       else
         m.reply "There was an error grabbing YouTube link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.delete("\n")}```."
       end
+      return
+    end
+    if url['pageInfo']['totalResults'].zero?
+      m.reply 'No results found' if provideurl == false
+      m.reply "No results found for #{givenurl}" if provideurl == true
       return
     end
     stats = url['items'][0]['statistics']
