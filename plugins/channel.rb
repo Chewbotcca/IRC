@@ -6,6 +6,41 @@ class Channel
   match /rquote/, method: :quote
   match /quote (.+)/, method: :userquote
   match /channel (.+) (.+)/, method: :channelconfig
+  match /seen (.+)/, method: :seen
+
+  def seen(m, member)
+    channel = m.channel.to_s[1..m.channel.to_s.length]
+    filename = "data/logs/#{channel}.txt"
+    unless File.exist?(filename)
+      File.new(filename, 'w+')
+      m.reply 'There is no log! No log = No quotes! Try again, bucko'
+      return
+    end
+    log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = log.length
+    current = count
+    found = false
+    while current.positive?
+      colon = log[current - 1].index(':')
+      user = log[current - 1][13..colon - 1]
+      if user == member
+        current = -1
+        found = true
+      else
+        current -= 1
+      end
+    end
+    time = log[current - 1][1..10]
+    t = Time.now.to_i - time.to_i
+    mm, ss = t.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    days = format('%d days, ', dd) if dd != 0
+    hours = format('%d hours, ', hh) if hh != 0
+    mins = format('%d minutes, ', mm) if mm != 0
+    secs = format('%d seconds', ss) if ss != 0
+    m.reply "#{member} was last seeen #{days}#{hours}#{mins}#{secs} ago."
+  end
 
   def channelconfig(m, option, setting)
     if getrank(m, m.user.name) > 1
