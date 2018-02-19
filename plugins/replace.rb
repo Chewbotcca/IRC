@@ -23,7 +23,6 @@ class Replace
               else
                 split[1]
               end
-    # Yay let's search every message
     current = count
     useme = ''
     while current.positive?
