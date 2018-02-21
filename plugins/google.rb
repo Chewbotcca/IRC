@@ -67,6 +67,7 @@ class Google
   end
 
   def youtube(m, url, provideurl = false, bypassconfig = false)
+    url = url.delete(')')
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/channels/#{channel}.yaml"
     unless File.exist?(filename)
@@ -99,7 +100,6 @@ class Google
       return
     end
     if url['pageInfo']['totalResults'].zero?
-      m.reply 'No results found' if provideurl == false
       m.reply "No results found for #{givenurl}" if provideurl == true
       return
     end
