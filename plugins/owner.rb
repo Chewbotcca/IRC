@@ -45,7 +45,10 @@ class Owner
       return
     end
     stafffile = "data/staff/#{m.user.name}.yaml"
-    m.reply "You aren't a staff member! You have no perms!" unless File.exist?(stafffile)
+    unless File.exist?(stafffile)
+      m.reply "You aren't a staff member! You have no perms!"
+      return
+    end
     staffdata = YAML.load_file(stafffile)
     perms = []
     if staffdata['all'] == true
