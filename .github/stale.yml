@@ -6,6 +6,7 @@ daysUntilClose: 7
 exemptLabels:
   - new command
   - in progress
+  - it's quite possible that we have made 1 or 2 fairly critical errors
 # Label to use when marking an issue as stale
 staleLabel: stale
 # Comment to post when marking an issue as stale. Set to `false` to disable
