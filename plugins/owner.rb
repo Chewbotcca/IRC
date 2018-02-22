@@ -48,7 +48,9 @@ class Owner
     m.reply "You aren't a staff member! You have no perms!" unless File.exist?(stafffile)
     staffdata = YAML.load_file(stafffile)
     perms = []
-    if staffdata['all'] == false
+    if staffdata['all'] == true
+      m.reply 'You have all permissions.'
+    else
       perms += ['restart'] if staffdata['restart'] == true
       perms += ['fullchannelperms'] if staffdata['fullchannelperms'] == true
       perms += ['botchans'] if staffdata['botchans'] == true
@@ -59,8 +61,6 @@ class Owner
       perms += ['nickserv'] if staffdata['nickserv'] == true
       perms += ['issues'] if staffdata['issues'] == true
       m.reply "Your perms are: #{perms.join(', ')}"
-    else
-      m.reply 'You have all permissions.'
     end
   end
 
