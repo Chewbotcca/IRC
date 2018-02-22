@@ -172,4 +172,9 @@ class Attack
     ].sample
     m.reply "#{m.user.name} #{templates}"
   end
+
+  def flirt(m)
+    flirts = File.readlines('data/messages/flirts.txt') { |line| line.split.map(&:to_s).join }
+    m.reply flirts.sample
+  end
 end
