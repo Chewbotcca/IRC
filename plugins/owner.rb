@@ -48,11 +48,11 @@ class Owner
 
   def perms(m)
     stafffile = "data/staff/#{m.user.name}.yaml"
-    staffdata = YAML.load_file(stafffile)
     unless File.exist?(stafffile)
       m.reply "You aren't a staff member! You have no perms!"
       return
     end
+    staffdata = YAML.load_file(stafffile)
     if authenticate(m) == false
       m.reply "You aren't authenticated! Make sure your credentials match the one in the staff file."
       return
