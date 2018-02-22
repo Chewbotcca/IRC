@@ -9,6 +9,7 @@ class Channel
   match /seen (.+)/, method: :seen
 
   def seen(m, member)
+    member.delete!(' ')
     channel = m.channel.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
@@ -44,7 +45,7 @@ class Channel
     hours = format('%d hours, ', hh) if hh != 0
     mins = format('%d minutes, ', mm) if mm != 0
     secs = format('%d seconds', ss) if ss != 0
-    m.reply "#{member} was last seen #{days}#{hours}#{mins}#{secs} ago."
+    m.reply "#{Format(:bold, member)} was last seen #{days}#{hours}#{mins}#{secs} ago."
   end
 
   def channelconfig(m, option, setting)
