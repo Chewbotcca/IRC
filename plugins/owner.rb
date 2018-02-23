@@ -24,6 +24,13 @@ class Owner
       m.reply "That staff member doesn't exist!"
       return
     end
+    if perm == 'all'
+      if authenticate(m) && checkperm(m, m.user.name, 'all')
+        m.reply "Permission `#{perm}` successfully set to `#{setting}` for Staff member #{nick}!"
+      else
+        m.reply 'Only users with "all" permissions may give others all permissions.'
+      end
+    end
     unless %w[restart fullchannelperms botchans eval die changeconfig changepermissions nickserv issues].include? perm
       m.reply 'Invalid permission!'
       return
@@ -40,13 +47,16 @@ class Owner
   end
 
   def perms(m)
+    stafffile = "data/staff/#{m.user.name}.yaml"
+    unless File.exist?(stafffile)
+      m.reply "You aren't a staff member! You have no perms!"
+      return
+    end
+    staffdata = YAML.load_file(stafffile)
     if authenticate(m) == false
       m.reply "You aren't authenticated! Make sure your credentials match the one in the staff file."
       return
     end
-    stafffile = "data/staff/#{m.user.name}.yaml"
-    m.reply "You aren't a staff member! You have no perms!" unless File.exist?(stafffile)
-    staffdata = YAML.load_file(stafffile)
     perms = []
     if staffdata['all'] == true
       m.reply 'You have all permissions.'

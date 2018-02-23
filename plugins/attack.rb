@@ -4,6 +4,7 @@ class Attack
   match /slap (.+)/, method: :slap
   match /kill (.+)/, method: :kill
   match /lart (.+)/, method: :lart
+  match /flirt/, method: :flirt
 
   def slap(m, user)
     user.delete!(' ')
