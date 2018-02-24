@@ -51,7 +51,7 @@ class Replace
       return
     else
       replaced = if replace == ''
-                   useme.delete(find)
+                   useme.gsub(find, '')
                  else
                    useme.gsub(find, Format(:bold, replace))
                  end
