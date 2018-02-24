@@ -12,6 +12,16 @@ class Replace
       File.new(filename, 'w+')
       return
     end
+    channelfile = "data/channels/#{channel}.yaml"
+    unless File.exist?(channelfile)
+      File.new(channelfile, 'w+')
+      exconfig = YAML.load_file('data/channels/channel.example.yaml')
+      exconfig['name'] = channel
+      File.open(channelfile, 'w') { |f| f.write exconfig.to_yaml }
+    end
+    data = false
+    data = YAML.load_file(channelfile) while data == false
+    return if data['replace'] == 'false'
     log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
     count = log.length
     return if message.split('/').length > 2

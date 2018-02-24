@@ -71,6 +71,15 @@ class Channel
       File.open(filename, 'w') { |f| f.write data.to_yaml }
       m.reply "👍 Option `youtubelinks` set to `#{setting}`."
       return
+    when 'replace'
+      if getrank(m, m.user.name) < 2
+        m.reply 'Only half-ops and above may modify the config option `replace`!'
+        return
+      end
+      data['replace'] = setting
+      File.open(filename, 'w') { |f| f.write data.to_yaml }
+      m.reply "👍 Option `replace` set to `#{setting}`."
+      return
     end
   end
 
