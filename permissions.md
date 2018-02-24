@@ -2,10 +2,11 @@
 
 The bot allows you to have staff members, allowing you to give certain perms to certain people. Here's a list:
 
-You can change permissions by [PREFIX]permissions (staff name) (permission node) (true/false)
+You can change permissions by `[PREFIX]permissions (staff name) (permission node) (true/false)`
 
 | Permission
 | ----------
+| [all](#all)
 | [restart](#restart)
 | [fullchannelperms](#fullchannelperms)
 | [botchans](#botchans)
@@ -13,6 +14,12 @@ You can change permissions by [PREFIX]permissions (staff name) (permission node)
 | [die](#die)
 | [changeconfig](#changeconfig)
 | [changepermissions](#changepermissions)
+| [nickserv](#nickserv)
+| [issues](#issues)
+
+## all
+
+Be very careful! Staff members with this permission have ALL permissions. Always.
 
 ## restart
 
@@ -43,3 +50,11 @@ This allows the staff member to `!config` and change config options.
 ## changepermissions
 
 This allows the staff member to `!permissions`, giving anyone any permission.
+
+## nickserv
+
+This allows the staff member to use `!nickserv` commands.
+
+## issues
+
+This allows the staff member to run `!bug` to report bugs.
