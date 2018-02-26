@@ -33,19 +33,21 @@ class Stats
     current = count
     while current.positive?
       colon = data[current - 1].index(':')
-      removed = data[current - 1][colon + 2..data[current - 1].length]
-      eachword = removed.split(' ')
-      currentword = 0
-      while currentword < eachword.length
-        word = eachword[currentword]
-        word = word.tr('^A-Za-z0-9', '')
-        word.downcase!
-        if users[word].nil?
-          users[word] = 1
-        else
-          users[word] += 1
+      unless colon.nil?
+        removed = data[current - 1][colon + 2..data[current - 1].length]
+        eachword = removed.split(' ')
+        currentword = 0
+        while currentword < eachword.length
+          word = eachword[currentword]
+          word = word.tr('^A-Za-z0-9', '')
+          word.downcase!
+          if users[word].nil?
+            users[word] = 1
+          else
+            users[word] += 1
+          end
+          currentword += 1
         end
-        currentword += 1
       end
       current -= 1
     end
@@ -73,11 +75,13 @@ class Stats
     current = count
     while current.positive?
       colon = data[current - 1].index(':')
-      user = data[current - 1][13..colon - 1]
-      if users[user].nil?
-        users[user] = 1
-      else
-        users[user] += 1
+      unless colon.nil?
+        user = data[current - 1][13..colon - 1]
+        if users[user].nil?
+          users[user] = 1
+        else
+          users[user] += 1
+        end
       end
       current -= 1
     end
@@ -111,20 +115,22 @@ class Stats
     wordcount = 0
     while current.positive?
       colon = data[current - 1].index(':')
-      removed = data[current - 1][colon + 2..data[current - 1].length]
-      eachword = removed.split(' ')
-      wordcount += eachword.length
-      currentword = 0
-      while currentword < eachword.length
-        word = eachword[currentword]
-        word = word.tr('^A-Za-z0-9', '')
-        word.downcase!
-        if users[word].nil?
-          users[word] = 1
-        else
-          users[word] += 1
+      unless colon.nil?
+        removed = data[current - 1][colon + 2..data[current - 1].length]
+        eachword = removed.split(' ')
+        wordcount += eachword.length
+        currentword = 0
+        while currentword < eachword.length
+          word = eachword[currentword]
+          word = word.tr('^A-Za-z0-9', '')
+          word.downcase!
+          if users[word].nil?
+            users[word] = 1
+          else
+            users[word] += 1
+          end
+          currentword += 1
         end
-        currentword += 1
       end
       current -= 1
     end
@@ -156,11 +162,13 @@ class Stats
     current = count
     while current.positive?
       colon = data[current - 1].index(':')
-      user = data[current - 1][13..colon - 1]
-      if users[user].nil?
-        users[user] = 1
-      else
-        users[user] += 1
+      unless colon.nil?
+        user = data[current - 1][13..colon - 1]
+        if users[user].nil?
+          users[user] = 1
+        else
+          users[user] += 1
+        end
       end
       current -= 1
     end
