@@ -134,5 +134,20 @@ def checkperm(_m, user, perm)
   false
 end
 
+def checkchan(_m, chan, setting)
+  chan = chan.to_s[1..chan.to_s.length]
+  channelfile = "data/channels/#{chan}.yaml"
+  unless File.exist?(channelfile)
+    File.new(channelfile, 'w+')
+    exconfig = YAML.load_file('data/channels/channel.example.yaml')
+    exconfig['name'] = channel
+    File.open(channelfile, 'w') { |f| f.write exconfig.to_yaml }
+  end
+  data = false
+  data = YAML.load_file(channelfile) while data == false
+  return true if data[setting] == 'true'
+  false
+end
+
 # START THE BOT
 bot.start
