@@ -5,6 +5,7 @@ class Attack
   match /kill (.+)/, method: :kill
   match /lart (.+)/, method: :lart
   match /flirt/, method: :flirt
+  match /rekt/, method: :rekt
 
   def slap(m, user)
     user.delete!(' ')
@@ -177,5 +178,10 @@ class Attack
   def flirt(m)
     flirts = File.readlines('data/messages/flirts.txt') { |line| line.split.map(&:to_s).join }
     m.reply flirts.sample
+  end
+
+  def rekt(m)
+    rekts = File.readlines('data/messages/rekt.txt') { |line| line.split.map(&:to_s).join }
+    m.reply rekts.sample
   end
 end
