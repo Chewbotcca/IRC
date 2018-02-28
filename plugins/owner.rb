@@ -70,7 +70,11 @@ class Owner
       perms += ['changepermissions'] if staffdata['changepermissions'] == true
       perms += ['nickserv'] if staffdata['nickserv'] == true
       perms += ['issues'] if staffdata['issues'] == true
-      m.reply "Your perms are: #{perms.join(', ')}"
+      if !perms.empty?
+        m.reply "Your perms are: #{perms.join(', ')}"
+      else
+        m.reply 'You have no permissions, although you are a staff member!'
+      end
     end
   end
 
