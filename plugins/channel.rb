@@ -4,12 +4,65 @@ class Channel
   listen_to :channel, method: :log_public_message, strip_colors: true
   match /resethistory/, method: :clearlog
   match /rquote/, method: :quote
-  match /cquote (.+)/, method: :cquote
+  match /crquote (.+)/, method: :crquote
+  match /cquote (.+) (.+)/, method: :usercquote
   match /quote (.+)/, method: :userquote
   match /channel (.+) (.+)/, method: :channelconfig
   match /seen (.+)/, method: :seen
 
-  def cquote(m, chan)
+  def usercquote(m, chan, user)
+    user.delete!(' ')
+    channel = chan.to_s[1..m.channel.to_s.length]
+    filename = "data/logs/#{channel}.txt"
+    unless File.exist?(filename)
+      m.reply 'That channel has no logs!'
+      return
+    end
+    unless Channel(chan).users.keys.join(' ').split(' ').include?(m.user.name)
+      m.reply 'You aren\'t a member of that channel! You must be a member of that channel to access its logs!'
+      return
+    end
+    log = File.readlines(filename) { |line| line.split.map(&:to_s).join }
+    count = log.length
+    # Search to see if user exists.....
+    # We're gonna wanna downcase the user, case sensitivity, my dudes.
+    downuser = user.downcase
+    current = count
+    while current.positive?
+      colon = log[current - 1].index(':')
+      userquote = log[current - 1][0..colon - 1]
+      userquote.downcase!
+      if userquote.include?(downuser)
+        found = true
+        current = -1
+      else
+        found = false
+        current -= 1
+      end
+    end
+    if found == false
+      m.reply "Could not find user #{user} in the log!"
+      return
+    end
+    while userquote != user
+      ichoose = rand(0..count - 1)
+      colon = log[ichoose].index(':')
+      removed = log[ichoose][colon + 2..log[ichoose].length].chomp
+      userquote = log[ichoose][13..colon - 1]
+    end
+    time = log[ichoose][1..10]
+    t = Time.now.to_i - time.to_i
+    mm, ss = t.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    days = format('%d days, ', dd) if dd != 0
+    hours = format('%d hours, ', hh) if hh != 0
+    mins = format('%d minutes, ', mm) if mm != 0
+    secs = format('%d seconds', ss) if ss != 0
+    m.reply "#{days}#{hours}#{mins}#{secs} ago, #{user} said: \"#{removed}\""
+  end
+
+  def crquote(m, chan)
     channel = chan.to_s[1..m.channel.to_s.length]
     filename = "data/logs/#{channel}.txt"
     unless File.exist?(filename)
