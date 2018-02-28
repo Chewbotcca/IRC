@@ -68,17 +68,7 @@ class Google
 
   def youtube(m, url, provideurl = false, bypassconfig = false)
     url = url.delete(')')
-    channel = m.channel.to_s[1..m.channel.to_s.length]
-    filename = "data/channels/#{channel}.yaml"
-    unless File.exist?(filename)
-      File.new(filename, 'w+')
-      exconfig = YAML.load_file('data/channels/channel.example.yaml')
-      exconfig['name'] = channel
-      File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
-    end
-    data = false
-    data = YAML.load_file(filename) while data == false
-    return if data['youtubelinks'] == 'false' && bypassconfig == false
+    return if checkchan(m, m.channel, 'youtubelinks') == false && bypassconfig == false
     begin
       givenurl = url
       url = url.split(/[\/,&,?,=]/)
