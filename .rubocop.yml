@@ -46,3 +46,6 @@ Metrics/ClassLength:
 
 Style/FormatStringToken:
   Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false

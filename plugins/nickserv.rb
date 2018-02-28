@@ -4,6 +4,16 @@ class NickServ
   listen_to :connect, method: :identify
   match /nsregister (.+) (.+)/, method: :register
   match /nsverify (.+)/, method: :verify
+  match /nsidentify/, method: :identifymaybe
+
+  def identifymaybe(m)
+    if authenticate(m) && checkperm(m, m.user.name, 'nickserv')
+      m.reply 'Sent idenification request to nickserv!'
+      identify
+    else
+      m.reply 'You have no perms to nickserv commands!'
+    end
+  end
 
   def identify(_m)
     User('NickServ').send("identify #{CONFIG['nickservpass']}") unless CONFIG['nickservpass'].nil? || CONFIG['nickservpass'] == ''
