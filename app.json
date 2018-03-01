@@ -1,0 +1,19 @@
+{
+  "name": "Botcca",
+  "description": "",
+  "scripts": {
+    "postdeploy": "bin/bot.rb"
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
