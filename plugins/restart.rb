@@ -14,11 +14,8 @@ class Restart
     end
     m.reply 'Restarting the bot without updating...'
     sleep 1
-    if CONFIG['bundler'] == 'true' || CONFIG['bundler'] == true
-      exec('bundle exec ruby bot.rb')
-    else
-      exec('ruby bot.rb')
-    end
+    bot.quit
+    `ruby bot.rb`
   end
 
   def update(m)
@@ -31,11 +28,8 @@ class Restart
     m.reply 'Restarting and Updating!'
     sleep 1
     `git pull`
-    if CONFIG['bundler'] == 'true' || CONFIG['bundler'] == true
-      exec('bundle exec ruby bot.rb')
-    else
-      exec('ruby bot.rb')
-    end
+    bot.quit
+    `ruby bot.rb`
   end
 
   def updates(m)
