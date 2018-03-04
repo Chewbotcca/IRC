@@ -175,12 +175,15 @@ class Stats
     end
     users = users.sort.sort_by { |_x, y| y }.reverse
     found = false
+    messagescount = 0
     users.each do |x, y|
       next unless x == member
-      m.reply "Member #{Format(:bold, member)} has sent #{Format(:bold, y.to_s)} messages!"
+      messagescount = y
       found = true
       next
     end
+    rank = users.index([member, messagescount])
+    m.reply "Member #{Format(:bold, member)} has sent #{Format(:bold, messagescount.to_s)} messages! (Rank: #{Format(:bold, "#{rank + 1}/#{users.count}")})" if found == true
     m.reply "Member #{Format(:bold, member)} has never sent a message!" if found == false
   end
 end
