@@ -1,6 +1,5 @@
 # Command List
 
-<link rel="stylesheet" href="http://cloudcitymc.us/assets/css/searchboxes.css">
 <link rel="stylesheet" href="searchBoxes.css">
 <script src="searchTable.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
