@@ -13,7 +13,7 @@ class MemeDB
     prefix = '.jpeg' if %w[trap].include? meme
     m.reply 'You can submit a meme here: http://goo.gl/forms/BRMomYVizsY7SqOg2' if meme == 'submit'
     if prefix == ''
-      m.reply "This meme doesn't exist! Make sure you spell the meme name right. Here is a list of the current memes: `rickroll, vegans, spotad, petpet, nicememe, paycheck, pokesteak, losthope, timetostop, trap, triggered, noot, iplayedmyself`"
+      m.reply "This meme doesn't exist! Make sure you spell the meme name right. Here is a list of the current memes: `rickroll, vegans, spotad, petpet, nicememe, paycheck, pokesteak, losthope, timetostop, trap, triggered, noot, iplayedmyself, nottheadmin, pineapplepringle, youarerobot`"
     else
       m.reply "http://chewbotcca.co/memedb/#{meme}#{prefix}"
     end
