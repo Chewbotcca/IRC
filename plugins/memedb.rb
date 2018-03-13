@@ -7,8 +7,8 @@ class MemeDB
     meme.downcase!
     prefix = ''
     prefix = '.gif' if %w[rickroll nicememe timetostop triggered noot].include? meme
-    prefix = '.png' if %w[vegans losthope iplayedmyself].include? meme
-    prefix = '.jpg' if %w[spotad petpet].include? meme
+    prefix = '.png' if %w[vegans losthope iplayedmyself nottheadmin pineapplepringle].include? meme
+    prefix = '.jpg' if %w[spotad petpet youarerobot].include? meme
     prefix = '.JPG' if %w[paycheck pokesteak].include? meme
     prefix = '.jpeg' if %w[trap].include? meme
     m.reply 'You can submit a meme here: http://goo.gl/forms/BRMomYVizsY7SqOg2' if meme == 'submit'
