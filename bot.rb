@@ -96,8 +96,20 @@ bot = Cinch::Bot.new do
     c.password = botserverpass
     c.plugins.prefix = botprefix
 
+    plugincount = Dir.glob(File.join('plugins', '**', '*.rb')).select { |file| File.file?(file) }.count
+    pluginlist = Array.new(plugincount)
+    x = 0
+    Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each do |wow|
+      bob = File.readlines(wow) { |line| line.split.map(&:to_s).join }
+      command = bob[0][6..bob[0].length]
+      command.delete!("\n")
+      command = Object.const_get(command)
+      pluginlist[x] = command
+      x += 1
+    end
+
     # Load modules.
-    c.plugins.plugins = [Misc, Minecraft, Owner, Restart, RandomCat, MemeDB, Quotes, NickServ, InviteToJoin, Bitcoin, About, English, Emoji, Food, Grammar, Formatting, BaseS4, GitHub, Google, Cleverbot, Channel, Language, Replace, Streams, Music, Stats, Attack]
+    c.plugins.plugins = pluginlist
   end
 end
 
