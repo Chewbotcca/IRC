@@ -86,7 +86,7 @@ class Music
     else
       m.reply "There was an error grabbing Spotify link information, don't worry! You did nothing wrong, please report the following error to Chew on GitHub: ```#{e.to_s.delete("\n")}```."
     end
-    return
+    nil
   end
 
   def lastfmtracks(m, user)
