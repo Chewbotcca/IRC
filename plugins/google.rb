@@ -56,14 +56,14 @@ class Google
     video = "http://youtu.be/#{id}"
     youtube(m, video, true, true)
   rescue StandardError
-    return
+    nil
   end
 
   def googl(m, url)
     m.reply JSON.parse(RestClient.post("https://www.googleapis.com/urlshortener/v1/url?key=#{CONFIG['google']}", { 'longUrl' => url }.to_json, content_type: :json))['id']
   rescue StandardError
     m.reply 'This command requires a Google API key!'
-    return
+    nil
   end
 
   def youtube(m, url, provideurl = false, bypassconfig = false)
