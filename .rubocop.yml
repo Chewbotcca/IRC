@@ -49,3 +49,6 @@ Style/FormatStringToken:
 
 Metrics/BlockNesting:
   Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
