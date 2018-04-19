@@ -36,14 +36,12 @@ class Minecraft
     url1 = Format(:"#{statusurl[0]['minecraft.net']}", 'Minecraft Site')
     url2 = Format(:"#{statusurl[1]['session.minecraft.net']}", 'Minecraft Sessions')
     url3 = Format(:"#{statusurl[2]['account.mojang.com']}", 'Mojang Accounts')
-    url4 = Format(:"#{statusurl[3]['auth.mojang.com']}", 'Mojang Auth')
-    url5 = Format(:"#{statusurl[4]['skins.minecraft.net']}", 'Minecraft Skins')
-    url6 = Format(:"#{statusurl[5]['authserver.mojang.com']}", 'Mojang Auth Servers')
-    url7 = Format(:"#{statusurl[6]['sessionserver.mojang.com']}", 'Mojang Sessions')
-    url8 = Format(:"#{statusurl[7]['api.mojang.com']}", 'Moajng API')
-    url9 = Format(:"#{statusurl[8]['textures.minecraft.net']}", 'Minecraft Textures')
-    url0 = Format(:"#{statusurl[9]['mojang.com']}", 'Mojang Site')
-    message = "#{Format(:green, 'Up')} - #{Format(:yellow, 'Shakey')} - #{Format(:red, 'Down')} : #{url1} - #{url2} - #{url3} - #{url4} - #{url5} - #{url6} - #{url7} - #{url8} - #{url9} - #{url0}"
+    url4 = Format(:"#{statusurl[3]['authserver.mojang.com']}", 'Mojang Auth Servers')
+    url5 = Format(:"#{statusurl[4]['sessionserver.mojang.com']}", 'Mojang Sessions')
+    url6 = Format(:"#{statusurl[5]['api.mojang.com']}", 'Moajng API')
+    url7 = Format(:"#{statusurl[6]['textures.minecraft.net']}", 'Minecraft Textures')
+    url8 = Format(:"#{statusurl[7]['mojang.com']}", 'Mojang Site')
+    message = "#{Format(:green, 'Up')} - #{Format(:yellow, 'Shakey')} - #{Format(:red, 'Down')} : #{url1} - #{url2} - #{url3} - #{url4} - #{url5} - #{url6} - #{url7} - #{url8}"
     m.reply message
   end
 
