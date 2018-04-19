@@ -6,10 +6,10 @@ class Streams
 
   def mixerlink(m, url)
     url = url.split('/')
-    mixer(m, url[3], false) if url[2] == 'mixer.com'
+    mixer(m, url[3], false, true) if url[2] == 'mixer.com'
   end
 
-  def mixer(m, user, notifynotfound = true)
+  def mixer(m, user, notifynotfound = true, nourl = nil)
     user = user.delete(' ')
     begin
       parse = JSON.parse(RestClient.get("https://mixer.com/api/v1/channels/#{user}"))
@@ -24,6 +24,8 @@ class Streams
                Format(:red, 'Currently Offline')
              end
     followers = parse['numFollowers'].to_s
-    m.reply "Info for Mixer user #{Format(:bold, name)} | #{Format(:bold, online)} | Followers: #{Format(:bold, followers)} | Stream Title: #{Format(:bold, parse['name'])} | Total Views: #{Format(:bold, parse['viewersTotal'].to_s)} | URL: http://mixer.com/#{name}"
+    message = "Info for Mixer user #{Format(:bold, name)} | #{Format(:bold, online)} | Followers: #{Format(:bold, followers)} | Stream Title: #{Format(:bold, parse['name'])} | Total Views: #{Format(:bold, parse['viewersTotal'].to_s)}"
+    message = "#{message} | URL: http://mixer.com/#{name}" if nourl.nil?
+    m.reply message
   end
 end
