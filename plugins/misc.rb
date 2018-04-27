@@ -10,8 +10,7 @@ class Misc
   match /isup (.+)/, method: :isup
 
   def isup(m, url)
-    uri = URI.parse("http://downforeveryoneorjustme.com/#{url}")
-    response = Net::HTTP.get_response(uri)
+    response = RestClient.get("http://downforeveryoneorjustme.com/#{url}")
 
     status = response.body.include?('It\'s just you')
 
