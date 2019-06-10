@@ -181,7 +181,6 @@ class Attack
   end
 
   def rekt(m)
-    rekts = File.readlines('data/messages/rekt.txt') { |line| line.split.map(&:to_s).join }
-    m.reply rekts.sample
+    m.reply File.readlines('data/messages/rekt.txt').sample
   end
 end
