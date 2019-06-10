@@ -9,11 +9,11 @@ class RandomCat
   def showmethecatto(m)
     whichcat = rand(2)
     showcat = if whichcat.zero?
-                JSON.parse(RestClient.get('http://random.cat/meow'))['file']
+                JSON.parse(RestClient.get('http://aws.random.cat/meow'))['file']
               else
                 Nokogiri::XML(open('http://thecatapi.com/api/images/get?format=xml&results_per_page=1')).xpath('//url').text
               end
-    m.reply "#{['Aww!', 'Adorable.'].sample} #{showcat}"
+    m.reply "#{['Aww!', 'Adorable.', 'Nyaa~~ :3', 'Cute kitty!'].sample} #{showcat}"
   end
 
   def multikitty(m, amount)
@@ -24,7 +24,7 @@ class RandomCat
     while currentcat.to_i < amount.to_i
       whichcat = rand(0..1)
       showcat = if whichcat.zero?
-                  JSON.parse(RestClient.get('http://random.cat/meow'))['file']
+                  JSON.parse(RestClient.get('http://aws.random.cat/meow'))['file']
                 else
                   Nokogiri::XML(open('http://thecatapi.com/api/images/get?format=xml&results_per_page=1')).xpath('//url').text
                 end
